@@ -5,6 +5,8 @@ import routes from './Config/routes.js';
 import { AuthProvider } from './Context';
 import AppRoute from './Components/AppRoute';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <AuthProvider>
