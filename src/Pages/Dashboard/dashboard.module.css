@@ -1,3 +1,8 @@
+img {
+  width: 80px;
+  height: 80px;
+}
+
 /* Set gray background color and 100% height */
 nav {
   background-color: rgb(199, 199, 199);
