@@ -1,11 +1,10 @@
 import React from 'react';
 import { useAuthDispatch, logout, useAuthState } from '../../Context';
-import styles from './dashboard.module.css';
 
 export default function Header(props) {
   const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
-
+  console.log(userDetails.userDetails.email);
   const handleLogout = () => {
     logout(dispatch);
     props.history.push('/login');
@@ -22,8 +21,15 @@ export default function Header(props) {
 
         <ul className="nav navbar-nav navbar-right">
           <li>
-            <span className="glyphicon glyphicon-log-in"></span>{' '}
-            <button onClick={handleLogout}>Logout</button>
+            {userDetails != undefined &&
+            userDetails.userDetails != undefined ? (
+              <div>
+                {userDetails.userDetails.email}
+                <button onClick={handleLogout}> Logout </button>
+              </div>
+            ) : (
+              <button>Login</button>
+            )}
           </li>
         </ul>
       </div>
