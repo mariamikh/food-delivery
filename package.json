@@ -33,5 +33,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "connect-api-mocker": "^1.10.0",
+    "express": "^4.17.1"
   }
 }

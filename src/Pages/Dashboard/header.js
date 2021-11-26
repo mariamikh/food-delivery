@@ -7,7 +7,9 @@ export default function Header(props) {
   console.log(userDetails.userDetails.email);
   const handleLogout = () => {
     logout(dispatch);
-    props.history.push('/login');
+
+    //TODO: uncommenting the follong line gives error, though redirecting //it works without it
+    //props.history.push('/login');
   };
 
   return (
