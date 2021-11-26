@@ -12,11 +12,21 @@ export default function Header(props) {
   };
 
   return (
-    <div className={styles.dashboardHeader}>
-      <div className={styles.dashboardTitle}> Food Application Header</div>
-      <button className={styles.logoutBtn} onClick={handleLogout}>
-        Logout
-      </button>
-    </div>
+    <nav className="navbar navbar-inverse">
+      <div className="container-fluid">
+        <div className="navbar-header">
+          <a className="navbar-brand" href="#">
+            Food Delivery
+          </a>
+        </div>
+
+        <ul className="nav navbar-nav navbar-right">
+          <li>
+            <span className="glyphicon glyphicon-log-in"></span>{' '}
+            <button onClick={handleLogout}>Logout</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 }
