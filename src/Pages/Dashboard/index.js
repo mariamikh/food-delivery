@@ -4,20 +4,19 @@ import styles from './dashboard.module.css';
 import Header from './header';
 import SideBar from './sideBar';
 import Restaurent from '../Restaurent/details';
+import RestaurentList from '../Restaurent/list';
 
 function Dashboard(props) {
   const userDetails = useAuthState();
 
   return (
-    //<div classNameName={styles.dashboardPage}>
-
     <div>
       <Header />
       <div className="container-fluid">
         <div className="row content">
           <SideBar />
-          <div className="col-sm-9">
-            <Restaurent />
+          <div id="main" className="col-sm-9">
+            <RestaurentList />
           </div>
         </div>
       </div>
