@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuthDispatch, logout, useAuthState } from '../../Context';
+import { useAuthDispatch, logout, useAuthState } from '../Context';
 
 export default function Header(props) {
   const dispatch = useAuthDispatch();
