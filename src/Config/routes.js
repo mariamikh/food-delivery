@@ -1,18 +1,18 @@
 import React from 'react';
 import Login from '../Pages/Login';
 import NotFound from '../Pages/NotFound';
-import RestaurentList from '../Pages/Restaurent/list';
-import Restaurent from '../Pages/Restaurent/details/';
+import RestaurantList from '../Pages/Restaurant/list';
+import Restaurant from '../Pages/Restaurant/details/';
 
 const routes = [
   {
     path: '/',
-    component: RestaurentList,
+    component: RestaurantList,
     isPrivate: false,
   },
   {
-    path: '/Restaurent',
-    component: Restaurent,
+    path: '/restaurant',
+    component: Restaurant,
     isPrivate: false,
   },
   {

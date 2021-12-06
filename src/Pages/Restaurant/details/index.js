@@ -1,7 +1,7 @@
 import React from 'react';
 import Meal from '../Meal';
 
-export default function Restaurent() {
+export default function Restaurant() {
   return (
     <div className="row">
       <div className="col-sm-12">

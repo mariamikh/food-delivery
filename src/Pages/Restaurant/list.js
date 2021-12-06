@@ -1,38 +1,41 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import Restaurent from './details';
+import Restaurant from './details';
 
-import RestaurentDataService from '../../services/restaurent.service';
+import RestaurantDataService from '../../services/restaurant.service';
 
-export default function RestaurentList() {
+export default function RestaurantList() {
   {
     /* TODO: check what happens if data is not retrived and initial values are rendered */
   }
   const initialValue = [{ id: 0, name: '', address: '' }];
-  const [restaurentList, getRestaurentList] = useState(initialValue);
+  const [restaurantList, getRestaurantList] = useState(initialValue);
 
   useEffect(() => {
-    retriveRestaurentList();
+    retriveRestaurantList();
   }, []);
 
-  function openDetails(id) {
-    console.log(id);
-    ReactDOM.render(<Restaurent />, document.getElementById('main'));
-  }
+  const history = useHistory();
 
-  function retriveRestaurentList() {
-    RestaurentDataService.getAll()
+  const openDetails = (id) => {
+    history.push('/restaurant/' + id);
+  };
+
+  function retriveRestaurantList() {
+    RestaurantDataService.getAll()
       .then((response) => {
-        getRestaurentList(response.data);
+        getRestaurantList(response.data);
       })
       .catch((e) => {
+        // TODO: handle exception
         console.log(e);
       });
   }
 
   return (
     <div>
-      {restaurentList.map((r) => (
+      {restaurantList.map((r) => (
         <div key={r.id} className="row pb-2">
           <div className="col-sm-3">
             {/* TODO: add real image src */}
@@ -43,7 +46,9 @@ export default function RestaurentList() {
             />
           </div>
           <div className="col-sm-9">
-            <p onClick={() => openDetails(r.id)}> {r.name} </p>
+            <p style={{ cursor: 'pointer' }} onClick={() => openDetails(r.id)}>
+              {r.name}
+            </p>
             <p>{r.address} </p>
           </div>
         </div>
