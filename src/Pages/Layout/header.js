@@ -23,8 +23,8 @@ export default function Header(props) {
 
         <ul className="nav navbar-nav navbar-right">
           <li>
-            {userDetails != undefined &&
-            userDetails.userDetails != undefined ? (
+            {userDetails !== undefined &&
+            userDetails.userDetails !== undefined ? (
               <div>
                 {userDetails.userDetails.email}
                 <button onClick={handleLogout}> Logout </button>

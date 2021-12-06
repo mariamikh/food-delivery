@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Restaurent from './details';
 
+import RestaurentDataService from '../../services/restaurent.service';
+
 export default function RestaurentList() {
-  const restaurentList = [
-    { id: 1, name: 'Tabla', addr: 'Rustaveli' },
-    { id: 2, name: 'MC', addr: 'Rustaveli 2' },
-    { id: 3, name: 'Monopoli', addr: 'Digomi' },
-  ];
+  {
+    /* TODO: check what happens if data is not retrived and initial values are rendered */
+  }
+  const initialValue = [{ id: 0, name: '', address: '' }];
+  const [restaurentList, getRestaurentList] = useState(initialValue);
+
+  useEffect(() => {
+    retriveRestaurentList();
+  }, []);
 
   function openDetails(id) {
     console.log(id);
     ReactDOM.render(<Restaurent />, document.getElementById('main'));
+  }
+
+  function retriveRestaurentList() {
+    RestaurentDataService.getAll()
+      .then((response) => {
+        getRestaurentList(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   return (
@@ -19,6 +35,7 @@ export default function RestaurentList() {
       {restaurentList.map((r) => (
         <div key={r.id} className="row pb-2">
           <div className="col-sm-3">
+            {/* TODO: add real image src */}
             <img
               src="https://bit.ly/3xBxOZE"
               className="img-rounded"
@@ -27,7 +44,7 @@ export default function RestaurentList() {
           </div>
           <div className="col-sm-9">
             <p onClick={() => openDetails(r.id)}> {r.name} </p>
-            <p>{r.addr} </p>
+            <p>{r.address} </p>
           </div>
         </div>
       ))}

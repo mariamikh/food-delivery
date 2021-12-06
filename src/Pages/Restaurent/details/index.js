@@ -7,8 +7,8 @@ export default function Restaurent() {
       <div className="col-sm-12">
         <div className="panel panel-default text-left">
           <div className="panel-body">
-            <p contenteditable="true">Tabla</p>
-            <p contenteditable="true">Rustaveli Ave.</p>
+            <p>Tabla</p>
+            <p>Rustaveli Ave.</p>
           </div>
         </div>
       </div>
