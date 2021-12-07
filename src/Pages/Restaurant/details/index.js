@@ -21,10 +21,11 @@ export default function Restaurant() {
   const [restaurant, getRestaurant] = useState(initialValue);
   const { id } = useParams();
 
-  function retriveRestaurantDetails() {
-    RestaurantDataService.get(2)
+  function retriveRestaurantDetails(id) {
+    RestaurantDataService.get(id)
       .then((response) => {
         getRestaurant(response.data);
+        console.log(response.data);
       })
       .catch((e) => {
         // TODO: handle exception
