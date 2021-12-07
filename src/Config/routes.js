@@ -6,18 +6,23 @@ import Restaurant from '../Pages/Restaurant/details/';
 
 const routes = [
   {
-    path: '/',
-    component: RestaurantList,
+    path: '/restaurant/:id',
+    component: Restaurant,
     isPrivate: false,
   },
   {
     path: '/restaurant',
-    component: Restaurant,
+    component: RestaurantList,
     isPrivate: false,
   },
   {
     path: '/login',
     component: Login,
+    isPrivate: false,
+  },
+  {
+    path: '/',
+    component: NotFound,
     isPrivate: false,
   },
   {

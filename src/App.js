@@ -15,7 +15,6 @@ function App() {
   return (
     <AuthProvider>
       <Header />
-
       <div className="container-fluid">
         <div className="row content">
           <SideBar />
