@@ -12,20 +12,21 @@ export default function Restaurant() {
       meals: [
         {
           id: 0,
+          img: '',
           name: '',
           price: 0,
         },
       ],
     },
   ];
-  const [restaurant, getRestaurant] = useState(initialValue);
+  const [restaurant, setRestaurant] = useState(initialValue);
   const { id } = useParams();
 
   function retriveRestaurantDetails(id) {
     RestaurantDataService.get(id)
       .then((response) => {
-        getRestaurant(response.data);
-        console.log(response.data);
+        setRestaurant(response.data);
+        console.log(restaurant);
       })
       .catch((e) => {
         // TODO: handle exception
@@ -49,10 +50,11 @@ export default function Restaurant() {
         </div>
       </div>
 
-      <Meal />
-      <Meal />
-      <Meal />
-      <Meal />
+      {restaurant !== undefined && restaurant.meals !== undefined ? (
+        restaurant.meals.map((m) => <Meal key={m.id} meal={m} />)
+      ) : (
+        <button>Add Meal</button>
+      )}
     </div>
   );
 }

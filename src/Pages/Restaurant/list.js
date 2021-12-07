@@ -10,7 +10,7 @@ export default function RestaurantList() {
     /* TODO: check what happens if data is not retrived and initial values are rendered */
   }
   const initialValue = [{ id: 0, name: '', address: '' }];
-  const [restaurantList, getRestaurantList] = useState(initialValue);
+  const [restaurantList, setRestaurantList] = useState(initialValue);
 
   useEffect(() => {
     retriveRestaurantList();
@@ -25,7 +25,7 @@ export default function RestaurantList() {
   function retriveRestaurantList() {
     RestaurantDataService.getAll()
       .then((response) => {
-        getRestaurantList(response.data);
+        setRestaurantList(response.data);
       })
       .catch((e) => {
         // TODO: handle exception
