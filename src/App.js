@@ -17,9 +17,9 @@ function App() {
       <Header />
       <div className="container-fluid">
         <div className="row content">
-          <SideBar />
-          <div id="main" className="col-sm-9">
-            <Router>
+          <Router>
+            <SideBar />
+            <div id="main" className="col-sm-9">
               <Switch>
                 {routes.map((route) => (
                   <AppRoute
@@ -30,8 +30,8 @@ function App() {
                   />
                 ))}
               </Switch>
-            </Router>
-          </div>
+            </div>
+          </Router>
         </div>
       </div>
 

@@ -11,7 +11,7 @@ export default function Meal(props) {
   return (
     <div className="row pb-2">
       <div className="col-sm-3">
-        <img src={img} className="img-rounded" alt="Cinque Terre" />
+        <img src={img} className="img-rounded" />
       </div>
       <div className="col-sm-5">{name}</div>
       <div className="col-sm-2">{price}</div>
