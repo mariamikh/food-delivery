@@ -6,7 +6,7 @@ export default function SideBar() {
     <div className="col-sm-3">
       <ul>
         <li>
-          <Link to="/restaurant"> Restaurent List </Link>
+          <Link to="/restaurant"> Restaurant List </Link>
         </li>
         <li>
           <Link to="/order"> Order List </Link>

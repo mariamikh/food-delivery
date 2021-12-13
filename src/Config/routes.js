@@ -3,8 +3,14 @@ import Login from '../Pages/Login';
 import NotFound from '../Pages/NotFound';
 import RestaurantList from '../Pages/Restaurant/list';
 import Restaurant from '../Pages/Restaurant/details/';
+import AddMeal from '../Pages/Restaurant/Meal/AddMeal';
 
 const routes = [
+  {
+    path: '/restaurant/:id/meal',
+    component: AddMeal,
+    isPrivate: false,
+  },
   {
     path: '/restaurant/:id',
     component: Restaurant,

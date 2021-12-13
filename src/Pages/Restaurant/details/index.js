@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Meal from '../Meal';
 import RestaurantDataService from '../../../services/restaurant.service';
+import { useHistory } from 'react-router-dom';
 
 export default function Restaurant() {
   const initialValue = [
@@ -22,6 +23,12 @@ export default function Restaurant() {
   const [restaurant, setRestaurant] = useState(initialValue);
   const { id } = useParams();
 
+  const history = useHistory();
+
+  const addMeal = (id) => {
+    history.push('/restaurant/' + id + '/meal');
+  };
+
   function retriveRestaurantDetails(id) {
     RestaurantDataService.get(id)
       .then((response) => {
@@ -35,7 +42,7 @@ export default function Restaurant() {
   }
 
   useEffect(() => {
-    console.log('Restaurent details page is loaded: ' + id);
+    console.log('Restaurant details page is loaded: ' + id);
     retriveRestaurantDetails(id);
   }, []);
 
@@ -50,10 +57,14 @@ export default function Restaurant() {
         </div>
       </div>
 
-      {restaurant !== undefined && restaurant.meals !== undefined ? (
-        restaurant.meals.map((m) => <Meal key={m.id} meal={m} />)
+      {restaurant !== undefined ? (
+        restaurant.meals !== undefined ? (
+          restaurant.meals.map((m) => <Meal key={m.id} meal={m} />)
+        ) : (
+          <button onClick={() => addMeal(restaurant.id)}>Add Meal</button>
+        )
       ) : (
-        <button>Add Meal</button>
+        <p> TODO: Restaurant not Found </p>
       )}
     </div>
   );
