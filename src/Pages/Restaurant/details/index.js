@@ -57,15 +57,18 @@ export default function Restaurant() {
         </div>
       </div>
 
-      {restaurant !== undefined ? (
-        restaurant.meals !== undefined ? (
-          restaurant.meals.map((m) => <Meal key={m.id} meal={m} />)
+      {
+        // TODO add Make Order button
+        restaurant !== undefined ? (
+          restaurant.meals !== undefined ? (
+            restaurant.meals.map((m) => <Meal key={m.id} meal={m} />)
+          ) : (
+            <button onClick={() => addMeal(restaurant.id)}>Add Meal</button>
+          )
         ) : (
-          <button onClick={() => addMeal(restaurant.id)}>Add Meal</button>
+          <p> TODO: Restaurant not Found </p>
         )
-      ) : (
-        <p> TODO: Restaurant not Found </p>
-      )}
+      }
     </div>
   );
 }
