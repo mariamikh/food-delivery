@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
-
-export default function AddMeal() {
+import RestaurantDataService from '../../../services/restaurant.service';
+import Error from '../../Error';
+export default function AddMeal(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [img, setImg] = useState('');
+  const [err, setErr] = useState('');
 
   const handleAddingMeal = async (e) => {
     e.preventDefault();
 
-    console.log('handling add meal operation');
+    RestaurantDataService.create({
+      name,
+      price,
+      img,
+    })
+      .then(() => {
+        props.history.push('/');
+      })
+      .catch((error) => {
+        //TODO: handle error
+        setErr(error);
+        console.log(error);
+      });
   };
 
   return (
@@ -17,7 +31,6 @@ export default function AddMeal() {
       <div className="card-body">
         <ul>
           <li>
-            {' '}
             <input
               type="text"
               name="name"
@@ -48,6 +61,8 @@ export default function AddMeal() {
             />
           </li>
         </ul>
+
+        {err !== undefined && err !== '' ? <Error text={err} /> : ''}
 
         <input
           type="submit"
