@@ -63,9 +63,10 @@ export default function Restaurant() {
     };
 
     OrderDataService.create(orderData)
-      .then((response) => {
-        //TODO: handle successful request
-        console.log('Ordered Successfully');
+      .then((id) => {
+        // TODO: 'Add Alert Message: Ordered Successfully'
+        console.log('Add Alert Message: Ordered Successfully');
+        history.push('/order/' + id);
       })
       .catch((e) => {
         // TODO: handle exception

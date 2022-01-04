@@ -3,9 +3,17 @@ import http from '../http-common';
 class OrderDataService {
   async create(data) {
     // TODO: add dynamic id - /restaurant/${id}/meal
-    await http.post('/restaurant/2/order', data).then(() => {
+    return await http.post('/order', data).then((response) => {
       console.log('Adding new order for restaurant');
+      console.log(response.data);
+      // TODO: handle a case when response or response.data is undefined
+      if (response !== undefined && response.data !== undefined)
+        return response.data.id;
     });
+  }
+
+  get(id) {
+    return http.get(`/order/${id}`);
   }
 }
 
