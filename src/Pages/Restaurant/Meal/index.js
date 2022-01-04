@@ -8,10 +8,10 @@ export default function Meal(props) {
   function changeButton() {
     if (btnText === 'Add') {
       setBtnText('Delete');
-      //TODO: Add meal to order list
+      props.onAddToCart();
     } else {
       setBtnText('Add');
-      //TODO: remove meal from order list
+      props.onRemoveFromCart();
     }
   }
 

@@ -29,6 +29,8 @@ export default function Restaurant() {
     history.push('/restaurant/' + id + '/meal');
   };
 
+  const orderedMeals = [];
+
   function retriveRestaurantDetails(id) {
     RestaurantDataService.get(id)
       .then((response) => {
@@ -39,6 +41,26 @@ export default function Restaurant() {
         // TODO: handle exception
         console.log(e);
       });
+  }
+
+  function addMealToCart(id) {
+    orderedMeals[id] = true;
+  }
+
+  function removeFromCart(id) {
+    orderedMeals[id] = false;
+  }
+
+  function makeOrder() {
+    let len = orderedMeals.length;
+    let j = 0;
+    const orderedMealList = [];
+    for (var i = 0; i < len; i++) {
+      if (orderedMeals[i] === true) {
+        orderedMealList[j] = i;
+        j++;
+      }
+    }
   }
 
   useEffect(() => {
@@ -61,7 +83,14 @@ export default function Restaurant() {
         // TODO add Make Order button
         restaurant !== undefined ? (
           restaurant.meals !== undefined ? (
-            restaurant.meals.map((m) => <Meal key={m.id} meal={m} />)
+            restaurant.meals.map((m) => (
+              <Meal
+                key={m.id}
+                meal={m}
+                onAddToCart={() => addMealToCart(m.id)}
+                onRemoveFromCart={() => removeFromCart(m.id)}
+              />
+            ))
           ) : (
             <button onClick={() => addMeal(restaurant.id)}>Add Meal</button>
           )
@@ -69,6 +98,8 @@ export default function Restaurant() {
           <p> TODO: Restaurant not Found </p>
         )
       }
+
+      <button onClick={() => makeOrder()}>Make Order</button>
     </div>
   );
 }
