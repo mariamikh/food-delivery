@@ -15,12 +15,7 @@ export default function Meal(props) {
     }
   }
 
-  function makeOrder() {
-    //TODO: make oder
-  }
-
   // TODO: image is not shown, img url is not read correctly
-
   return (
     <div className="row pb-2">
       <div className="col-sm-3">

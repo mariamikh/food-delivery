@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Meal from '../Meal';
 import RestaurantDataService from '../../../services/restaurant.service';
+import OrderDataService from '../../../services/order.service';
 import { useHistory } from 'react-router-dom';
 
 export default function Restaurant() {
@@ -31,6 +32,47 @@ export default function Restaurant() {
 
   const orderedMeals = [];
 
+  function addMealToCart(id) {
+    orderedMeals[id] = true;
+  }
+
+  function removeFromCart(id) {
+    orderedMeals[id] = false;
+  }
+
+  function getOrderedMeals() {
+    let len = orderedMeals.length;
+    let j = 0;
+    const orderedMealList = [];
+    for (var i = 0; i < len; i++) {
+      if (orderedMeals[i] === true) {
+        orderedMealList[j] = i;
+        j++;
+      }
+    }
+    return orderedMealList;
+  }
+
+  // TODO: hide make order button for restaurent owner and when no meal is added to cart
+  function makeOrder() {
+    const orderedMealList = getOrderedMeals();
+    const orderData = {
+      user: '',
+      restaurent: '',
+      meals: orderedMealList,
+    };
+
+    OrderDataService.create(orderData)
+      .then((response) => {
+        //TODO: handle successful request
+        console.log('Ordered Successfully');
+      })
+      .catch((e) => {
+        // TODO: handle exception
+        console.log(e);
+      });
+  }
+
   function retriveRestaurantDetails(id) {
     RestaurantDataService.get(id)
       .then((response) => {
@@ -42,27 +84,6 @@ export default function Restaurant() {
         console.log(e);
       });
   }
-
-  function addMealToCart(id) {
-    orderedMeals[id] = true;
-  }
-
-  function removeFromCart(id) {
-    orderedMeals[id] = false;
-  }
-
-  function makeOrder() {
-    let len = orderedMeals.length;
-    let j = 0;
-    const orderedMealList = [];
-    for (var i = 0; i < len; i++) {
-      if (orderedMeals[i] === true) {
-        orderedMealList[j] = i;
-        j++;
-      }
-    }
-  }
-
   useEffect(() => {
     console.log('Restaurant details page is loaded: ' + id);
     retriveRestaurantDetails(id);
@@ -98,7 +119,6 @@ export default function Restaurant() {
           <p> TODO: Restaurant not Found </p>
         )
       }
-
       <button onClick={() => makeOrder()}>Make Order</button>
     </div>
   );
