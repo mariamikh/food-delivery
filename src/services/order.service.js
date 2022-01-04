@@ -15,6 +15,10 @@ class OrderDataService {
   get(id) {
     return http.get(`/order/${id}`);
   }
+
+  getUserOrders(userId) {
+    return http.get('/order/user/${userId}');
+  }
 }
 
 export default new OrderDataService();
