@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom';
 import { useAuthDispatch, useAuthState } from '../../Context';
 
 export default function SideBar() {
-  // TODO: dynamically get user ID(to fetch order list for user or for restaurent) and role(to display relevant navigation)
   const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
-  console.log('sidebar: ');
-  console.log(userDetails.userDetails.email);
 
-  const user = {
+  const userInitialValue = {
     id: 5,
-    role: 'user',
-    // role: 'owner'
+    // role: 'user',
+    role: 'owner',
   };
 
   const initialValue = [
@@ -22,13 +19,27 @@ export default function SideBar() {
     },
   ];
   const [sideBarItems, setSideBarItems] = useState(initialValue);
+  const [user, setUser] = useState(userInitialValue);
 
-  function retriveSideBarItems() {
+  function getUserDetails() {
+    // TODO: dynamically get user ID(to fetch order list for user or for restaurent) and role(to display relevant navigation)
+
+    console.log('sidebar: ');
+    console.log(userDetails.userDetails.email);
+  }
+
+  function getSideBarItems() {
+    getUserDetails();
+
     //TODO get userID dynamicaly for user and for restaurant
 
     if (user !== 'undefined' && user === 'owner') {
       console.log('in IF');
       setSideBarItems([
+        {
+          name: 'My Restaurant',
+          link: '/restaurent?Owner=1',
+        },
         {
           name: 'Restaurant List',
           link: '/restaurant',
@@ -36,10 +47,6 @@ export default function SideBar() {
         {
           name: 'Order List',
           link: '/order/restaurent/1',
-        },
-        {
-          name: 'My Restaurant',
-          link: '/restaurent?Owner=1',
         },
       ]);
     } else {
@@ -59,7 +66,7 @@ export default function SideBar() {
   }
 
   useEffect(() => {
-    retriveSideBarItems();
+    getSideBarItems();
   }, []);
 
   return (
