@@ -13,12 +13,10 @@ export default function Header(props) {
   };
 
   return (
-    <nav className="navbar navbar-inverse">
-      <div className="container-fluid">
+    <div className="container header">
+      <nav className="navbar navbar-inverse">
         <div className="navbar-header">
-          <a className="navbar-brand" href="#">
-            Food Delivery
-          </a>
+          <h4>Food Delivery </h4>
         </div>
 
         <ul className="nav navbar-nav navbar-right">
@@ -34,7 +32,7 @@ export default function Header(props) {
             )}
           </li>
         </ul>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }

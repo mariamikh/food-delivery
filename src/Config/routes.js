@@ -33,11 +33,11 @@ const routes = [
     component: RestaurantList,
     isPrivate: false,
   },
-  {
-    path: '/login',
-    component: Login,
-    isPrivate: false,
-  },
+  // {
+  //   path: '/login',
+  //   component: Login,
+  //   isPrivate: false,
+  // },
   {
     path: '/',
     component: NotFound,

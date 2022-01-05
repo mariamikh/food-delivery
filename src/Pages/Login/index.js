@@ -16,6 +16,7 @@ function Login(props) {
       let response = await loginUser(dispatch, { email, password });
       if (!response.user) return;
 
+      // TODO: this doesn't work
       props.history.push('/');
     } catch (error) {
       console.log(error);
@@ -23,9 +24,9 @@ function Login(props) {
   };
 
   return (
-    <div className={styles.container}>
+    <div className="container login">
       <div className={{ width: 200 }}>
-        <h1>Login Page</h1>
+        <h5>Login Page</h5>
         {errorMessage ? <p className={styles.error}>{errorMessage}</p> : null}
         <form>
           <div className={styles.loginForm}>
