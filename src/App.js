@@ -16,13 +16,13 @@ function App() {
     <AuthProvider>
       <Header />
       <div className="container content border">
-        <Login />
+        {/* <Login /> */}
 
-        {/*
-        <div className="container-fluid">
-          <div className="row content">
-            <Router>
-              <SideBar />
+        <Router>
+          <SideBar />
+
+          {/* <div className="container-fluid">
+            <div className="row content">
               <div id="main" className="col-sm-9">
                 <Switch>
                   {routes.map((route) => (
@@ -35,10 +35,9 @@ function App() {
                   ))}
                 </Switch>
               </div>
-            </Router>
-          </div>
-                  
-        </div>*/}
+            </div>
+          </div> */}
+        </Router>
       </div>
     </AuthProvider>
   );
