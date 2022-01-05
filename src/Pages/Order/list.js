@@ -8,7 +8,9 @@ export default function OrderList() {
   {
     /* TODO: check what happens if data is not retrived and initial values are rendered */
   }
-  const initialValue = [{ id: 0, date: '', status: '', total: 0 }];
+  const initialValue = [{ id: 0, date: '', total: '', status: '' }];
+  const secondValue = [{ id: 1, date: '1', total: '12', status: '2' }];
+
   const [orderList, setOrderList] = useState(initialValue);
 
   useEffect(() => {
@@ -34,8 +36,8 @@ export default function OrderList() {
   }
 
   return (
+    // TODO: if orderlist is emprty, handle
     <div>
-      TODO: check what is shown, this page is in progress
       {orderList.map((r) => (
         <div key={r.id} className="row pb-2">
           <div className="col-sm-3"></div>

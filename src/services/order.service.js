@@ -17,7 +17,9 @@ class OrderDataService {
   }
 
   getUserOrders(userId) {
-    return http.get('/order/user/${userId}');
+    // TODO set dynamic userID
+    // return http.get('/order/user/${userId}');
+    return http.get('/order/user/5');
   }
 }
 
