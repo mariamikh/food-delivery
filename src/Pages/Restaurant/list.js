@@ -33,30 +33,71 @@ export default function RestaurantList() {
       });
   }
 
+  {
+    /* TODO: paging 
+      TODO: add real image src
+  */
+  }
   return (
-    <div className="d-flex flex-column">
-      {/* TODO: paging */}
+    <div class="row bg-light m-2 p-2">
       {restaurantList.map((r) => (
         <div
           key={r.id}
-          className="d-flex flex-nowrap bg-light m-2"
+          class="card meal-card"
           onClick={() => openDetails(r.id)}
           style={{ cursor: 'pointer' }}
         >
-          <div className="p-2">
-            {/* TODO: add real image src */}
-            <img
-              src="https://bit.ly/3xBxOZE"
-              className="img-rounded"
-              alt="Cinque Terre"
-            />
-          </div>
-          <div className="p-2">
-            <h6>{r.name}</h6>
-            <p>{r.address} </p>
+          <img class="card-img-top" src="https://bit.ly/3xBxOZE" />
+
+          <div class="card-body">
+            <h5 class="card-title">{r.name}</h5>
+            <p class="card-text">{r.address}</p>
           </div>
         </div>
+
+        //     <div
+        //       key={r.id}
+        //       className="d-flex flex-nowrap bg-light m-2"
+        //       onClick={() => openDetails(r.id)}
+        //       style={{ cursor: 'pointer' }}
+        //     >
+        //       <div className="p-2">
+        //         <img
+        //           src="https://bit.ly/3xBxOZE"
+        //           className="img-rounded"
+        //           alt="Cinque Terre"
+        //         />
+        //       </div>
+        //       <div className="p-2">
+        //         <h6>{r.name}</h6>
+        //         <p>{r.address} </p>
+        //       </div>
+        //     </div>
       ))}
     </div>
+
+    // <div className="d-flex flex-column">
+
+    //   {restaurantList.map((r) => (
+    //     <div
+    //       key={r.id}
+    //       className="d-flex flex-nowrap bg-light m-2"
+    //       onClick={() => openDetails(r.id)}
+    //       style={{ cursor: 'pointer' }}
+    //     >
+    //       <div className="p-2">
+    //         <img
+    //           src="https://bit.ly/3xBxOZE"
+    //           className="img-rounded"
+    //           alt="Cinque Terre"
+    //         />
+    //       </div>
+    //       <div className="p-2">
+    //         <h6>{r.name}</h6>
+    //         <p>{r.address} </p>
+    //       </div>
+    //     </div>
+    //   ))}
+    // </div>
   );
 }
