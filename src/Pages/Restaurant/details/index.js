@@ -53,7 +53,8 @@ export default function Restaurant() {
     return orderedMealList;
   }
 
-  // TODO: hide make order button for restaurent owner and when no meal is added to cart
+  // TODO: disable order button for restaurent owner and when no meal is added to cart
+
   function makeOrder() {
     const orderedMealList = getOrderedMeals();
     const orderData = {
@@ -91,19 +92,30 @@ export default function Restaurant() {
   }, []);
 
   return (
-    <div className="d-flex flex-column">
-      <div className="d-flex flex-nowrap bg-light p-3 mt-3 mb-5">
-        <div className="p-2">
+    <div class="d-flex flex-column">
+      <div class="row bg-light p-3 mt-3 mb-5">
+        <div class="col-3 p-2">
           {/* TODO: add real image src */}
           <img
             src="https://bit.ly/3xBxOZE"
-            className="img-rounded"
+            class="img-rounded"
             alt="Cinque Terre"
           />
         </div>
-        <div className="p-2">
+        <div class="col-6 p-2">
           <h6>{restaurant.name}</h6>
           <p>{restaurant.address} </p>
+        </div>
+
+        <div class="col-3 p-2 bg-white text-center border">
+          <h6>SubTotal: 128$</h6>
+          <button
+            type="button"
+            class="btn btn-info "
+            onClick={() => makeOrder()}
+          >
+            Order
+          </button>
         </div>
       </div>
 
@@ -124,10 +136,6 @@ export default function Restaurant() {
         ) : (
           <p> TODO: Restaurant not Found </p>
         )}
-      </div>
-
-      <div className="d-flex m-2">
-        <button onClick={() => makeOrder()}>Make Order</button>
       </div>
     </div>
   );
