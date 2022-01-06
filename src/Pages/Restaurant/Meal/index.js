@@ -27,23 +27,49 @@ export default function Meal(props) {
   }
 
   return (
-    <div class="card meal-card">
-      <img class="card-img-top" src={img} />
-      <div class="card-body">
-        <h5 class="card-title">{name}</h5>
-        <div class="d-flex justify-content-between">
-          <h5>${price}</h5>
-          <button
-            type="button"
-            className="btn btn-secondary btn-sm"
-            onClick={() => {
-              changeButton();
-            }}
-          >
-            {btnText}
-          </button>
-        </div>
+    <div class="row p-2 mb-2 bg-white">
+      <div class="col-3">
+        <img src={img} class="rounded float-left" />
+      </div>
+      <div class="col-7">
+        <h5>{name}</h5>
+        <p>Some description for meal </p>
+      </div>
+      <div class="col-2">
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm"
+          onClick={() => {
+            changeButton();
+          }}
+        >
+          {btnText}
+        </button>
       </div>
     </div>
+
+    // <div className="d-flex flex-column">
+
+    //   {restaurantList.map((r) => (
+    //     <div
+    //       key={r.id}
+    //       className="d-flex flex-nowrap bg-light m-2"
+    //       onClick={() => openDetails(r.id)}
+    //       style={{ cursor: 'pointer' }}
+    //     >
+    //       <div className="p-2">
+    //         <img
+    //           src="https://bit.ly/3xBxOZE"
+    //           className="img-rounded"
+    //           alt="Cinque Terre"
+    //         />
+    //       </div>
+    //       <div className="p-2">
+    //         <h6>{r.name}</h6>
+    //         <p>{r.address} </p>
+    //       </div>
+    //     </div>
+    //   ))}
+    // </div>
   );
 }

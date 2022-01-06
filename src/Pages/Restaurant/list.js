@@ -43,7 +43,7 @@ export default function RestaurantList() {
       {restaurantList.map((r) => (
         <div
           key={r.id}
-          class="card meal-card"
+          class="card restaurant-card"
           onClick={() => openDetails(r.id)}
           style={{ cursor: 'pointer' }}
         >
@@ -54,50 +54,7 @@ export default function RestaurantList() {
             <p class="card-text">{r.address}</p>
           </div>
         </div>
-
-        //     <div
-        //       key={r.id}
-        //       className="d-flex flex-nowrap bg-light m-2"
-        //       onClick={() => openDetails(r.id)}
-        //       style={{ cursor: 'pointer' }}
-        //     >
-        //       <div className="p-2">
-        //         <img
-        //           src="https://bit.ly/3xBxOZE"
-        //           className="img-rounded"
-        //           alt="Cinque Terre"
-        //         />
-        //       </div>
-        //       <div className="p-2">
-        //         <h6>{r.name}</h6>
-        //         <p>{r.address} </p>
-        //       </div>
-        //     </div>
       ))}
     </div>
-
-    // <div className="d-flex flex-column">
-
-    //   {restaurantList.map((r) => (
-    //     <div
-    //       key={r.id}
-    //       className="d-flex flex-nowrap bg-light m-2"
-    //       onClick={() => openDetails(r.id)}
-    //       style={{ cursor: 'pointer' }}
-    //     >
-    //       <div className="p-2">
-    //         <img
-    //           src="https://bit.ly/3xBxOZE"
-    //           className="img-rounded"
-    //           alt="Cinque Terre"
-    //         />
-    //       </div>
-    //       <div className="p-2">
-    //         <h6>{r.name}</h6>
-    //         <p>{r.address} </p>
-    //       </div>
-    //     </div>
-    //   ))}
-    // </div>
   );
 }
