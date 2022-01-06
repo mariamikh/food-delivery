@@ -15,28 +15,29 @@ function App() {
   return (
     <AuthProvider>
       <Header />
-      <div className="container content border">
+      <div className="container app-container border">
         {/* <Login /> */}
 
         <Router>
           <SideBar />
 
-          {/* <div className="container-fluid">
-            <div className="row content">
+          <div className="container-fluid app-content">
+            {/* <div className="row content">
               <div id="main" className="col-sm-9">
-                <Switch>
-                  {routes.map((route) => (
-                    <AppRoute
-                      key={route.path}
-                      path={route.path}
-                      component={route.component}
-                      isPrivate={route.isPrivate}
-                    />
-                  ))}
-                </Switch>
               </div>
-            </div>
-          </div> */}
+            </div>  */}
+
+            <Switch>
+              {routes.map((route) => (
+                <AppRoute
+                  key={route.path}
+                  path={route.path}
+                  component={route.component}
+                  isPrivate={route.isPrivate}
+                />
+              ))}
+            </Switch>
+          </div>
         </Router>
       </div>
     </AuthProvider>

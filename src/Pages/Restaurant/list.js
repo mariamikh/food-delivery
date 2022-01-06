@@ -34,10 +34,16 @@ export default function RestaurantList() {
   }
 
   return (
-    <div>
+    <div className="d-flex flex-column">
+      {/* TODO: paging */}
       {restaurantList.map((r) => (
-        <div key={r.id} className="row pb-2">
-          <div className="col-sm-3">
+        <div
+          key={r.id}
+          className="d-flex flex-nowrap bg-light m-2"
+          onClick={() => openDetails(r.id)}
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="p-2">
             {/* TODO: add real image src */}
             <img
               src="https://bit.ly/3xBxOZE"
@@ -45,10 +51,8 @@ export default function RestaurantList() {
               alt="Cinque Terre"
             />
           </div>
-          <div className="col-sm-9">
-            <p style={{ cursor: 'pointer' }} onClick={() => openDetails(r.id)}>
-              {r.name}
-            </p>
+          <div className="p-2">
+            <h6>{r.name}</h6>
             <p>{r.address} </p>
           </div>
         </div>

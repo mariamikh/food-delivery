@@ -9,10 +9,11 @@ body {
   width: 800px;
   height: 55px;
 }
-.content {
+.app-container {
   background-color: rgb(255, 255, 255);
   width: 800px;
-  height: 500px;
+  padding-bottom: 20px;
+  min-height: 500px;
 }
 
 .login {
@@ -34,6 +35,14 @@ body {
   border-bottom: royalblue;
 }
 
+.app-content {
+  height: 100%;
+  width: 100%;
+}
+
+.order-list-container {
+  width: 400px;
+}
 /* OLD CSS*/
 
 img {
