@@ -43,6 +43,10 @@ body {
 .order-list-container {
   width: 400px;
 }
+
+.meal-card {
+  width: 12rem;
+}
 /* OLD CSS*/
 
 img {

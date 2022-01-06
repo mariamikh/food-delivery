@@ -15,24 +15,33 @@ export default function Meal(props) {
     }
   }
 
-  // TODO: image is not shown, img url is not read correctly
+  {
+    /* 
+    TODO: paging
+    TODO: image is not shown, img url is not read correctly
+    TODO: add real image src 
+    TODO: add quantity to meal
+    */
+  }
+
   return (
-    <div className="row pb-2">
-      <div className="col-sm-3">
-        <img src={img} className="img-rounded" />
-      </div>
-      <div className="col-sm-5">{name}</div>
-      <div className="col-sm-2">{price}</div>
-      <div className="col-sm-2 ">
-        <button
-          type="button"
-          className="btn btn-secondary btn-sm"
-          onClick={() => {
-            changeButton();
-          }}
-        >
-          {btnText}
-        </button>
+    <div class="card meal-card m-2">
+      <img class="card-img-top" src={img} />
+      <div class="card-body">
+        <h5 class="card-title">{name}</h5>
+        <p class="card-text">Some description for teh meal</p>
+        <div class="d-flex justify-content-between">
+          <h5>${price}</h5>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => {
+              changeButton();
+            }}
+          >
+            {btnText}
+          </button>
+        </div>
       </div>
     </div>
   );

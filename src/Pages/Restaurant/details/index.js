@@ -91,19 +91,25 @@ export default function Restaurant() {
   }, []);
 
   return (
-    <div className="row">
-      <div className="col-sm-12">
-        <div className="panel panel-default text-left">
-          <div className="panel-body">
-            <p> {restaurant.name} </p>
-            <p> {restaurant.address} </p>
-          </div>
+    <div className="d-flex flex-column">
+      <div className="d-flex flex-nowrap bg-light m-2">
+        <div className="p-2">
+          {/* TODO: add real image src */}
+          <img
+            src="https://bit.ly/3xBxOZE"
+            className="img-rounded"
+            alt="Cinque Terre"
+          />
+        </div>
+        <div className="p-2">
+          <h6>{restaurant.name}</h6>
+          <p>{restaurant.address} </p>
         </div>
       </div>
 
-      {
-        // TODO add Make Order button
-        restaurant !== undefined ? (
+      {/* <div className="d-flex bg-light m-2"> */}
+      <div class="container" className="bg-light m-2">
+        {restaurant !== undefined ? (
           restaurant.meals !== undefined ? (
             restaurant.meals.map((m) => (
               <Meal
@@ -118,9 +124,12 @@ export default function Restaurant() {
           )
         ) : (
           <p> TODO: Restaurant not Found </p>
-        )
-      }
-      <button onClick={() => makeOrder()}>Make Order</button>
+        )}
+      </div>
+
+      <div className="d-flex m-2">
+        <button onClick={() => makeOrder()}>Make Order</button>
+      </div>
     </div>
   );
 }
