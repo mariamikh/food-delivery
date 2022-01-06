@@ -27,11 +27,10 @@ export default function Meal(props) {
   }
 
   return (
-    <div class="card meal-card m-2">
+    <div class="card meal-card">
       <img class="card-img-top" src={img} />
       <div class="card-body">
         <h5 class="card-title">{name}</h5>
-        <p class="card-text">Some description for teh meal</p>
         <div class="d-flex justify-content-between">
           <h5>${price}</h5>
           <button

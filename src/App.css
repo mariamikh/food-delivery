@@ -45,7 +45,9 @@ body {
 }
 
 .meal-card {
-  width: 12rem;
+  width: 10rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
 }
 /* OLD CSS*/
 

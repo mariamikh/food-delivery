@@ -107,8 +107,7 @@ export default function Restaurant() {
         </div>
       </div>
 
-      {/* <div className="d-flex bg-light m-2"> */}
-      <div class="container" className="bg-light m-2">
+      <div class="row bg-light m-2 p-2">
         {restaurant !== undefined ? (
           restaurant.meals !== undefined ? (
             restaurant.meals.map((m) => (
