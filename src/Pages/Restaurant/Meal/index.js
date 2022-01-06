@@ -35,7 +35,7 @@ export default function Meal(props) {
         <h5>{name}</h5>
         <p>Some description for meal </p>
       </div>
-      <div class="col-2">
+      <div class="col-2 align-self-center">
         <button
           type="button"
           class="btn btn-secondary btn-sm"
