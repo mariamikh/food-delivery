@@ -21,6 +21,8 @@ export default function Meal(props) {
     TODO: image is not shown, img url is not read correctly
     TODO: add real image src 
     TODO: add quantity to meal
+    TODO:  show selected meal list and total
+    TODO: make "Make Order" button more visible"
     */
   }
 
