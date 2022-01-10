@@ -31,10 +31,11 @@ export default function Meal(props) {
       <div class="col-3">
         <img src={img} class="rounded float-left" />
       </div>
-      <div class="col-7">
-        <h5>{name}</h5>
+      <div class="col-6">
+        <h6>{name}</h6>
         <p>Some description for meal </p>
       </div>
+      <h6 class="col-1 align-self-center">{price}$</h6>
       <div class="col-2 align-self-center">
         <button
           type="button"

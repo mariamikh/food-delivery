@@ -97,7 +97,7 @@ export default function Restaurant() {
 
   return (
     <div class="d-flex flex-column">
-      <div class="row bg-light p-3 mt-3 mb-5">
+      <div class="row bg-light p-3 mx-1 mb-4">
         <div class="col-3 p-2">
           {/* TODO: add real image src */}
           <img
@@ -107,7 +107,7 @@ export default function Restaurant() {
           />
         </div>
         <div class="col-6 p-2">
-          <h6>{restaurant.name}</h6>
+          <h5>{restaurant.name}</h5>
           <p>{restaurant.address} </p>
         </div>
 
@@ -123,7 +123,7 @@ export default function Restaurant() {
         </div>
       </div>
 
-      <div class="bg-light p-5">
+      <div class="bg-light px-4 pt-3">
         {restaurant !== undefined ? (
           restaurant.meals !== undefined ? (
             restaurant.meals.map((m) => (
