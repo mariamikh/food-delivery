@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Meal from '../Meal';
-import RestaurantDataService from '../../../services/restaurant.service';
-import OrderDataService from '../../../services/order.service';
+import Meal from './Meal/list';
+import RestaurantDataService from '../../services/restaurant.service';
+import OrderDataService from '../../services/order.service';
 import { useHistory } from 'react-router-dom';
 
 export default function Restaurant() {

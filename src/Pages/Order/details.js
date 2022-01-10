@@ -1,4 +1,4 @@
-import OrderDataService from '../../../services/order.service';
+import OrderDataService from '../../services/order.service';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

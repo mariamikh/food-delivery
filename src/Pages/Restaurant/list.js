@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import Restaurant from './details';
 
 import RestaurantDataService from '../../services/restaurant.service';
 

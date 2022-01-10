@@ -2,9 +2,9 @@ import React from 'react';
 import Login from '../Pages/Login';
 import NotFound from '../Pages/NotFound';
 import RestaurantList from '../Pages/Restaurant/list';
-import Restaurant from '../Pages/Restaurant/details/';
+import Restaurant from '../Pages/Restaurant/details';
 import AddMeal from '../Pages/Restaurant/Meal/AddMeal';
-import Order from '../Pages/Order/details';
+import Order from '../Pages/Order/details.js';
 import OrderList from '../Pages/Order/list';
 
 const routes = [
