@@ -44,11 +44,42 @@ export default function Order() {
   }, []);
 
   return (
-    <div className="row">
-      Order Details:
-      <p> {order.id} </p>
-      <p> {order.date} </p>
-      <p> {order.total} </p>
+    <div class="d-flex flex-column">
+      <div class="bg-light mt-2">
+        <div class="card-body">
+          <h5 class="card-title">Order Details</h5>
+          <div>Order No.: #{order.id}</div>
+          <div>
+            Restaurent:{' '}
+            {order !== undefined && order.restaurant != undefined
+              ? order.restaurant.name
+              : ''}
+          </div>
+          <div>Order Date: {order.date}</div>
+          <div>Total Sum: {order.total}</div>
+        </div>
+      </div>
+
+      <table class="table bg-light p-5 mt-2">
+        <thead>
+          <tr>
+            <th scope="col">name</th>
+            <th scope="col">price</th>
+            <th scope="col">quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {order !== undefined && order.meals !== undefined
+            ? order.meals.map((r) => (
+                <tr>
+                  <td>{r.name}</td>
+                  <td>{r.price}$</td>
+                  <td>{r.quantity}</td>
+                </tr>
+              ))
+            : ''}
+        </tbody>
+      </table>
     </div>
   );
 }
