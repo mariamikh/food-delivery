@@ -53,7 +53,11 @@ export default function Restaurant() {
     return orderedMealList;
   }
 
-  // TODO: disable order button for restaurent owner and when no meal is added to cart
+  /*
+   TODO: disable order button for restaurent owner and when no meal is added to cart
+   TODO: calculate subtotal and show in subtotal div
+   TODO: add quantity to ADD button
+   */
 
   function makeOrder() {
     const orderedMealList = getOrderedMeals();
