@@ -5,14 +5,8 @@ export default function Meal(props) {
 
   const [btnText, setBtnText] = useState('Add');
 
-  function changeButton() {
-    if (btnText === 'Add') {
-      setBtnText('Delete');
-      props.onAddToCart();
-    } else {
-      setBtnText('Add');
-      props.onRemoveFromCart();
-    }
+  function changeQuantity(quantity) {
+    props.changeTotal(id, price, quantity);
   }
 
   {
@@ -20,9 +14,6 @@ export default function Meal(props) {
     TODO: paging
     TODO: image is not shown, img url is not read correctly
     TODO: add real image src 
-    TODO: add quantity to meal
-    TODO:  show selected meal list and total
-    TODO: make "Make Order" button more visible"
     */
   }
 
@@ -40,10 +31,11 @@ export default function Meal(props) {
         <input
           type="number"
           class="form-control form-control-sm"
-          id="input1"
+          id="quantity"
           placeholder="0"
-          min="1"
+          min="0"
           max="99"
+          onChange={(e) => changeQuantity(e.target.value)}
         />
       </div>
     </div>

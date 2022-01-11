@@ -22,6 +22,9 @@ export default function Restaurant() {
     },
   ];
   const [restaurant, setRestaurant] = useState(initialValue);
+  const [total, setTotal] = useState(0);
+  const [orderedMeals, setOrderedMeals] = useState([]);
+
   const { id } = useParams();
 
   const history = useHistory();
@@ -30,14 +33,13 @@ export default function Restaurant() {
     history.push('/restaurant/' + id + '/meal');
   };
 
-  const orderedMeals = [];
+  function modifyTotal({ id, price, quantity }) {
+    if (setOrderedMeals[id] === undefined) {
+      setOrderedMeals[id] = 0;
+    }
 
-  function addMealToCart(id) {
-    orderedMeals[id] = true;
-  }
-
-  function removeFromCart(id) {
-    orderedMeals[id] = false;
+    setTotal(total + (quantity - setOrderedMeals[id]) * price);
+    setOrderedMeals[id] = quantity;
   }
 
   function getOrderedMeals() {
@@ -55,8 +57,6 @@ export default function Restaurant() {
 
   /*
    TODO: disable order button for restaurent owner and when no meal is added to cart
-   TODO: calculate subtotal and show in subtotal div
-   TODO: add quantity to ADD button
    */
 
   function makeOrder() {
@@ -112,7 +112,7 @@ export default function Restaurant() {
         </div>
 
         <div class="col-3 p-2 bg-white text-center border">
-          <h6>SubTotal: 128$</h6>
+          <h6>SubTotal: {total}$</h6>
           <button
             type="button"
             class="btn btn-info "
@@ -130,8 +130,9 @@ export default function Restaurant() {
               <Meal
                 key={m.id}
                 meal={m}
-                onAddToCart={() => addMealToCart(m.id)}
-                onRemoveFromCart={() => removeFromCart(m.id)}
+                changeTotal={(id, price, quantity) =>
+                  modifyTotal({ id, price, quantity })
+                }
               />
             ))
           ) : (
