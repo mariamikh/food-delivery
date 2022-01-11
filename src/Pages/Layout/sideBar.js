@@ -70,9 +70,9 @@ export default function SideBar() {
   }, []);
 
   return (
-    <ul class="nav nav-pills navbar-right side-bar border-bottom">
+    <ul className="nav nav-pills navbar-right side-bar border-bottom">
       {sideBarItems.map((r) => (
-        <li>
+        <li key={r.name}>
           <Link
             to={r.link}
             style={{ textDecorationLine: 'none', marginLeft: 30 }}
