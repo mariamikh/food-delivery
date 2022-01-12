@@ -25,10 +25,18 @@ export default function Header(props) {
             userDetails.userDetails !== undefined ? (
               <div>
                 {userDetails.userDetails.email}
-                <button onClick={handleLogout}> Logout </button>
+                <button
+                  onClick={handleLogout}
+                  type="button"
+                  className="btn btn-outline-secondary"
+                >
+                  Logout
+                </button>
               </div>
             ) : (
-              <button>Login</button>
+              <button type="button" className="btn btn-secondary">
+                Login
+              </button>
             )}
           </li>
         </ul>

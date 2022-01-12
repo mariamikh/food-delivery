@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useAuthState } from './Context';
 
 import routes from './Config/routes.js';
-import { AuthProvider } from './Context';
 import AppRoute from './Components/AppRoute';
 import Header from './Pages/Layout/header';
 import SideBar from './Pages/Layout/sideBar';
@@ -12,11 +12,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
+  const userDetails = useAuthState();
+  // console.log(userDetails.userDetails.email);
+  console.log(userDetails);
+
   return (
-    <AuthProvider>
+    <React.Fragment>
       <Header />
       <div className="container app-container border">
-        {/* <Login /> */}
+        <Login />
 
         <Router>
           <SideBar />
@@ -40,7 +44,7 @@ function App() {
           </div>
         </Router>
       </div>
-    </AuthProvider>
+    </React.Fragment>
   );
 }
 

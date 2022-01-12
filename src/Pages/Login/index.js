@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { loginUser, useAuthState, useAuthDispatch } from '../../Context';
 import styles from './login.module.css';
+import AuthDataService from '../../services/auth.service';
+import jwt_decode from 'jwt-decode';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -9,19 +11,37 @@ function Login(props) {
   const dispatch = useAuthDispatch(); //get the dispatch method from the useDispatch custom hook
   const { loading, errorMessage } = useAuthState();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
+  async function loginUser() {
     try {
-      let response = await loginUser(dispatch, { email, password });
-      if (!response.user) return;
+      dispatch({ type: 'REQUEST_LOGIN' });
 
-      // TODO: this doesn't work
-      props.history.push('/');
+      AuthDataService.login({ email, password })
+        .then((response) => {
+          if (response !== 'undefined' && response.data !== 'undefined') {
+            var token = response.data.auth_token;
+            var data = jwt_decode(token);
+
+            dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+            localStorage.setItem('currentUser', JSON.stringify(data));
+
+            console.log('in action: ' + JSON.stringify(data));
+            // TODO Redirect to content
+          }
+        })
+        .catch((error) => {
+          // dispatch({ type: 'LOGIN_ERROR', error: data.errors[0] });
+          console.log(error);
+        });
     } catch (error) {
-      console.log(error);
+      dispatch({ type: 'LOGIN_ERROR', error: error });
     }
-  };
+  }
+
+  async function logout(dispatch) {
+    dispatch({ type: 'LOGOUT' });
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
+  }
 
   return (
     <div className="container login">
@@ -51,7 +71,12 @@ function Login(props) {
               />
             </div>
           </div>
-          <button onClick={handleLogin} disabled={loading}>
+          <button
+            type="button"
+            className="btn btn-secondary "
+            onClick={loginUser}
+            disabled={loading}
+          >
             login
           </button>
         </form>
