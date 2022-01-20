@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthDispatch, useAuthState } from '../../Context';
+// import { useAuthDispatch, useAuthState } from '../../Context';
+import { useAuthState } from '../../Context';
 
 export default function SideBar() {
-  const dispatch = useAuthDispatch();
+  // const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
 
   const userInitialValue = {

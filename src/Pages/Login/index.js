@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { loginUser, useAuthState, useAuthDispatch } from '../../Context';
 import styles from './login.module.css';
-import AuthDataService from '../../services/auth.service';
-import jwt_decode from 'jwt-decode';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -11,37 +9,13 @@ function Login(props) {
   const dispatch = useAuthDispatch(); //get the dispatch method from the useDispatch custom hook
   const { loading, errorMessage } = useAuthState();
 
-  async function loginUser() {
-    try {
-      dispatch({ type: 'REQUEST_LOGIN' });
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-      AuthDataService.login({ email, password })
-        .then((response) => {
-          if (response !== 'undefined' && response.data !== 'undefined') {
-            var token = response.data.auth_token;
-            var data = jwt_decode(token);
-
-            dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-            localStorage.setItem('currentUser', JSON.stringify(data));
-
-            console.log('in action: ' + JSON.stringify(data));
-            // TODO Redirect to content
-          }
-        })
-        .catch((error) => {
-          // dispatch({ type: 'LOGIN_ERROR', error: data.errors[0] });
-          console.log(error);
-        });
-    } catch (error) {
-      dispatch({ type: 'LOGIN_ERROR', error: error });
-    }
-  }
-
-  async function logout(dispatch) {
-    dispatch({ type: 'LOGOUT' });
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('token');
-  }
+    loginUser(dispatch, { email, password }).then((value) => {
+      props.history.push('/');
+    });
+  };
 
   return (
     <div className="container login">
@@ -74,7 +48,7 @@ function Login(props) {
           <button
             type="button"
             className="btn btn-secondary "
-            onClick={loginUser}
+            onClick={handleLogin}
             disabled={loading}
           >
             login

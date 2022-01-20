@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 
 import RestaurantDataService from '../../services/restaurant.service';
 
 export default function RestaurantList() {
-  {
-    /* TODO: check what happens if data is not retrived and initial values are rendered */
-  }
+  /* TODO: check what happens if data is not retrived and initial values are rendered */
+
   const initialValue = [{ id: 0, name: '', address: '' }];
   const [restaurantList, setRestaurantList] = useState(initialValue);
 
@@ -32,11 +30,9 @@ export default function RestaurantList() {
       });
   }
 
-  {
-    /* TODO: paging 
+  /* TODO: paging 
       TODO: add real image src
   */
-  }
   return (
     <div class="row bg-light m-2 p-2">
       {restaurantList.map((r) => (
@@ -46,7 +42,7 @@ export default function RestaurantList() {
           onClick={() => openDetails(r.id)}
           style={{ cursor: 'pointer' }}
         >
-          <img class="card-img-top" src="https://bit.ly/3xBxOZE" />
+          <img class="card-img-top" alt="" src="https://bit.ly/3xBxOZE" />
 
           <div class="card-body">
             <h5 class="card-title">{r.name}</h5>

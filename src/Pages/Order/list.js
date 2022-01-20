@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 
 import OrderDataService from '../../services/order.service';
 
 export default function OrderList() {
-  {
-    /* TODO: check what happens if data is not retrived and initial values are rendered */
-  }
+  /* TODO: check what happens if data is not retrived and initial values are rendered */
+
   const initialValue = [{ id: 0, date: '', total: '', status: '' }];
-  const secondValue = [{ id: 1, date: '1', total: '12', status: '2' }];
 
   const [orderList, setOrderList] = useState(initialValue);
 

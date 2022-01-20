@@ -1,15 +1,15 @@
 import AuthDataService from '../services/auth.service';
 import jwt_decode from 'jwt-decode';
 
-const ROOT_URL = 'https://secret-hamlet-03431.herokuapp.com';
+// const ROOT_URL = 'https://secret-hamlet-03431.herokuapp.com';
 // user: nero@admin.com
 // pass: admin123
 
-export async function loginUser(dispatch, loginPayload) {
+export function loginUser(dispatch, loginPayload) {
   try {
     dispatch({ type: 'REQUEST_LOGIN' });
 
-    AuthDataService.login(loginPayload)
+    return AuthDataService.login(loginPayload)
       .then((response) => {
         if (response !== 'undefined' && response.data !== 'undefined') {
           var token = response.data.auth_token;
@@ -18,13 +18,11 @@ export async function loginUser(dispatch, loginPayload) {
           dispatch({ type: 'LOGIN_SUCCESS', payload: data });
           localStorage.setItem('currentUser', JSON.stringify(data));
 
-          console.log('in action: ' + JSON.stringify(data));
-
           return data;
         }
       })
       .catch((error) => {
-        // dispatch({ type: 'LOGIN_ERROR', error: data.errors[0] });
+        dispatch({ type: 'LOGIN_ERROR', error: error });
         console.log(error);
       });
 

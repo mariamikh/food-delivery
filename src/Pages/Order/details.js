@@ -41,7 +41,7 @@ export default function Order() {
   useEffect(() => {
     console.log('Order details page is loaded: ' + id);
     retriveOrderDetails(id);
-  }, []);
+  });
 
   return (
     <div class="d-flex flex-column">
@@ -51,7 +51,7 @@ export default function Order() {
           <div>Order No.: #{order.id}</div>
           <div>
             Restaurent:{' '}
-            {order !== undefined && order.restaurant != undefined
+            {order !== undefined && order.restaurant !== undefined
               ? order.restaurant.name
               : ''}
           </div>

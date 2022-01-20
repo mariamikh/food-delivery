@@ -1,5 +1,4 @@
-import React from 'react';
-import Login from '../Pages/Login';
+// import Login from '../Pages/Login';
 import NotFound from '../Pages/NotFound';
 import RestaurantList from '../Pages/Restaurant/list';
 import Restaurant from '../Pages/Restaurant/details';

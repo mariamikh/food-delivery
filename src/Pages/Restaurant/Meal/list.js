@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function Meal(props) {
   const { id, name, img, price } = props.meal;
-
-  const [btnText, setBtnText] = useState('Add');
 
   function changeQuantity(quantity) {
     props.changeTotal(id, price, quantity);
   }
 
-  {
-    /* 
+  /* 
     TODO: paging
     TODO: image is not shown, img url is not read correctly
     TODO: add real image src 
     */
-  }
 
   return (
     <div class="row p-2 mb-2 bg-white">
       <div class="col-3">
-        <img src={img} class="rounded float-left" />
+        <img src={img} alt="" class="rounded float-left" />
       </div>
       <div class="col-5">
         <h6>{name}</h6>
