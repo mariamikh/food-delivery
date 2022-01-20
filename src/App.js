@@ -5,42 +5,43 @@ import AppRoute from './Components/AppRoute';
 import Header from './Pages/Layout/header';
 import SideBar from './Pages/Layout/sideBar';
 import Login from './Pages/Login/index';
+import { useAuthState } from './Context';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
-  // const userDetails = useAuthState();
+  const userDetails = useAuthState();
   // console.log(userDetails.userDetails.email);
-  // console.log('in APP: ' + JSON.stringify(userDetails));
+  console.log('in APP: ' + JSON.stringify(userDetails));
 
   return (
     <React.Fragment>
-      <Header />
-      <div className="container app-container border">
-        <Router>
-          <Login />
-          <SideBar />
+      <Router>
+        {userDetails.user ? (
+          <React.Fragment>
+            <Header />
+            <div className="container app-container border">
+              <SideBar />
 
-          <div className="container-fluid app-content">
-            {/* <div className="row content">
-              <div id="main" className="col-sm-9">
+              <div className="container-fluid app-content">
+                <Switch>
+                  {routes.map((route) => (
+                    <AppRoute
+                      key={route.path}
+                      path={route.path}
+                      component={route.component}
+                      isPrivate={route.isPrivate}
+                    />
+                  ))}
+                </Switch>
               </div>
-            </div>  */}
-
-            <Switch>
-              {routes.map((route) => (
-                <AppRoute
-                  key={route.path}
-                  path={route.path}
-                  component={route.component}
-                  isPrivate={route.isPrivate}
-                />
-              ))}
-            </Switch>
-          </div>
-        </Router>
-      </div>
+            </div>
+          </React.Fragment>
+        ) : (
+          <Login />
+        )}
+      </Router>
     </React.Fragment>
   );
 }

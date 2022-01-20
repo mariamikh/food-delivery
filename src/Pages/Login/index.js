@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { loginUser, useAuthState, useAuthDispatch } from '../../Context';
 import styles from './login.module.css';
+import { useHistory } from 'react-router-dom';
 
 function Login(props) {
   const [email, setEmail] = useState('');
@@ -8,12 +9,13 @@ function Login(props) {
 
   const dispatch = useAuthDispatch(); //get the dispatch method from the useDispatch custom hook
   const { loading, errorMessage } = useAuthState();
+  const history = useHistory();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     loginUser(dispatch, { email, password }).then((value) => {
-      props.history.push('/');
+      history.push('/');
     });
   };
 
