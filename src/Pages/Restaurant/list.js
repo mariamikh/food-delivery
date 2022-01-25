@@ -34,19 +34,19 @@ export default function RestaurantList() {
       TODO: add real image src
   */
   return (
-    <div class="row bg-light m-2 p-2">
+    <div className="row bg-light m-2 p-2">
       {restaurantList.map((r) => (
         <div
           key={r.id}
-          class="card restaurant-card"
+          className="card restaurant-card"
           onClick={() => openDetails(r.id)}
           style={{ cursor: 'pointer' }}
         >
-          <img class="card-img-top" alt="" src="https://bit.ly/3xBxOZE" />
+          <img className="card-img-top" alt="" src="https://bit.ly/3xBxOZE" />
 
-          <div class="card-body">
-            <h5 class="card-title">{r.name}</h5>
-            <p class="card-text">{r.address}</p>
+          <div className="card-body">
+            <h5 className="card-title">{r.name}</h5>
+            <p className="card-text">{r.address}</p>
           </div>
         </div>
       ))}

@@ -14,19 +14,19 @@ export default function Meal(props) {
     */
 
   return (
-    <div class="row p-2 mb-2 bg-white">
-      <div class="col-3">
-        <img src={img} alt="" class="rounded float-left" />
+    <div className="row p-2 mb-2 bg-white">
+      <div className="col-3">
+        <img src={img} alt="" className="rounded float-left" />
       </div>
-      <div class="col-5">
+      <div className="col-5">
         <h6>{name}</h6>
         <p>Some description for meal </p>
       </div>
-      <h6 class="col-1 align-self-center">{price}$</h6>
-      <div class="col-3 align-self-center">
+      <h6 className="col-1 align-self-center">{price}$</h6>
+      <div className="col-3 align-self-center">
         <input
           type="number"
-          class="form-control form-control-sm"
+          className="form-control form-control-sm"
           id="quantity"
           placeholder="0"
           min="0"

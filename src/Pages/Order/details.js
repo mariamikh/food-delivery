@@ -44,10 +44,10 @@ export default function Order() {
   });
 
   return (
-    <div class="d-flex flex-column">
-      <div class="bg-light mt-2">
-        <div class="card-body">
-          <h5 class="card-title">Order Details</h5>
+    <div className="d-flex flex-column">
+      <div className="bg-light mt-2">
+        <div className="card-body">
+          <h5 className="card-title">Order Details</h5>
           <div>Order No.: #{order.id}</div>
           <div>
             Restaurent:{' '}
@@ -60,7 +60,7 @@ export default function Order() {
         </div>
       </div>
 
-      <table class="table bg-light p-5 mt-2">
+      <table className="table bg-light p-5 mt-2">
         <thead>
           <tr>
             <th scope="col">name</th>

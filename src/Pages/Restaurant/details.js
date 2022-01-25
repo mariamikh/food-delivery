@@ -96,26 +96,26 @@ export default function Restaurant() {
   }, []);
 
   return (
-    <div class="d-flex flex-column">
-      <div class="row bg-light p-3 mx-1 mb-4">
-        <div class="col-3 p-2">
+    <div className="d-flex flex-column">
+      <div className="row bg-light p-3 mx-1 mb-4">
+        <div className="col-3 p-2">
           {/* TODO: add real image src */}
           <img
             src="https://bit.ly/3xBxOZE"
-            class="img-rounded"
+            className="img-rounded"
             alt="Cinque Terre"
           />
         </div>
-        <div class="col-6 p-2">
+        <div className="col-6 p-2">
           <h5>{restaurant.name}</h5>
           <p>{restaurant.address} </p>
         </div>
 
-        <div class="col-3 p-2 bg-white text-center border">
+        <div className="col-3 p-2 bg-white text-center border">
           <h6>SubTotal: {total}$</h6>
           <button
             type="button"
-            class="btn btn-info "
+            className="btn btn-info "
             onClick={() => makeOrder()}
           >
             Order
@@ -123,7 +123,7 @@ export default function Restaurant() {
         </div>
       </div>
 
-      <div class="bg-light px-4 pt-3">
+      <div className="bg-light px-4 pt-3">
         {restaurant !== undefined ? (
           restaurant.meals !== undefined ? (
             restaurant.meals.map((m) => (

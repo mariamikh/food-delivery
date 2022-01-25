@@ -37,14 +37,14 @@ export default function OrderList() {
     <div className="d-flex flex-column order-list-container">
       {orderList.map((r) => (
         <div
-          class="d-flex flex-nowrap bg-light m-1"
+          className="d-flex flex-nowrap bg-light m-1"
           key={r.id}
           onClick={() => openDetails(r.id)}
           style={{ cursor: 'pointer' }}
         >
-          <div class="p-2"> #{r.id}</div>
-          <div class="p-2">{r.date}</div>
-          <div class="p-2">{r.status}</div>
+          <div className="p-2"> #{r.id}</div>
+          <div className="p-2">{r.date}</div>
+          <div className="p-2">{r.status}</div>
         </div>
       ))}
     </div>

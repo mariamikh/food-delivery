@@ -4,7 +4,12 @@ import { useAuthDispatch, logout, useAuthState } from '../../Context';
 export default function Header(props) {
   const dispatch = useAuthDispatch();
   const userDetails = useAuthState();
-  console.log(userDetails.userDetails.email);
+
+  console.log('Header: ' + JSON.stringify(userDetails));
+
+  const currentUser = localStorage.getItem('currentUser');
+  console.log('Header currentUser: ' + JSON.stringify(currentUser));
+
   const handleLogout = () => {
     logout(dispatch);
 
