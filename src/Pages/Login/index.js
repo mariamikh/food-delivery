@@ -15,14 +15,14 @@ function Login(props) {
     e.preventDefault();
 
     loginUser(dispatch, { email, password }).then((value) => {
-      history.push('/');
+      history.push('/restaurant');
     });
   };
 
   return (
     <div className="container login">
       <div className={{ width: 200 }}>
-        <h5>Food Delivery Page</h5>
+        <h5>Food Delivery Login</h5>
         {errorMessage ? <p className={styles.error}>{errorMessage}</p> : null}
         <form>
           <div className={styles.loginForm}>
