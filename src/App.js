@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import routes from './Config/routes.js';
 import AppRoute from './Components/AppRoute';
 import Header from './Pages/Layout/header';
-import SideBar from './Pages/Layout/sideBar';
+import Navigation from './Pages/Layout/navigation';
 import Login from './Pages/Login/index';
 import { useAuthState } from './Context';
 
@@ -22,7 +22,7 @@ function App() {
           <React.Fragment>
             <Header />
             <div className="container app-container border">
-              <SideBar />
+              <Navigation />
 
               <div className="container-fluid app-content">
                 <Switch>
