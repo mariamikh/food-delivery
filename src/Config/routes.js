@@ -1,5 +1,5 @@
 // import Login from '../Pages/Login';
-import NotFound from '../Pages/NotFound';
+import NotFound from '../Pages/Error/notFound';
 import RestaurantList from '../Pages/Restaurant/list';
 import Restaurant from '../Pages/Restaurant/details';
 import AddMeal from '../Pages/Restaurant/Meal/AddMeal';
