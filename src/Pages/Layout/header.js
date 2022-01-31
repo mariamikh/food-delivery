@@ -1,15 +1,20 @@
 import React from 'react';
-import { useAuthDispatch, logout } from '../../Context';
-import { getUserDetails } from '../../Context/action';
+import { useAuthDispatch, useAuthState, logout } from '../../Context';
 
 export default function Header(props) {
-  const userDetails = getUserDetails();
+  const user = useAuthState();
+
+  const isAuthenticated =
+    user !== 'undefined' &&
+    user !== '' &&
+    user.userDetails != 'undefined' &&
+    user.userDetails !== ''
+      ? true
+      : false;
+
   const dispatch = useAuthDispatch();
   const handleLogout = () => {
     logout(dispatch);
-
-    //TODO: uncommenting the follong line gives error, though redirecting //it works without it
-    //props.history.push('/login');
   };
 
   return (
@@ -18,12 +23,11 @@ export default function Header(props) {
         <div className="navbar-header">
           <h4>Food Delivery </h4>
         </div>
-
-        <ul className="nav navbar-nav navbar-right">
-          <li>
-            {userDetails !== '' ? (
+        {isAuthenticated ? (
+          <ul className="nav navbar-nav navbar-right">
+            <li>
               <div>
-                {userDetails.email}
+                {user.userDetails.email}
                 <button
                   onClick={handleLogout}
                   type="button"
@@ -32,13 +36,11 @@ export default function Header(props) {
                   Logout
                 </button>
               </div>
-            ) : (
-              <button type="button" className="btn btn-secondary">
-                Login
-              </button>
-            )}
-          </li>
-        </ul>
+            </li>
+          </ul>
+        ) : (
+          ''
+        )}
       </nav>
     </div>
   );

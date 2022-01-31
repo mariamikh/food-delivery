@@ -48,10 +48,3 @@ export async function logout(dispatch) {
   localStorage.removeItem('currentUser');
   localStorage.removeItem('token');
 }
-
-export function getUserDetails() {
-  const currentUser = localStorage.getItem('currentUser');
-  return currentUser !== 'undefined' && currentUser !== null
-    ? JSON.parse(currentUser)
-    : '';
-}

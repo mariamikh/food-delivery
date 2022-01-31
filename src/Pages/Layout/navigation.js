@@ -1,37 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { useAuthDispatch, useAuthState } from '../../Context';
 import { useAuthState } from '../../Context';
 
 export default function Navigation() {
-  // const dispatch = useAuthDispatch();
-  const userDetails = useAuthState();
-
-  const userInitialValue = {
-    id: 5,
-    // role: 'user',
-    role: 'owner',
-  };
-
+  const user = useAuthState();
+  const isAuthenticated =
+    user !== 'undefined' &&
+    user !== '' &&
+    user.userDetails != 'undefined' &&
+    user.userDetails !== ''
+      ? true
+      : false;
+  const role = isAuthenticated ? user.userDetails.role : '';
   const initialValue = [
     {
-      name: 'Restaurant List',
-      link: '/restaurant',
+      name: '',
+      link: '/',
     },
   ];
   const [navigationItems, setNavigationItems] = useState(initialValue);
-  const [user, setUser] = useState(userInitialValue);
-
-  function getUserDetails() {
-    // TODO: dynamically get user ID(to fetch order list for user or for restaurent) and role(to display relevant navigation)
-  }
 
   function getNavigationItems() {
-    getUserDetails();
-
-    //TODO get userID dynamicaly for user and for restaurant
-
-    if (user !== 'undefined' && user === 'owner') {
+    if (isAuthenticated && role == 'owner') {
       setNavigationItems([
         {
           name: 'My Restaurant',
@@ -46,7 +36,7 @@ export default function Navigation() {
           link: '/order/restaurent/1',
         },
       ]);
-    } else {
+    } else if (isAuthenticated && role == 'user') {
       setNavigationItems([
         {
           name: 'Restaurant List',
