@@ -24,9 +24,6 @@ export default function Navigation() {
 
   function getUserDetails() {
     // TODO: dynamically get user ID(to fetch order list for user or for restaurent) and role(to display relevant navigation)
-
-    console.log('Navigation: ');
-    console.log(userDetails.userDetails.email);
   }
 
   function getNavigationItems() {
@@ -35,7 +32,6 @@ export default function Navigation() {
     //TODO get userID dynamicaly for user and for restaurant
 
     if (user !== 'undefined' && user === 'owner') {
-      console.log('in IF');
       setNavigationItems([
         {
           name: 'My Restaurant',
@@ -51,8 +47,6 @@ export default function Navigation() {
         },
       ]);
     } else {
-      console.log('in ELSE');
-
       setNavigationItems([
         {
           name: 'Restaurant List',

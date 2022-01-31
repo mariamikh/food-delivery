@@ -83,7 +83,6 @@ export default function Restaurant() {
     RestaurantDataService.get(id)
       .then((response) => {
         setRestaurant(response.data);
-        console.log(restaurant);
       })
       .catch((e) => {
         // TODO: handle exception
@@ -91,7 +90,6 @@ export default function Restaurant() {
       });
   }
   useEffect(() => {
-    console.log('Restaurant details page is loaded: ' + id);
     retriveRestaurantDetails(id);
   }, []);
 

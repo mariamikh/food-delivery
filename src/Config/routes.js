@@ -5,38 +5,39 @@ import Restaurant from '../Pages/Restaurant/details';
 import AddMeal from '../Pages/Restaurant/Meal/AddMeal';
 import Order from '../Pages/Order/details.js';
 import OrderList from '../Pages/Order/list';
+import Login from '../Pages/Login';
 
 const routes = [
   {
     path: '/order/user/:id',
     component: OrderList,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: '/order/:id',
     component: Order,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: '/restaurant/:id/meal',
     component: AddMeal,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: '/restaurant/:id',
     component: Restaurant,
-    isPrivate: false,
+    isPrivate: true,
   },
   {
     path: '/restaurant',
     component: RestaurantList,
+    isPrivate: true,
+  },
+  {
+    path: '/login',
+    component: Login,
     isPrivate: false,
   },
-  // {
-  //   path: '/login',
-  //   component: Login,
-  //   isPrivate: false,
-  // },
   {
     path: '/',
     component: NotFound,
@@ -45,7 +46,7 @@ const routes = [
   {
     path: '/*',
     component: NotFound,
-    isPrivate: true,
+    isPrivate: false,
   },
 ];
 

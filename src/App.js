@@ -5,42 +5,41 @@ import AppRoute from './Components/AppRoute';
 import Header from './Pages/Layout/header';
 import Navigation from './Pages/Layout/navigation';
 import Login from './Pages/Login/index';
-import { useAuthState } from './Context';
+import { getUserDetails } from './Context/action';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
-  const userDetails = useAuthState();
-  // console.log(userDetails.userDetails.email);
-  console.log('in APP: ' + JSON.stringify(userDetails));
+  let userDetails = getUserDetails();
 
   return (
     <React.Fragment>
       <Router>
-        {userDetails.user ? (
-          <React.Fragment>
-            <Header />
-            <div className="container app-container border">
-              <Navigation />
+        {JSON.stringify(userDetails)}
+        {/* {userDetails !== '' && userDetails.user ? ( */}
+        <React.Fragment>
+          <Header />
+          <div className="container app-container border">
+            <Navigation />
 
-              <div className="container-fluid app-content">
-                <Switch>
-                  {routes.map((route) => (
-                    <AppRoute
-                      key={route.path}
-                      path={route.path}
-                      component={route.component}
-                      isPrivate={route.isPrivate}
-                    />
-                  ))}
-                </Switch>
-              </div>
+            <div className="container-fluid app-content">
+              <Switch>
+                {routes.map((route) => (
+                  <AppRoute
+                    key={route.path}
+                    path={route.path}
+                    component={route.component}
+                    isPrivate={route.isPrivate}
+                  />
+                ))}
+              </Switch>
             </div>
-          </React.Fragment>
-        ) : (
-          <Login />
-        )}
+          </div>
+        </React.Fragment>
+        {/* ) : ( */}
+        {/* <Login /> */}
+        {/* )} */}
       </Router>
     </React.Fragment>
   );

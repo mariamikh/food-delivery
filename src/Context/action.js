@@ -14,6 +14,7 @@ export function loginUser(dispatch, loginPayload) {
         if (response !== 'undefined' && response.data !== 'undefined') {
           var token = response.data.auth_token;
           var data = jwt_decode(token);
+          data.token = token;
 
           dispatch({ type: 'LOGIN_SUCCESS', payload: data });
           localStorage.setItem('currentUser', JSON.stringify(data));
@@ -46,4 +47,11 @@ export async function logout(dispatch) {
   dispatch({ type: 'LOGOUT' });
   localStorage.removeItem('currentUser');
   localStorage.removeItem('token');
+}
+
+export function getUserDetails() {
+  const currentUser = localStorage.getItem('currentUser');
+  return currentUser !== 'undefined' && currentUser !== null
+    ? JSON.parse(currentUser)
+    : '';
 }

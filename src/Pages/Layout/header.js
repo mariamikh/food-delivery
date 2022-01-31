@@ -1,15 +1,10 @@
 import React from 'react';
-import { useAuthDispatch, logout, useAuthState } from '../../Context';
+import { useAuthDispatch, logout } from '../../Context';
+import { getUserDetails } from '../../Context/action';
 
 export default function Header(props) {
+  const userDetails = getUserDetails();
   const dispatch = useAuthDispatch();
-  const userDetails = useAuthState();
-
-  console.log('Header: ' + JSON.stringify(userDetails));
-
-  const currentUser = localStorage.getItem('currentUser');
-  console.log('Header currentUser: ' + JSON.stringify(currentUser));
-
   const handleLogout = () => {
     logout(dispatch);
 
@@ -26,10 +21,9 @@ export default function Header(props) {
 
         <ul className="nav navbar-nav navbar-right">
           <li>
-            {userDetails !== undefined &&
-            userDetails.userDetails !== undefined ? (
+            {userDetails !== '' ? (
               <div>
-                {userDetails.userDetails.email}
+                {userDetails.email}
                 <button
                   onClick={handleLogout}
                   type="button"

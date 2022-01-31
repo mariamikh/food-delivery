@@ -39,7 +39,6 @@ export default function Order() {
       });
   }
   useEffect(() => {
-    console.log('Order details page is loaded: ' + id);
     retriveOrderDetails(id);
   });
 

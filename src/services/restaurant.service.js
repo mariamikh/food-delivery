@@ -11,9 +11,7 @@ class RestaurantDataService {
 
   async create(data) {
     // TODO: add dynamic id - /restaurant/${id}/meal
-    await http.post('/restaurant/2/meal', data).then(() => {
-      console.log('in post creat meal then');
-    });
+    await http.post('/restaurant/2/meal', data).then(() => {});
   }
 
   update(id, data) {
