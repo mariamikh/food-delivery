@@ -16,8 +16,6 @@ function App() {
   return (
     <React.Fragment>
       <Router>
-        {JSON.stringify(userDetails)}
-        {/* {userDetails !== '' && userDetails.user ? ( */}
         <React.Fragment>
           <Header />
           <div className="container app-container border">
@@ -37,9 +35,6 @@ function App() {
             </div>
           </div>
         </React.Fragment>
-        {/* ) : ( */}
-        {/* <Login /> */}
-        {/* )} */}
       </Router>
     </React.Fragment>
   );
