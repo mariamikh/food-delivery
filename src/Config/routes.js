@@ -38,15 +38,10 @@ const routes = [
     component: Login,
     isPrivate: false,
   },
-  // {
-  //   path: '/',
-  //   component: NotFound,
-  //   isPrivate: true,
-  // },
   {
     path: '/*',
     component: NotFound,
-    isPrivate: false,
+    isPrivate: true,
   },
 ];
 
