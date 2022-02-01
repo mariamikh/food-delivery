@@ -1,10 +1,6 @@
 import AuthDataService from '../services/auth.service';
 import jwt_decode from 'jwt-decode';
 
-// const ROOT_URL = 'https://secret-hamlet-03431.herokuapp.com';
-// user: nero@admin.com
-// pass: admin123
-
 export function loginUser(dispatch, loginPayload) {
   try {
     dispatch({ type: 'REQUEST_LOGIN' });
@@ -17,7 +13,17 @@ export function loginUser(dispatch, loginPayload) {
           data.token = token;
 
           dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-          localStorage.setItem('currentUser', JSON.stringify(data));
+          localStorage.setItem(
+            'currentUser',
+            JSON.stringify({
+              userDetails: {
+                user: data.user,
+                email: data.email,
+                role: data.role,
+              },
+              token: token,
+            })
+          );
 
           return data;
         }
@@ -29,15 +35,6 @@ export function loginUser(dispatch, loginPayload) {
 
     // let response = await fetch(`${ROOT_URL}/login`, requestOptions);
     // let data = await response.json();
-
-    /* data: 
-    {
-      {
-        "auth_token":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.5b0YUvXu9IFCI4kqzNAfrnuA2lSMp8XtezIZTfQYH4k",
-        "user":{"id":1,"email":"nero@admin.com"}
-      }
-    }
-    */
   } catch (error) {
     dispatch({ type: 'LOGIN_ERROR', error: error });
   }

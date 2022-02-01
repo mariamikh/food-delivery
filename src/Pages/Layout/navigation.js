@@ -4,14 +4,6 @@ import { useAuthState } from '../../Context';
 
 export default function Navigation() {
   const user = useAuthState();
-  const isAuthenticated =
-    user !== 'undefined' &&
-    user !== '' &&
-    user.userDetails != 'undefined' &&
-    user.userDetails !== ''
-      ? true
-      : false;
-  const role = isAuthenticated ? user.userDetails.role : '';
   const initialValue = [
     {
       name: '',
@@ -20,8 +12,26 @@ export default function Navigation() {
   ];
   const [navigationItems, setNavigationItems] = useState(initialValue);
 
+  function getUserRole() {
+    let isAuthenticated =
+      user !== 'undefined' &&
+      user !== '' &&
+      user.userDetails != 'undefined' &&
+      user.userDetails !== ''
+        ? true
+        : false;
+
+    console.log('Navigation, isAuthenticated=' + isAuthenticated);
+    console.log('Navigation, user.userDetails=' + user.userDetails);
+
+    return isAuthenticated ? user.userDetails.role : '';
+  }
+
   function getNavigationItems() {
-    if (isAuthenticated && role == 'owner') {
+    const role = getUserRole();
+    console.log('Navigation, role=' + role);
+
+    if (role === 'owner') {
       setNavigationItems([
         {
           name: 'My Restaurant',
@@ -36,7 +46,7 @@ export default function Navigation() {
           link: '/order/restaurent/1',
         },
       ]);
-    } else if (isAuthenticated && role == 'user') {
+    } else if (role == 'user') {
       setNavigationItems([
         {
           name: 'Restaurant List',

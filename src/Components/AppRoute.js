@@ -5,6 +5,8 @@ import { useAuthState } from '../Context';
 const AppRoute = ({ component: Component, path, isPrivate, ...rest }) => {
   const userDetails = useAuthState();
 
+  console.log('AppRoute, userDetails: ' + JSON.stringify(userDetails));
+
   return (
     <Route
       path={path}
