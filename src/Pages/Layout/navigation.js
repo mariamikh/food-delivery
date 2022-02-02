@@ -48,7 +48,7 @@ export default function Navigation() {
   }
 
   return (
-    <ul className="nav nav-pills navbar-right side-bar border-bottom">
+    <ul className="nav nav-pills navbar-right side-bar">
       {navigationItems.map((r) => (
         <li key={r.name}>
           <Link
