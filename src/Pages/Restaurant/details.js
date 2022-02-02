@@ -4,6 +4,7 @@ import Meal from './Meal/list';
 import RestaurantDataService from '../../services/restaurant.service';
 import OrderDataService from '../../services/order.service';
 import { useHistory } from 'react-router-dom';
+import { useAuthState } from '../../Context';
 
 export default function Restaurant() {
   const initialValue = [
@@ -22,13 +23,18 @@ export default function Restaurant() {
     },
   ];
   const [restaurant, setRestaurant] = useState(initialValue);
+
+  // validate variable, for undefiend and for correct values
+  // validate restaurant for undefined
+  const role = useAuthState().userDetails.role;
+
+  // validate restaurant for meals
+  const hasMeal = restaurant.meals !== undefined ? true : false;
+
   const [total, setTotal] = useState(0);
   const [orderedMeals, setOrderedMeals] = useState([]);
-
-  const { id } = useParams();
-
   const history = useHistory();
-
+  const { id } = useParams();
   const addMeal = (id) => {
     history.push('/restaurant/' + id + '/meal');
   };
@@ -54,10 +60,6 @@ export default function Restaurant() {
     }
     return orderedMealList;
   }
-
-  /*
-   TODO: disable order button for restaurent owner and when no meal is added to cart
-   */
 
   function makeOrder() {
     const orderedMealList = getOrderedMeals();
@@ -109,35 +111,46 @@ export default function Restaurant() {
           <p>{restaurant.address} </p>
         </div>
 
-        <div className="col-3 p-2 bg-white text-center border">
-          <h6>SubTotal: {total}$</h6>
-          <button
-            type="button"
-            className="btn btn-info "
-            onClick={() => makeOrder()}
-          >
-            Order
-          </button>
-        </div>
+        {role === 'owner' ? (
+          <div className="col-3 p-2 bg-white text-center border">
+            <button
+              type="button"
+              className="btn btn-info "
+              onClick={() => addMeal(restaurant.id)}
+            >
+              Add Meal
+            </button>
+          </div>
+        ) : hasMeal ? (
+          <div className="col-3 p-2 bg-white text-center border">
+            {' '}
+            <h6>SubTotal: {total}$</h6>
+            <button
+              type="button"
+              className="btn btn-info "
+              onClick={() => makeOrder()}
+            >
+              Order
+            </button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
 
       <div className="bg-light px-4 pt-3">
-        {restaurant !== undefined ? (
-          restaurant.meals !== undefined ? (
-            restaurant.meals.map((m) => (
-              <Meal
-                key={m.id}
-                meal={m}
-                changeTotal={(id, price, quantity) =>
-                  modifyTotal({ id, price, quantity })
-                }
-              />
-            ))
-          ) : (
-            <button onClick={() => addMeal(restaurant.id)}>Add Meal</button>
-          )
+        {hasMeal ? (
+          restaurant.meals.map((m) => (
+            <Meal
+              key={m.id}
+              meal={m}
+              changeTotal={(id, price, quantity) =>
+                modifyTotal({ id, price, quantity })
+              }
+            />
+          ))
         ) : (
-          <p> TODO: Restaurant not Found </p>
+          <p class="text-center">This restaurant has no meal yet</p>
         )}
       </div>
     </div>
