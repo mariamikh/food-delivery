@@ -14,7 +14,12 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: '/order/:id',
+    path: '/restaurent/:id/order',
+    component: Order,
+    isPrivate: true,
+  },
+  {
+    path: '/user/:id/order',
     component: Order,
     isPrivate: true,
   },
@@ -25,6 +30,11 @@ const routes = [
   },
   {
     path: '/restaurant/:id',
+    component: Restaurant,
+    isPrivate: true,
+  },
+  {
+    path: '/user/:id/restaurent',
     component: Restaurant,
     isPrivate: true,
   },

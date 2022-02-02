@@ -23,7 +23,7 @@ export default function Navigation() {
     navigationItems = [
       {
         name: 'My Restaurant',
-        link: '/restaurent?Owner=1',
+        link: '/user/' + user.userDetails.user + '/restaurent',
       },
       {
         name: 'Restaurant List',
@@ -31,7 +31,8 @@ export default function Navigation() {
       },
       {
         name: 'Order List',
-        link: '/order/restaurent/1',
+        // TODO: maybe url should be different for orders of owner restaurant
+        link: '/user/' + user.userDetails.user + '/order',
       },
     ];
   } else if (role == 'user') {
@@ -42,7 +43,7 @@ export default function Navigation() {
       },
       {
         name: 'Order List',
-        link: '/order/user/5',
+        link: '/user/' + user.userDetails.user + '/order',
       },
     ];
   }
