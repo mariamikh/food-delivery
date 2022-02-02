@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAuthState } from '../../Context';
 
 import OrderDataService from '../../services/order.service';
 
 export default function OrderList() {
   /* TODO: check what happens if data is not retrived and initial values are rendered */
 
+  const user = useAuthState();
+
   const initialValue = [{ id: 0, date: '', total: '', status: '' }];
 
   const [orderList, setOrderList] = useState(initialValue);
 
   useEffect(() => {
-    retriveOrderList();
+    // TODO: check on undefined
+    retriveOrderList(user.userDetails.user);
   }, []);
 
   const history = useHistory();
@@ -21,8 +25,7 @@ export default function OrderList() {
   };
 
   function retriveOrderList(userId) {
-    // TODO: pass userId from context
-    OrderDataService.getUserOrders(5)
+    OrderDataService.getUserOrders(userId)
       .then((response) => {
         setOrderList(response.data);
       })

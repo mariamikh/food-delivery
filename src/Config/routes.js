@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/user/:id/order',
-    component: Order,
+    component: OrderList,
     isPrivate: true,
   },
   {
