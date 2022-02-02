@@ -21,9 +21,6 @@ export default function Navigation() {
         ? true
         : false;
 
-    console.log('Navigation, isAuthenticated=' + isAuthenticated);
-    console.log('Navigation, user.userDetails=' + user.userDetails);
-
     return isAuthenticated ? user.userDetails.role : '';
   }
 
@@ -62,7 +59,7 @@ export default function Navigation() {
 
   useEffect(() => {
     getNavigationItems();
-  }, []);
+  }, [user]);
 
   return (
     <ul className="nav nav-pills navbar-right side-bar border-bottom">
