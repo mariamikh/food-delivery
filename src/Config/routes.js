@@ -9,13 +9,13 @@ import Login from '../Pages/Login';
 
 const routes = [
   {
-    path: '/order/user/:id',
-    component: OrderList,
+    path: '/order/:id',
+    component: Order,
     isPrivate: true,
   },
   {
     path: '/restaurent/:id/order',
-    component: Order,
+    component: OrderList,
     isPrivate: true,
   },
   {

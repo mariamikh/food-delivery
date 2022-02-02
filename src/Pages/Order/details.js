@@ -40,7 +40,7 @@ export default function Order() {
   }
   useEffect(() => {
     retriveOrderDetails(id);
-  });
+  }, []);
 
   return (
     <div className="d-flex flex-column">
