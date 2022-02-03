@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Meal(props) {
-  const { id, name, img, price } = props.meal;
+  const { id, name, img, price, userRole } = props.meal;
 
   function changeQuantity(quantity) {
     props.changeTotal(id, price, quantity);
@@ -24,15 +24,19 @@ export default function Meal(props) {
       </div>
       <h6 className="col-1 align-self-center">{price}$</h6>
       <div className="col-3 align-self-center">
-        <input
-          type="number"
-          className="form-control form-control-sm"
-          id="quantity"
-          placeholder="0"
-          min="0"
-          max="99"
-          onChange={(e) => changeQuantity(e.target.value)}
-        />
+        {userRole ? (
+          <input
+            type="number"
+            className="form-control form-control-sm"
+            id="quantity"
+            placeholder="0"
+            min="0"
+            max="99"
+            onChange={(e) => changeQuantity(e.target.value)}
+          />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

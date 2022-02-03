@@ -123,7 +123,6 @@ export default function Restaurant() {
           </div>
         ) : hasMeal ? (
           <div className="col-3 p-2 bg-white text-center border">
-            {' '}
             <h6>SubTotal: {total}$</h6>
             <button
               type="button"
@@ -144,6 +143,7 @@ export default function Restaurant() {
             <Meal
               key={m.id}
               meal={m}
+              userRole={role}
               changeTotal={(id, price, quantity) =>
                 modifyTotal({ id, price, quantity })
               }
