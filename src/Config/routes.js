@@ -34,11 +34,6 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: '/user/:id/restaurent',
-    component: Restaurant,
-    isPrivate: true,
-  },
-  {
     path: '/restaurant',
     component: RestaurantList,
     isPrivate: true,

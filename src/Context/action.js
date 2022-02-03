@@ -20,6 +20,7 @@ export function loginUser(dispatch, loginPayload) {
                 user: data.user,
                 email: data.email,
                 role: data.role,
+                myRestaurant: data.myRestaurant,
               },
               token: token,
             })

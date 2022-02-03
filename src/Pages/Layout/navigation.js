@@ -19,11 +19,19 @@ export default function Navigation() {
       ? user.userDetails.role
       : '';
 
+  const myRestaurant =
+    user !== 'undefined' &&
+    user !== '' &&
+    user.userDetails != 'undefined' &&
+    user.userDetails !== ''
+      ? user.userDetails.myRestaurant
+      : '';
+
   if (role === 'owner') {
     navigationItems = [
       {
         name: 'My Restaurant',
-        link: '/user/' + user.userDetails.user + '/restaurent',
+        link: '/restaurant/' + myRestaurant,
       },
       {
         name: 'Restaurant List',
