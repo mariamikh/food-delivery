@@ -28,7 +28,6 @@ export default function AddMeal(props) {
 
   return (
     <div className="card mb-3">
-      <div className="card-header">Add Meal</div>
       <div className="card-body">
         <ul>
           <li>

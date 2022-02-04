@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-import OrderDataService from '../../services/order.service';
-import { useHistory } from 'react-router-dom';
 import Meal from './Meal/MealEditable';
+import MyModal from '../Layout/Modal';
 
 export default function RestaurantEditable(props) {
   const { id, name, address, meals } = props.restaurant;
-  const history = useHistory();
-
-  const addMeal = (id) => {
-    history.push('/restaurant/' + id + '/meal');
-  };
 
   // validate restaurant for meals
   const hasMeal = meals !== undefined ? true : false;
@@ -31,20 +25,18 @@ export default function RestaurantEditable(props) {
         </div>
 
         <div className="col-3 p-2 bg-white text-center border">
-          <button
-            type="button"
-            className="btn btn-info "
-            onClick={() => addMeal(id)}
-          >
-            Add Meal
-          </button>
+          <MyModal
+            button="addButton"
+            header="Register New Meal"
+            bodyComponent="AddMeal"
+          />
         </div>
       </div>
       <div className="bg-light px-4 pt-3">
         {hasMeal ? (
           meals.map((m) => <Meal key={m.id} meal={m} />)
         ) : (
-          <p class="text-center">This restaurant has no meal yet</p>
+          <p className="text-center">This restaurant has no meal yet</p>
         )}
       </div>
     </div>
