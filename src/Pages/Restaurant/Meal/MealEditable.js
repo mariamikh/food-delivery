@@ -1,6 +1,8 @@
 import React from 'react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCoffee } from '@fortawesome/fontawesome-free-solid';
 
-export default function Meal(props) {
+export default function MealEditable(props) {
   // TODO userRole should not be inside meal
   const { id, name, img, price } = props.meal;
 
@@ -23,17 +25,9 @@ export default function Meal(props) {
         <h6>{name}</h6>
         <p>Some description for meal </p>
       </div>
-      <h6 className="col-1 align-self-center">{price}$</h6>
-      <div className="col-3 align-self-center">
-        <input
-          type="number"
-          className="form-control form-control-sm"
-          id="quantity"
-          placeholder="0"
-          min="0"
-          max="99"
-          onChange={(e) => changeQuantity(e.target.value)}
-        />
+      <h6 className="col-2 align-self-center">{price}$</h6>
+      <div className="col-2 align-self-center">
+        {/* <FontAwesomeIcon icon={faCoffee} /> */}
       </div>
     </div>
   );
