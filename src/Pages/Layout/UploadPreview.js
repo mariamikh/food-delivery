@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 export default class UploadPreview extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { file: null };
+    this.state = {
+      file: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png',
+    };
     this.onChange = this.onChange.bind(this);
-    this.resetFile = this.resetFile.bind(this);
+    // this.resetFile = this.resetFile.bind(this);
   }
   onChange(event) {
     this.setState({
@@ -20,13 +22,17 @@ export default class UploadPreview extends React.Component {
   render() {
     return (
       <div>
+        <img
+          style={{ width: '100', height: '100', marginRight: '20px' }}
+          src={this.state.file}
+          className="rounded float-left"
+        />
         <input type="file" onChange={this.onChange} />
-        {this.state.file && (
+        {/* {this.state.file && (
           <div style={{ textAlign: 'center' }}>
             <button onClick={this.resetFile}>Remove File</button>
           </div>
-        )}
-        <img style={{ width: '100%' }} src={this.state.file} />
+        )} */}
       </div>
     );
   }
