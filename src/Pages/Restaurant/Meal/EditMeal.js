@@ -4,6 +4,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Error from '../../Error';
 import RestaurantDataService from '../../../services/restaurant.service';
+import UploadPreview from '../../Layout/UploadPreview';
 
 export default function EditMeal(props) {
   const [show, setShow] = useState(false);
@@ -13,6 +14,7 @@ export default function EditMeal(props) {
   const [name, setName] = useState(props.mealDetails.name);
   const [price, setPrice] = useState(props.mealDetails.price);
   const [img, setImg] = useState(props.mealDetails.img);
+  const [desc, setDesc] = useState(props.mealDetails.desc);
   const [err, setErr] = useState('');
 
   const handleEditingMeal = async (e) => {
@@ -43,38 +45,53 @@ export default function EditMeal(props) {
           <Modal.Title>Change Meal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ul>
-            <li>
+          <form>
+            <div class="form-group mb-3">
+              <label for="name">name</label>
               <input
+                id="name"
                 type="text"
+                class="form-control"
                 name="name"
                 label="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter Name..."
               />
-            </li>
-            <li>
-              <input
+            </div>
+            <div class="form-group mb-3">
+              <label for="desc">description</label>
+              <textarea
+                id="desc"
                 type="text"
-                name="img"
-                label="img"
-                value={img}
-                onChange={(e) => setImg(e.target.value)}
-                placeholder="Enter image..."
-              />
-            </li>
-            <li>
+                class="form-control"
+                name="desc"
+                label="description"
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                placeholder="Enter description..."
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="form-group mb-3">
+              <label for="price">price</label>
               <input
+                id="price"
                 type="text"
+                class="form-control"
                 name="price"
                 label="price"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="Enter Price..."
               />
-            </li>
-          </ul>
+            </div>
+
+            <div class="form-group">
+              <label for="img">Upload Image</label>
+              <UploadPreview id="img" />
+            </div>
+          </form>
 
           {err !== undefined && err !== '' ? <Error text={err} /> : ''}
         </Modal.Body>
