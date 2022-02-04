@@ -42,7 +42,7 @@ export default function EditMeal(props) {
       </a>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Change Meal</Modal.Title>
+          <Modal.Title>Edit Meal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
@@ -102,7 +102,7 @@ export default function EditMeal(props) {
 
           <input
             type="submit"
-            value="Add Meal"
+            value="Save"
             className="btn btn-primary btn-block"
             onClick={handleEditingMeal}
           />
