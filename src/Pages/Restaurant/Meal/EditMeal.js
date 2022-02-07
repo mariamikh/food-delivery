@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
+
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Error from '../../Error';
@@ -75,7 +76,19 @@ export default function EditMeal(props) {
             </div>
             <div class="form-group mb-3">
               <label for="price">price</label>
-              <input
+
+              <InputGroup className="mb-3 w-25">
+                <FormControl
+                  id="price"
+                  aria-label="Small"
+                  aria-describedby="inputGroup-sizing-sm"
+                  onChange={(e) => setPrice(e.target.value)}
+                  value={price}
+                />
+                <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
+              </InputGroup>
+
+              {/* <input
                 id="price"
                 type="text"
                 class="form-control"
@@ -84,7 +97,7 @@ export default function EditMeal(props) {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="Enter Price..."
-              />
+              /> */}
             </div>
 
             <div class="form-group">
