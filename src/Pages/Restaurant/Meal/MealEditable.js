@@ -8,9 +8,9 @@ export default function MealEditable(props) {
   // TODO userRole should not be inside meal
   const { id, name, img, price } = props.meal;
 
-  function changeQuantity(quantity) {
-    props.changeTotal(id, price, quantity);
-  }
+  // function changeQuantity(quantity) {
+  //   props.changeTotal(id, price, quantity);
+  // }
 
   /* 
     TODO: paging

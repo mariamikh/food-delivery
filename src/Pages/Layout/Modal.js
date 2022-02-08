@@ -20,10 +20,10 @@ export default function MyModal(props) {
           addButton: (
             <button
               type="button"
-              className="btn btn-info "
+              className="btn btn-secondary"
               onClick={handleShow}
             >
-              Add Meal
+              {header}
             </button>
           ),
           faEdit: (

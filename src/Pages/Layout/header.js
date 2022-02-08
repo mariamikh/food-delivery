@@ -8,7 +8,7 @@ export default function Header(props) {
   const isAuthenticated =
     user !== 'undefined' &&
     user !== '' &&
-    user.userDetails != 'undefined' &&
+    user.userDetails !== 'undefined' &&
     user.userDetails !== ''
       ? true
       : false;

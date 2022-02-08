@@ -14,7 +14,7 @@ export default function Navigation() {
   const role =
     user !== 'undefined' &&
     user !== '' &&
-    user.userDetails != 'undefined' &&
+    user.userDetails !== 'undefined' &&
     user.userDetails !== ''
       ? user.userDetails.role
       : '';
@@ -22,7 +22,7 @@ export default function Navigation() {
   const myRestaurant =
     user !== 'undefined' &&
     user !== '' &&
-    user.userDetails != 'undefined' &&
+    user.userDetails !== 'undefined' &&
     user.userDetails !== ''
       ? user.userDetails.myRestaurant
       : '';
