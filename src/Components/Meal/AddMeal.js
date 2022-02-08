@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RestaurantDataService from '../../services/restaurant.service';
-import Error from '../Error';
+import Error from '../helper';
 
 export default function AddMeal(props) {
   const [name, setName] = useState('');

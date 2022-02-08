@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import routes from './Config/routes.js';
 import AppRoute from './Components/AppRoute';
-import Header from './Components/Layout/header';
-import Navigation from './Components/Layout/navigation';
+import Header from './Components/helper/header';
+import Navigation from './Components/helper/navigation';
 import Login from './Components/Login/index';
 import { getUserDetails } from './Context/action';
 

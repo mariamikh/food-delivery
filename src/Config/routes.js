@@ -1,5 +1,5 @@
 // import Login from '../Components/Login';
-import NotFound from '../Components/Error/notFound';
+import NotFound from '../Components/helper/notFound';
 import RestaurantList from '../Components/Restaurant/list';
 import Restaurant from '../Components/Restaurant/details';
 import AddMeal from '../Components/Meal/AddMeal';

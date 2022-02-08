@@ -3,7 +3,7 @@ import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MealDataService from '../../services/meal.service';
-import UploadPreview from '../Layout/UploadPreview';
+import UploadPreview from '../helper/UploadPreview';
 
 export default function EditMealForm(props) {
   const [show, setShow] = useState(false);

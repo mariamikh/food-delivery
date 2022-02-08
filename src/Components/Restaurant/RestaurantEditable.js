@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Meal from '../Meal/MealEditable';
-import MyModal from '../Layout/Modal';
+import MyModal from '../helper/Modal';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
