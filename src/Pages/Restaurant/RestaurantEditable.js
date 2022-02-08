@@ -1,16 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import Meal from './Meal/MealEditable';
 import MyModal from '../Layout/Modal';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function RestaurantEditable(props) {
-  const { id, name, address, meals } = props.restaurant;
-  const [editMode, setEditMode] = useState(false);
+import RestaurantDataService from '../../services/restaurant.service';
 
+export default function RestaurantEditable(props) {
+  const { id, meals, name, address } = props.restaurant;
+  const [editMode, setEditMode] = useState(false);
+  const [rName, setName] = useState(name);
+  const [rAddress, setAddress] = useState(address);
   // validate restaurant for meals
   const hasMeal = meals !== undefined ? true : false;
+
+  useEffect(() => {
+    setName(name);
+    setAddress(address);
+  }, [props.restaurant.name, props.restaurant.address]);
+
+  function updateRestaurant() {
+    RestaurantDataService.update(id, {
+      name: rName,
+      description: rAddress,
+    })
+      .then(() => {
+        setEditMode(false);
+        // TODO: show updated data in the page
+      })
+      .catch((error) => {
+        //TODO: handle error
+        console.log(error);
+      });
+  }
 
   return (
     <div className="d-flex flex-column">
@@ -26,12 +49,12 @@ export default function RestaurantEditable(props) {
         <div className="col-9 p-2">
           <div className={editMode ? 'd-none' : ''}>
             <h5>
-              {name}
+              {rName}
               <a href="#" className="p-2" onClick={() => setEditMode(true)}>
                 <FontAwesomeIcon icon={faEdit} />
               </a>
             </h5>
-            <p>{address}</p>
+            <p>{rAddress}</p>
           </div>
 
           <div className={editMode ? '' : 'd-none'}>
@@ -39,20 +62,22 @@ export default function RestaurantEditable(props) {
               type="text"
               className="form-control mb-2"
               id="name"
-              placeholder={name}
+              placeholder={rName}
+              onChange={(e) => setName(e.target.value)}
             />
 
             <textarea
               type="text"
               className="form-control mb-2"
               id="addr"
-              placeholder={address}
+              placeholder={rAddress}
+              onChange={(e) => setAddress(e.target.value)}
             />
 
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => setEditMode(false)}
+              onClick={() => updateRestaurant()}
             >
               Save
             </button>
