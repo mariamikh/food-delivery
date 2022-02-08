@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AddMeal from '../Restaurant/Meal/AddMeal';
-import EditMeal from '../Restaurant/Meal/EditMealForm';
+import AddMeal from '../Meal/AddMeal';
+import EditMeal from '../Meal/EditMealForm';
 
 export default function MyModal(props) {
   const { button, header, bodyComponent } = props;
