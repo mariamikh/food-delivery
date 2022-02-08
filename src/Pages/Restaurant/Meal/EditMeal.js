@@ -10,8 +10,8 @@ export default function EditMeal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const { id } = props.mealDetails.id;
-  const { restaurant } = props.restaurant;
+  const [id, setId] = useState(props.mealDetails.id);
+  const [restaurantId, setRestaurantId] = useState(props.restaurant);
   const [mName, setName] = useState(props.mealDetails.name);
   const [mPrice, setPrice] = useState(props.mealDetails.price);
   const [mImg, setImg] = useState(props.mealDetails.img);
@@ -22,6 +22,8 @@ export default function EditMeal(props) {
     setPrice(props.mealDetails.price);
     setImg(props.mealDetails.img);
     setDesc(props.mealDetails.desc);
+    setId(props.mealDetails.id);
+    setRestaurantId(props.restaurant);
   }, [
     props.mealDetails.name,
     props.mealDetails.price,
@@ -32,12 +34,12 @@ export default function EditMeal(props) {
   const UpdateMeal = async (e) => {
     e.preventDefault();
 
-    MealDataService.update('2', '3', {
+    MealDataService.update(id, restaurantId, {
       id: id,
       name: mName,
       description: mDesc,
       price: mPrice,
-      restaurantId: restaurant,
+      restaurantId: restaurantId,
     })
       .then(() => {
         handleClose();

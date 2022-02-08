@@ -5,7 +5,7 @@ class MealDataService {
     return http.put(`/restaurant/${restaurantId}/meal/${id}`, data);
   }
 
-  delete(restaurantId, id) {
+  delete(id, restaurantId) {
     return http.delete(`/restaurant/${restaurantId}/meal/${id}`);
   }
 }
