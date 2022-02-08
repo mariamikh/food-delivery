@@ -1,8 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-// import MyModal from '../../Layout/Modal';
-import EditMeal from './EditMealForm';
+import EditMeal from './editMealForm';
 
 export default function MealEditable(props) {
   // TODO userRole should not be inside meal
