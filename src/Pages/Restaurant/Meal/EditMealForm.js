@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MealDataService from '../../../services/meal.service';
 import UploadPreview from '../../Layout/UploadPreview';
 
-export default function EditMeal(props) {
+export default function EditMealForm(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

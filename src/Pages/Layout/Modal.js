@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AddMeal from '../Restaurant/Meal/AddMeal';
-import EditMeal from '../Restaurant/Meal/EditMeal';
+import EditMeal from '../Restaurant/Meal/EditMealForm';
 
 export default function MyModal(props) {
   const { button, header, bodyComponent } = props;
