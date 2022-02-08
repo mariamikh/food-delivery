@@ -1,7 +1,7 @@
 // import Login from '../Components/Login';
 import NotFound from '../Components/helper/notFound';
 import RestaurantList from '../Components/Restaurant/list';
-import Restaurant from '../Components/Restaurant/details';
+import Restaurant from '../Components/Restaurant/parentDetails';
 import AddMeal from '../Components/Meal/AddMeal';
 import Order from '../Components/Order/details.js';
 import OrderList from '../Components/Order/list';

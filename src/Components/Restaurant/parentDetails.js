@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import RestaurantDataService from '../../services/restaurant.service';
-import RestaurantEditable from './RestaurantEditable';
-import RestaurantDetails from './RestaurantDetails';
+import EditDetails from './editDetails';
+import ShowDetails from './showDetails';
 import { useAuthState } from '../../Context';
 import { useParams } from 'react-router-dom';
 
@@ -50,8 +50,8 @@ export default function Restaurant() {
   }, []);
 
   return role === 'owner' ? (
-    <RestaurantEditable restaurant={restaurant} />
+    <EditDetails restaurant={restaurant} />
   ) : (
-    <RestaurantDetails restaurant={restaurant} />
+    <ShowDetails restaurant={restaurant} />
   );
 }

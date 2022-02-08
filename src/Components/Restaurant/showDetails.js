@@ -3,7 +3,7 @@ import OrderDataService from '../../services/order.service';
 import { useHistory } from 'react-router-dom';
 import Meal from '../Meal/MealList';
 
-export default function RestaurantDetails(props) {
+export default function ShowDetails(props) {
   const { id, name, address, meals } = props.restaurant;
 
   const [total, setTotal] = useState(0);

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import RestaurantDataService from '../../services/restaurant.service';
 
-export default function RestaurantEditable(props) {
+export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;
   const [editMode, setEditMode] = useState(false);
   const [rName, setName] = useState(name);
