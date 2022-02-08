@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AddMeal from '../Meal/AddMeal';
+import AddMeal from '../Meal/AddMealForm';
 import EditMeal from '../Meal/EditMealForm';
 
 export default function MyModal(props) {
