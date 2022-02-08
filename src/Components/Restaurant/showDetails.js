@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OrderDataService from '../../services/order.service';
 import { useHistory } from 'react-router-dom';
-import Meal from '../Meal/MealList';
+import Meal from '../Meal/showMeals';
 
 export default function ShowDetails(props) {
   const { id, name, address, meals } = props.restaurant;

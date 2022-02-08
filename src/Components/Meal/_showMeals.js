@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function MealList(props) {
+export default function Meal(props) {
   // TODO userRole should not be inside meal
   const { id, name, img, price } = props.meal;
 
