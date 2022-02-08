@@ -29,7 +29,7 @@ export default function MealEditable(props) {
       </div>
       <h6 className="col-2 align-self-center">{price}$</h6>
       <div className="col-1 align-self-center cursor-pointer">
-        <EditMeal mealDetails={props.meal} />
+        <EditMeal restaurant={props.restaurant} mealDetails={props.meal} />
       </div>
       <div className="col-1 align-self-center ">
         <a href="#" className="pe-auto">

@@ -91,6 +91,7 @@ export default function RestaurantDetails(props) {
           meals.map((m) => (
             <Meal
               key={m.id}
+              restaurant={id}
               meal={m}
               changeTotal={(id, price, quantity) =>
                 modifyTotal({ id, price, quantity })

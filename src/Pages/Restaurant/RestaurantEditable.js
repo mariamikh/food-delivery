@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import Meal from './Meal/MealEditable';
 import MyModal from '../Layout/Modal';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -94,7 +93,7 @@ export default function RestaurantEditable(props) {
           />
         </div>
         {hasMeal ? (
-          meals.map((m) => <Meal key={m.id} meal={m} />)
+          meals.map((m) => <Meal restaurant={id} key={m.id} meal={m} />)
         ) : (
           <p className="text-center">This restaurant has no meal yet</p>
         )}

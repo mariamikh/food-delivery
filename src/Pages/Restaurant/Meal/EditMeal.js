@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
-
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Error from '../../Error';
-import RestaurantDataService from '../../../services/restaurant.service';
+import MealDataService from '../../../services/meal.service';
 import UploadPreview from '../../Layout/UploadPreview';
 
 export default function EditMeal(props) {
@@ -12,26 +10,40 @@ export default function EditMeal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [name, setName] = useState(props.mealDetails.name);
-  const [price, setPrice] = useState(props.mealDetails.price);
-  const [img, setImg] = useState(props.mealDetails.img);
-  const [desc, setDesc] = useState(props.mealDetails.desc);
-  const [err, setErr] = useState('');
+  const { id } = props.mealDetails.id;
+  const { restaurant } = props.restaurant;
+  const [mName, setName] = useState(props.mealDetails.name);
+  const [mPrice, setPrice] = useState(props.mealDetails.price);
+  const [mImg, setImg] = useState(props.mealDetails.img);
+  const [mDesc, setDesc] = useState(props.mealDetails.desc);
 
-  const handleEditingMeal = async (e) => {
+  useEffect(() => {
+    setName(props.mealDetails.name);
+    setPrice(props.mealDetails.price);
+    setImg(props.mealDetails.img);
+    setDesc(props.mealDetails.desc);
+  }, [
+    props.mealDetails.name,
+    props.mealDetails.price,
+    props.mealDetails.img,
+    props.mealDetails.desc,
+  ]);
+
+  const UpdateMeal = async (e) => {
     e.preventDefault();
 
-    RestaurantDataService.create({
-      name,
-      price,
-      img,
+    MealDataService.update('2', '3', {
+      id: id,
+      name: mName,
+      description: mDesc,
+      price: mPrice,
+      restaurantId: restaurant,
     })
       .then(() => {
-        props.history.push('/');
+        handleClose();
       })
       .catch((error) => {
         //TODO: handle error
-        setErr(error);
         console.log(error);
       });
   };
@@ -55,7 +67,7 @@ export default function EditMeal(props) {
                 class="form-control"
                 name="name"
                 label="name"
-                value={name}
+                value={mName}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter Name..."
               />
@@ -68,7 +80,7 @@ export default function EditMeal(props) {
                 class="form-control"
                 name="desc"
                 label="description"
-                value={desc}
+                value={mDesc}
                 onChange={(e) => setDesc(e.target.value)}
                 placeholder="Enter description..."
                 rows="3"
@@ -83,21 +95,10 @@ export default function EditMeal(props) {
                   aria-label="Small"
                   aria-describedby="inputGroup-sizing-sm"
                   onChange={(e) => setPrice(e.target.value)}
-                  value={price}
+                  value={mPrice}
                 />
                 <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
               </InputGroup>
-
-              {/* <input
-                id="price"
-                type="text"
-                class="form-control"
-                name="price"
-                label="price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="Enter Price..."
-              /> */}
             </div>
 
             <div class="form-group">
@@ -105,8 +106,6 @@ export default function EditMeal(props) {
               <UploadPreview id="img" />
             </div>
           </form>
-
-          {err !== undefined && err !== '' ? <Error text={err} /> : ''}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -117,7 +116,7 @@ export default function EditMeal(props) {
             type="submit"
             value="Save"
             className="btn btn-primary btn-block"
-            onClick={handleEditingMeal}
+            onClick={UpdateMeal}
           />
         </Modal.Footer>
       </Modal>
