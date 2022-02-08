@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import RestaurantDataService from '../../services/restaurant.service';
 import Error from '../helper';
 
-export default function AddMeal(props) {
+export default function AddMealForm(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [img, setImg] = useState('');

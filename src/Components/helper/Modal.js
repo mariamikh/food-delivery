@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import AddMeal from '../Meal/AddMealForm';
-import EditMeal from '../Meal/EditMealForm';
+import AddMealForm from '../Meal/addMealForm';
+import EditMealForm from '../Meal/editMealForm';
 
 export default function MyModal(props) {
   const { button, header, bodyComponent } = props;
@@ -11,7 +11,8 @@ export default function MyModal(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const TagName = props.bodyComponent === 'EditMeal' ? EditMeal : AddMeal;
+  const TagName =
+    props.bodyComponent === 'EditMeal' ? EditMealForm : AddMealForm;
 
   return (
     <div>

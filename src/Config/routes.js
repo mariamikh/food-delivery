@@ -2,7 +2,6 @@
 import NotFound from '../Components/helper/notFound';
 import RestaurantList from '../Components/Restaurant/list';
 import Restaurant from '../Components/Restaurant/parentDetails';
-import AddMeal from '../Components/Meal/AddMealForm';
 import Order from '../Components/Order/details.js';
 import OrderList from '../Components/Order/list';
 import Login from '../Components/Login';
@@ -21,11 +20,6 @@ const routes = [
   {
     path: '/user/:id/order',
     component: OrderList,
-    isPrivate: true,
-  },
-  {
-    path: '/restaurant/:id/meal',
-    component: AddMeal,
     isPrivate: true,
   },
   {
