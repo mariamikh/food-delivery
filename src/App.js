@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import routes from './Config/routes.js';
-import AppRoute from './Pages/AppRoute';
-import Header from './Pages/Layout/header';
-import Navigation from './Pages/Layout/navigation';
-import Login from './Pages/Login/index';
+import AppRoute from './Components/AppRoute';
+import Header from './Components/Layout/header';
+import Navigation from './Components/Layout/navigation';
+import Login from './Components/Login/index';
 import { getUserDetails } from './Context/action';
 
 import 'bootstrap/dist/css/bootstrap.min.css';

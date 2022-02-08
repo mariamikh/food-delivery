@@ -1,11 +1,11 @@
-// import Login from '../Pages/Login';
-import NotFound from '../Pages/Error/notFound';
-import RestaurantList from '../Pages/Restaurant/list';
-import Restaurant from '../Pages/Restaurant/details';
-import AddMeal from '../Pages/Restaurant/Meal/AddMeal';
-import Order from '../Pages/Order/details.js';
-import OrderList from '../Pages/Order/list';
-import Login from '../Pages/Login';
+// import Login from '../Components/Login';
+import NotFound from '../Components/Error/notFound';
+import RestaurantList from '../Components/Restaurant/list';
+import Restaurant from '../Components/Restaurant/details';
+import AddMeal from '../Components/Restaurant/Meal/AddMeal';
+import Order from '../Components/Order/details.js';
+import OrderList from '../Components/Order/list';
+import Login from '../Components/Login';
 
 const routes = [
   {
