@@ -5,7 +5,6 @@ import EditMealForm from './editMealForm';
 import MealDataService from '../../services/meal.service';
 
 export default function EditMeal(props) {
-  // TODO userRole should not be inside meal
   const { id, name, img, price } = props.meal;
   const { restaurant } = props.restaurant;
   const [isDeleted, setIsDeleted] = useState(false);

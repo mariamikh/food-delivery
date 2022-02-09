@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Meal from '../Meal/editMeals';
-import MyModal from '../helper/Modal';
+import AddMealForm from '../Meal/addMealForm';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -86,11 +86,7 @@ export default function EditDetails(props) {
 
       <div className="bg-light px-4">
         <div className="pb-2 pt-2 d-flex flex-row-reverse">
-          <MyModal
-            button="addButton"
-            header="Add New Meal"
-            bodyComponent="AddMeal"
-          />
+          <AddMealForm restaurant={props.restaurant} />
         </div>
         {hasMeal ? (
           meals.map((m) => <Meal restaurant={id} key={m.id} meal={m} />)
