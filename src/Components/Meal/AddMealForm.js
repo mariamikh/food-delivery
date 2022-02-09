@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import RestaurantDataService from '../../services/restaurant.service';
+import MealDataService from '../../services/meal.service';
 import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
 import UploadPreview from '../helper/UploadPreview';
 
@@ -13,22 +13,24 @@ export default function AddMealForm(props) {
   const [img, setImg] = useState('');
   const [desc, setDesc] = useState('');
 
-  const [restaurantId, setRestaurantId] = useState(props.restaurant);
+  function addMeal(id) {
+    console.log('AddMealForm: ' + id);
 
-  useEffect(() => {
-    setRestaurantId(props.restaurant);
-  }, [props.restaurantId]);
+    props.updateMeals(id, price, name, img, desc);
+    handleClose();
+  }
 
   const SaveMeal = async (e) => {
     e.preventDefault();
 
-    RestaurantDataService.create({
-      name,
-      price,
-      img,
+    MealDataService.create(props.restaurant, {
+      name: name,
+      description: desc,
+      price: price,
+      restaurantId: props.restaurant,
     })
-      .then(() => {
-        props.history.push('/');
+      .then((response) => {
+        addMeal(response);
       })
       .catch((error) => {
         //TODO: handle error

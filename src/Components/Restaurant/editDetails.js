@@ -10,14 +10,16 @@ export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;
   const [editMode, setEditMode] = useState(false);
   const [rName, setName] = useState(name);
+  const [rMeals, setMeals] = useState(meals);
   const [rAddress, setAddress] = useState(address);
-  // validate restaurant for meals
-  const hasMeal = meals !== undefined ? true : false;
+  const [hasMeal, setHasMeal] = useState(false);
 
   useEffect(() => {
     setName(name);
     setAddress(address);
-  }, [props.restaurant.name, props.restaurant.address]);
+    setMeals(meals);
+    setHasMeal(meals !== undefined ? true : false);
+  }, [props.restaurant.meals, props.restaurant.name, props.restaurant.address]);
 
   function updateRestaurant() {
     RestaurantDataService.update(id, {
@@ -26,12 +28,23 @@ export default function EditDetails(props) {
     })
       .then(() => {
         setEditMode(false);
-        // TODO: show updated data in the page
       })
       .catch((error) => {
         //TODO: handle error
         console.log(error);
       });
+  }
+
+  function modifyMeal({ id, price, name, img, desc }) {
+    setMeals([
+      {
+        id: id,
+        img: img,
+        name: name,
+        price: price,
+      },
+      ...rMeals,
+    ]);
   }
 
   return (
@@ -86,10 +99,15 @@ export default function EditDetails(props) {
 
       <div className="bg-light px-4">
         <div className="pb-2 pt-2 d-flex flex-row-reverse">
-          <AddMealForm restaurant={props.restaurant} />
+          <AddMealForm
+            updateMeals={(id, price, name, img, desc) =>
+              modifyMeal({ id, price, name, img, desc })
+            }
+            restaurant={id}
+          />
         </div>
         {hasMeal ? (
-          meals.map((m) => <Meal restaurant={id} key={m.id} meal={m} />)
+          rMeals.map((m) => <Meal restaurant={id} key={m.id} meal={m} />)
         ) : (
           <p className="text-center">This restaurant has no meal yet</p>
         )}
