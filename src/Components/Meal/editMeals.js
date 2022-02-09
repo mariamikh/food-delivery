@@ -7,7 +7,6 @@ import MealDataService from '../../services/meal.service';
 export default function EditMeal(props) {
   const { id, name, img, price } = props.meal;
   const { restaurant } = props.restaurant;
-  const [isDeleted, setIsDeleted] = useState(false);
 
   /* 
     TODO: paging
@@ -18,7 +17,7 @@ export default function EditMeal(props) {
   function deleteMeal() {
     MealDataService.delete(id, props.restaurant)
       .then(() => {
-        setIsDeleted(true);
+        props.removeMeal(id);
       })
       .catch((error) => {
         //TODO: handle error
@@ -27,11 +26,7 @@ export default function EditMeal(props) {
   }
 
   return (
-    <div
-      className={
-        isDeleted ? 'row p-2 mb-2 bg-white d-none' : 'row p-2 mb-2 bg-white'
-      }
-    >
+    <div className="row p-2 mb-2 bg-white">
       <div className="col-3">
         <img src={img} alt="" className="rounded float-left" />
       </div>

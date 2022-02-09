@@ -35,7 +35,7 @@ export default function EditDetails(props) {
       });
   }
 
-  function modifyMeal({ id, price, name, img, desc }) {
+  function addMeal({ id, price, name, img, desc }) {
     setMeals([
       {
         id: id,
@@ -44,6 +44,14 @@ export default function EditDetails(props) {
         price: price,
       },
       ...rMeals,
+    ]);
+  }
+
+  function deleteMeal(id) {
+    setMeals([
+      ...rMeals.filter(function (obj) {
+        return obj.id !== id;
+      }),
     ]);
   }
 
@@ -101,13 +109,20 @@ export default function EditDetails(props) {
         <div className="pb-2 pt-2 d-flex flex-row-reverse">
           <AddMealForm
             updateMeals={(id, price, name, img, desc) =>
-              modifyMeal({ id, price, name, img, desc })
+              addMeal({ id, price, name, img, desc })
             }
             restaurant={id}
           />
         </div>
         {hasMeal ? (
-          rMeals.map((m) => <Meal restaurant={id} key={m.id} meal={m} />)
+          rMeals.map((m) => (
+            <Meal
+              removeMeal={(id) => deleteMeal(id)}
+              restaurant={id}
+              key={m.id}
+              meal={m}
+            />
+          ))
         ) : (
           <p className="text-center">This restaurant has no meal yet</p>
         )}

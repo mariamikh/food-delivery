@@ -14,8 +14,6 @@ export default function AddMealForm(props) {
   const [desc, setDesc] = useState('');
 
   function addMeal(id) {
-    console.log('AddMealForm: ' + id);
-
     props.updateMeals(id, price, name, img, desc);
     handleClose();
   }
