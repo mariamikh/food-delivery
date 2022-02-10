@@ -13,6 +13,9 @@ export function loginUser(dispatch, loginPayload) {
           data.token = token;
 
           dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+
+          var restaurantId = parseInt(data.myRestaurant) || 0;
+
           localStorage.setItem(
             'currentUser',
             JSON.stringify({
@@ -20,7 +23,7 @@ export function loginUser(dispatch, loginPayload) {
                 user: data.user,
                 email: data.email,
                 role: data.role,
-                myRestaurant: data.myRestaurant,
+                myRestaurant: restaurantId,
               },
               token: token,
             })

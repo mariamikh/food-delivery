@@ -26,7 +26,7 @@ export const AuthReducer = (initialState, action) => {
           user: action.payload.user,
           email: action.payload.email,
           role: action.payload.role,
-          myRestaurant: action.payload.myRestaurant,
+          myRestaurant: parseInt(action.payload.myRestaurant) || 0,
         },
         token: action.payload.token,
         loading: false,
