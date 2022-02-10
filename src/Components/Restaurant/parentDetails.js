@@ -25,7 +25,13 @@ export default function Restaurant() {
       ],
     },
   ];
-  const [restaurant, setRestaurant] = useState(initialValue);
+  // TODO: create nitial values for all classes and use those objects: meal, restaurant, order ...
+  const [restaurant, setRestaurant] = useState({
+    id: 0,
+    name: '',
+    address: '',
+    img: '',
+  });
   const userDetails = useAuthState().userDetails;
   const role = userDetails.role;
 
@@ -40,10 +46,12 @@ export default function Restaurant() {
       });
   }
   useEffect(() => {
-    retriveRestaurantDetails(id);
+    if (id != 0) {
+      retriveRestaurantDetails(id);
+    }
   }, []);
 
-  return userDetails.myRestaurant === id && role === 'owner' ? (
+  return id == 0 || (userDetails.myRestaurant === id && role === 'owner') ? (
     <EditDetails restaurant={restaurant} />
   ) : (
     <ShowDetails restaurant={restaurant} />

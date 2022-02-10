@@ -99,7 +99,7 @@ export default function ShowDetails(props) {
             />
           ))
         ) : (
-          <p class="text-center">This restaurant has no meal yet</p>
+          <p className="text-center">This restaurant has no meal yet</p>
         )}
       </div>
     </div>

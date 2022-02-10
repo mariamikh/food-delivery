@@ -8,13 +8,16 @@ import RestaurantDataService from '../../services/restaurant.service';
 
 export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;
-  const [editMode, setEditMode] = useState(false);
+
+  const [editMode, setEditMode] = useState(id == 0 ? true : false);
+  const [rId, setId] = useState(id);
   const [rName, setName] = useState(name);
   const [rMeals, setMeals] = useState(meals);
   const [rAddress, setAddress] = useState(address);
   const [hasMeal, setHasMeal] = useState(false);
 
   useEffect(() => {
+    setId(id);
     setName(name);
     setAddress(address);
     setMeals(meals);
@@ -22,7 +25,7 @@ export default function EditDetails(props) {
   }, [props.restaurant.meals, props.restaurant.name, props.restaurant.address]);
 
   function updateRestaurant() {
-    RestaurantDataService.update(id, {
+    RestaurantDataService.update(rId, {
       name: rName,
       description: rAddress,
     })
@@ -33,6 +36,32 @@ export default function EditDetails(props) {
         //TODO: handle error
         console.log(error);
       });
+  }
+
+  function addRestaurant() {
+    RestaurantDataService.create({
+      name: rName,
+      description: rAddress,
+    })
+      .then((response) => {
+        console.log('Restaurant ID=' + response + ' was added!');
+        setId(response);
+        setEditMode(false);
+      })
+      .catch((error) => {
+        //TODO: handle error
+        console.log(error);
+      });
+  }
+
+  function submit() {
+    if (id == 0) {
+      console.log('Adding restaurant');
+      addRestaurant();
+    } else {
+      console.log('Updating restaurant id=' + id);
+      updateRestaurant();
+    }
   }
 
   function addMeal({ id, price, name, img, desc }) {
@@ -97,7 +126,7 @@ export default function EditDetails(props) {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => updateRestaurant()}
+              onClick={() => submit()}
             >
               Save
             </button>
