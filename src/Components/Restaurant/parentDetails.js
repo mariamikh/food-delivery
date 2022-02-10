@@ -6,6 +6,9 @@ import { useAuthState } from '../../Context';
 import { useParams } from 'react-router-dom';
 
 export default function Restaurant() {
+  // TODO:  validate variable, for undefiend and for correct values
+  // TODO: validate restaurant for undefined
+
   const { id } = useParams();
   const initialValue = [
     {
@@ -23,17 +26,8 @@ export default function Restaurant() {
     },
   ];
   const [restaurant, setRestaurant] = useState(initialValue);
-
-  // validate variable, for undefiend and for correct values
-  // validate restaurant for undefined
   const userDetails = useAuthState().userDetails;
   const role = userDetails.role;
-  const isEditable =
-    userDetails.myRestaurant !== '' &&
-    userDetails.myRestaurant !== 'undefined' &&
-    role === 'owner'
-      ? true
-      : false;
 
   function retriveRestaurantDetails(id) {
     RestaurantDataService.get(id)
@@ -49,7 +43,7 @@ export default function Restaurant() {
     retriveRestaurantDetails(id);
   }, []);
 
-  return role === 'owner' ? (
+  return userDetails.myRestaurant === id && role === 'owner' ? (
     <EditDetails restaurant={restaurant} />
   ) : (
     <ShowDetails restaurant={restaurant} />
