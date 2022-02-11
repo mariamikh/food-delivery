@@ -120,26 +120,55 @@ export default function Order() {
         </div>
       </div>
 
-      <table className="table bg-light p-5 mt-2">
-        <thead>
-          <tr>
-            <th scope="col">name</th>
-            <th scope="col">price</th>
-            <th scope="col">quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          {order !== undefined && order.meals !== undefined
-            ? order.meals.map((r) => (
-                <tr>
-                  <td>{r.name}</td>
-                  <td>{r.price}$</td>
-                  <td>{r.quantity}</td>
-                </tr>
-              ))
-            : ''}
-        </tbody>
-      </table>
+      <div className="bg-light mt-2 w-75">
+        <div className="card-body">
+          <h5 className="card-title">Order History</h5>
+          <table className="table bg-light p-5 mt-2">
+            <thead>
+              <tr>
+                <th scope="col">status</th>
+                <th scope="col">time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {order !== undefined && order.history !== undefined
+                ? order.history.map((r) => (
+                    <tr>
+                      <td>{r.status}</td>
+                      <td>{r.time}</td>
+                    </tr>
+                  ))
+                : ''}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="bg-light mt-2 w-75">
+        <div className="card-body">
+          <h5 className="card-title">Ordered Meals</h5>
+          <table className="table bg-light p-5 mt-2">
+            <thead>
+              <tr>
+                <th scope="col">name</th>
+                <th scope="col">price</th>
+                <th scope="col">quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {order !== undefined && order.meals !== undefined
+                ? order.meals.map((r) => (
+                    <tr>
+                      <td>{r.name}</td>
+                      <td>{r.price}$</td>
+                      <td>{r.quantity}</td>
+                    </tr>
+                  ))
+                : ''}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
