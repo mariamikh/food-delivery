@@ -53,7 +53,7 @@ export default function Order() {
   }
   useEffect(() => {
     retriveOrderDetails(id).then(() => {});
-  }, []);
+  }, [isStatusChanged]);
 
   function getAvailableStatus(role, currentStatus) {
     if (role === 'user') {
