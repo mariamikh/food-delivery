@@ -1,8 +1,18 @@
 import OrderDataService from '../../services/order.service';
 import React, { useEffect, useState } from 'react';
+import { Form, Stack } from 'react-bootstrap';
+import { useAuthState } from '../../Context';
 import { useParams } from 'react-router-dom';
 
 export default function Order() {
+  const user = useAuthState();
+  const role =
+    user !== 'undefined' &&
+    user !== '' &&
+    user.userDetails !== 'undefined' &&
+    user.userDetails !== ''
+      ? user.userDetails.role
+      : '';
   const { id } = useParams();
   const initialValue = [
     {
@@ -27,11 +37,13 @@ export default function Order() {
   ];
 
   const [order, setOrder] = useState(initialValue);
+  const [availableStatus, setAvailableStatus] = useState('');
 
   function retriveOrderDetails(id) {
-    OrderDataService.get(id)
+    return OrderDataService.get(id)
       .then((response) => {
         setOrder(response.data);
+        setAvailableStatus(getAvailableStatus(role, response.data.status));
       })
       .catch((e) => {
         // TODO: handle exception
@@ -39,8 +51,27 @@ export default function Order() {
       });
   }
   useEffect(() => {
-    retriveOrderDetails(id);
+    retriveOrderDetails(id).then(() => {});
   }, []);
+
+  function getAvailableStatus(role, currentStatus) {
+    if (role === 'user') {
+      switch (currentStatus) {
+        case 'Placed':
+          return 'Canceled';
+        case 'Delivered':
+          return 'Recieved';
+      }
+    } else if (role === 'owner') {
+      switch (currentStatus) {
+        case 'Placed':
+          return 'Processing';
+        case 'Processing':
+          return 'Delivered';
+      }
+    }
+    return '';
+  }
 
   return (
     <div className="d-flex flex-column">
@@ -54,6 +85,19 @@ export default function Order() {
               ? order.restaurant.name
               : ''}
           </div>
+
+          <Stack direction="horizontal" gap={3}>
+            <div>Status:</div>
+            <Form.Select
+              aria-label="status-select"
+              size="sm"
+              className="w-25"
+              disabled={availableStatus === '' ? true : false}
+            >
+              <option>{order.status}</option>
+              <option value={availableStatus}>{availableStatus}</option>
+            </Form.Select>
+          </Stack>
           <div>Order Date: {order.date}</div>
           <div>Total Sum: {order.total}</div>
         </div>
