@@ -38,6 +38,7 @@ export default function Order() {
 
   const [order, setOrder] = useState(initialValue);
   const [availableStatus, setAvailableStatus] = useState('');
+  const [isStatusChanged, setIsStatusChanged] = useState(false);
 
   function retriveOrderDetails(id) {
     return OrderDataService.get(id)
@@ -73,6 +74,19 @@ export default function Order() {
     return '';
   }
 
+  function changeStatus(newStatus) {
+    console.log('change status is called');
+
+    return OrderDataService.update(id, { status: newStatus })
+      .then(() => {
+        setIsStatusChanged(true);
+      })
+      .catch((e) => {
+        // TODO: handle exception
+        console.log(e);
+      });
+  }
+
   return (
     <div className="d-flex flex-column">
       <div className="bg-light mt-2">
@@ -80,7 +94,7 @@ export default function Order() {
           <h5 className="card-title">Order Details</h5>
           <div>Order No.: #{order.id}</div>
           <div>
-            Restaurent:{' '}
+            Restaurent:
             {order !== undefined && order.restaurant !== undefined
               ? order.restaurant.name
               : ''}
@@ -92,7 +106,10 @@ export default function Order() {
               aria-label="status-select"
               size="sm"
               className="w-25"
-              disabled={availableStatus === '' ? true : false}
+              disabled={
+                availableStatus === '' || isStatusChanged ? true : false
+              }
+              onChange={(e) => changeStatus(e.target.value)}
             >
               <option>{order.status}</option>
               <option value={availableStatus}>{availableStatus}</option>

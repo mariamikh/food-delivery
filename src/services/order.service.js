@@ -18,6 +18,10 @@ class OrderDataService {
   getUserOrders(userId) {
     return http.get('/user/' + userId + '/order');
   }
+
+  update(id, data) {
+    return http.put(`/order/${id}`, data);
+  }
 }
 
 export default new OrderDataService();
