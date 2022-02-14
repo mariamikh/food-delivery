@@ -10,21 +10,12 @@ export default function Restaurant() {
   // TODO: validate restaurant for undefined
 
   const { id } = useParams();
-  const initialValue = [
-    {
-      id: 0,
-      name: '',
-      address: '',
-      meals: [
-        {
-          id: 0,
-          img: '',
-          name: '',
-          price: 0,
-        },
-      ],
-    },
-  ];
+  const initialValue = {
+    id: 0,
+    name: '',
+    address: '',
+    meals: [],
+  };
   // TODO: create nitial values for all classes and use those objects: meal, restaurant, order ...
   const [restaurant, setRestaurant] = useState({
     id: 0,
@@ -48,8 +39,10 @@ export default function Restaurant() {
   useEffect(() => {
     if (id != 0) {
       retriveRestaurantDetails(id);
+    } else {
+      setRestaurant(initialValue);
     }
-  }, []);
+  }, [id]);
 
   return id == 0 || (userDetails.myRestaurant === id && role === 'owner') ? (
     <EditDetails restaurant={restaurant} />

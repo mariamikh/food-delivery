@@ -8,7 +8,6 @@ import RestaurantDataService from '../../services/restaurant.service';
 
 export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;
-
   const [editMode, setEditMode] = useState(id == 0 ? true : false);
   const [rId, setId] = useState(id);
   const [rName, setName] = useState(name);
@@ -22,6 +21,7 @@ export default function EditDetails(props) {
     setAddress(address);
     setMeals(meals);
     setHasMeal(meals !== undefined ? true : false);
+    setEditMode(id == 0 ? true : false);
   }, [props.restaurant.meals, props.restaurant.name, props.restaurant.address]);
 
   function updateRestaurant() {
