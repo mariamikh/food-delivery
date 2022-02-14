@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../../Context';
+import UserRole from '../../Config/role';
 
 export default function Navigation() {
   const user = useAuthState();
@@ -27,7 +28,7 @@ export default function Navigation() {
       ? user.userDetails.myRestaurant
       : '';
 
-  if (role === 'owner') {
+  if (role === UserRole.Owner.name) {
     navigationItems = [
       {
         name: 'My Restaurant',
@@ -43,7 +44,7 @@ export default function Navigation() {
         link: '/user/' + user.userDetails.user + '/order',
       },
     ];
-  } else if (role == 'user') {
+  } else if (role == UserRole.Regular.name) {
     navigationItems = [
       {
         name: 'Restaurant List',

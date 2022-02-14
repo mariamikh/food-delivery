@@ -1,10 +1,12 @@
 import React from 'react';
 import { useAuthState } from '../../Context';
+import UserRole from '../../Config/role';
 
 export default function MealList(props) {
   // TODO userRole should not be inside meal
   const { id, name, img, price } = props.meal;
-  const canOrder = useAuthState().userDetails.role === 'owner' ? false : true;
+  const canOrder =
+    useAuthState().userDetails.role === UserRole.Owner.name ? false : true;
 
   function changeQuantity(quantity) {
     props.changeTotal(id, price, quantity);

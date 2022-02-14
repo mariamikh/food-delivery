@@ -5,6 +5,7 @@ import { useAuthState } from '../../Context';
 import Meal from '../Meal/editMeals';
 import AddMealForm from '../Meal/addMealForm';
 import RestaurantDataService from '../../services/restaurant.service';
+import UserRole from '../../Config/role';
 
 export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;
@@ -20,7 +21,7 @@ export default function EditDetails(props) {
   const userDetails = useAuthState().userDetails;
   const role = userDetails.role;
 
-  let canOrder = role === 'owner' ? false : true;
+  let canOrder = role === UserRole.Owner.name ? false : true;
 
   useEffect(() => {
     setId(id);

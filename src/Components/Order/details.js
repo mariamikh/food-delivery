@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, Stack } from 'react-bootstrap';
 import { useAuthState } from '../../Context';
 import { useParams } from 'react-router-dom';
+import UserRole from '../../Config/role';
 
 export default function Order() {
   const user = useAuthState();
@@ -56,14 +57,14 @@ export default function Order() {
   }, [isStatusChanged]);
 
   function getAvailableStatus(role, currentStatus) {
-    if (role === 'user') {
+    if (role === UserRole.Regular.name) {
       switch (currentStatus) {
         case 'Placed':
           return 'Canceled';
         case 'Delivered':
           return 'Recieved';
       }
-    } else if (role === 'owner') {
+    } else if (role === UserRole.Owner.name) {
       switch (currentStatus) {
         case 'Placed':
           return 'Processing';

@@ -4,6 +4,7 @@ import EditDetails from './editDetails';
 import ShowDetails from './showDetails';
 import { useAuthState } from '../../Context';
 import { useParams } from 'react-router-dom';
+import UserRole from '../../Config/role';
 
 export default function Restaurant() {
   // TODO:  validate variable, for undefiend and for correct values
@@ -44,7 +45,8 @@ export default function Restaurant() {
     }
   }, [id]);
 
-  return id == 0 || (userDetails.myRestaurant === id && role === 'owner') ? (
+  return id == 0 ||
+    (userDetails.myRestaurant === id && role === UserRole.Owner.name) ? (
     <EditDetails restaurant={restaurant} />
   ) : (
     <ShowDetails restaurant={restaurant} />
