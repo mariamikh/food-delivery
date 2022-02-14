@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import OrderDataService from '../../services/order.service';
 import { useHistory } from 'react-router-dom';
+import { useAuthState } from '../../Context';
+
 import Meal from '../Meal/showMeals';
 
 export default function ShowDetails(props) {
@@ -8,8 +10,9 @@ export default function ShowDetails(props) {
 
   const [total, setTotal] = useState(0);
   const [orderedMeals, setOrderedMeals] = useState([]);
-  const history = useHistory();
+  const canOrder = useAuthState().userDetails.role === 'owner' ? false : true;
 
+  const history = useHistory();
   // validate restaurant for meals
   const hasMeal = meals !== undefined ? true : false;
 
@@ -71,7 +74,7 @@ export default function ShowDetails(props) {
           <p>{address} </p>
         </div>
 
-        {hasMeal ? (
+        {hasMeal && canOrder ? (
           <div className="col-3 p-2 bg-white text-center border">
             <h6>SubTotal: {total}$</h6>
             <button

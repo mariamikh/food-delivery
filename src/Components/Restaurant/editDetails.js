@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import Meal from '../Meal/editMeals';
-import AddMealForm from '../Meal/addMealForm';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { useAuthState } from '../../Context';
+import Meal from '../Meal/editMeals';
+import AddMealForm from '../Meal/addMealForm';
 import RestaurantDataService from '../../services/restaurant.service';
 
 export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;
-  const [editMode, setEditMode] = useState(id == 0 ? true : false);
+
   const [rId, setId] = useState(id);
   const [rName, setName] = useState(name);
   const [rMeals, setMeals] = useState(meals);
   const [rAddress, setAddress] = useState(address);
+
   const [hasMeal, setHasMeal] = useState(false);
+  const [editMode, setEditMode] = useState(id == 0 ? true : false);
+
+  const userDetails = useAuthState().userDetails;
+  const role = userDetails.role;
+
+  let canOrder = role === 'owner' ? false : true;
 
   useEffect(() => {
     setId(id);
