@@ -1,11 +1,10 @@
 import http from '../http-common';
-import { validateGetAllResponse } from '../services/restaurant.service.validator';
+import {
+  validateGetAllResponse,
+  validateGetResponse,
+} from '../services/restaurant.service.validator';
 
 class RestaurantDataService {
-  // getAll() {
-  //   return http.get('/restaurant');
-  // }
-
   async getAll() {
     return await http
       .get(`/restaurant`)
@@ -14,12 +13,20 @@ class RestaurantDataService {
         return response.data;
       })
       .catch((e) => {
-        throw Error('Getting Restaurant Failed');
+        throw Error('Getting Restaurants Failed');
       });
   }
 
-  get(id) {
-    return http.get(`/restaurant/${id}`);
+  async get(id) {
+    return await http
+      .get(`/restaurant/${id}`)
+      .then((response) => {
+        validateGetResponse(response);
+        return response.data;
+      })
+      .catch((e) => {
+        throw Error('Getting Restaurant Failed');
+      });
   }
 
   async create(data) {

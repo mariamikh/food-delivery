@@ -1,40 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import RestaurantDataService from '../../services/restaurant.service';
+import RestaurantObject from '../../Config/restaurant';
 import EditDetails from './editDetails';
 import ShowDetails from './showDetails';
 import { useAuthState } from '../../Context';
 import { useParams } from 'react-router-dom';
 import UserRole from '../../Config/role';
+import Error from '../helper/error';
 
 export default function Restaurant() {
-  // TODO:  validate variable, for undefiend and for correct values
-  // TODO: validate restaurant for undefined
-
   const { id } = useParams();
-  const initialValue = {
-    id: 0,
-    name: '',
-    address: '',
-    meals: [],
-  };
-  // TODO: create nitial values for all classes and use those objects: meal, restaurant, order ...
-  const [restaurant, setRestaurant] = useState({
-    id: 0,
-    name: '',
-    address: '',
-    img: '',
-  });
+  const [error, setError] = useState();
+  const initialValue = new RestaurantObject(0, '', '', '', []);
+  const [restaurant, setRestaurant] = useState(initialValue);
   const userDetails = useAuthState().userDetails;
-  const role = userDetails.role;
+
+  function isMyRestaurant() {
+    return userDetails.myRestaurant === id &&
+      userDetails.role === UserRole.Owner.name
+      ? true
+      : false;
+  }
+  function isNewRestaurant() {
+    return id == 0 ? true : false;
+  }
 
   function retriveRestaurantDetails(id) {
     RestaurantDataService.get(id)
-      .then((response) => {
-        setRestaurant(response.data);
+      .then((restaurantData) => {
+        setRestaurant(restaurantData);
       })
       .catch((e) => {
-        // TODO: handle exception
-        console.log(e);
+        setError(e.message);
       });
   }
   useEffect(() => {
@@ -45,8 +42,9 @@ export default function Restaurant() {
     }
   }, [id]);
 
-  return id == 0 ||
-    (userDetails.myRestaurant === id && role === UserRole.Owner.name) ? (
+  return error ? (
+    <Error message={error} />
+  ) : isNewRestaurant() || isMyRestaurant() ? (
     <EditDetails restaurant={restaurant} />
   ) : (
     <ShowDetails restaurant={restaurant} />

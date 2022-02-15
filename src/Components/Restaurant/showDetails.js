@@ -3,7 +3,6 @@ import OrderDataService from '../../services/order.service';
 import { useHistory } from 'react-router-dom';
 import { useAuthState } from '../../Context';
 import UserRole from '../../Config/role';
-
 import Meal from '../Meal/showMeals';
 
 export default function ShowDetails(props) {
