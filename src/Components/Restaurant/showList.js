@@ -5,8 +5,6 @@ import Restaurant from '../../Config/restaurant';
 import Error from '../helper/error';
 
 export default function RestaurantList() {
-  /* TODO: check what happens if data is not retrived and initial values are rendered */
-
   const [error, setError] = useState();
   const [restaurantList, setRestaurantList] = useState([
     new Restaurant(0, '', '', ''),
