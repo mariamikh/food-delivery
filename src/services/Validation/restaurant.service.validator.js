@@ -15,3 +15,14 @@ export function validateGetResponse(response) {
     throw Error('Getting Restaurant Failed');
   }
 }
+
+export function validateCreateResponse(response) {
+  if (response === undefined || response.data === undefined) {
+    throw Error('Adding Restaurant Failed');
+  }
+}
+export function validateUpdateRequest(id, data) {
+  if (isNaN(id) || data === undefined) {
+    throw Error('Adding Restaurant Failed');
+  }
+}

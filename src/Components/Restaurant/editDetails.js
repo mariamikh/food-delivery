@@ -6,16 +6,17 @@ import Meal from '../Meal/editMeals';
 import AddMealForm from '../Meal/addMealForm';
 import RestaurantDataService from '../../services/restaurant.service';
 import UserRole from '../../Config/role';
-import Order from '../../Config/order';
+import Error from '../helper/error';
+import Alert from 'react-bootstrap/Alert';
+import MealObject from '../../Config/meal';
 
 export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;
-
   const [rId, setId] = useState(id);
   const [rName, setName] = useState(name);
   const [rMeals, setMeals] = useState(meals);
   const [rAddress, setAddress] = useState(address);
-
+  const [error, setError] = useState();
   const [hasMeal, setHasMeal] = useState(false);
   const [editMode, setEditMode] = useState(id == 0 ? true : false);
 
@@ -31,6 +32,7 @@ export default function EditDetails(props) {
     setMeals(meals);
     setHasMeal(meals !== undefined ? true : false);
     setEditMode(id == 0 ? true : false);
+    setError('');
   }, [props.restaurant.meals, props.restaurant.name, props.restaurant.address]);
 
   function updateRestaurant() {
@@ -41,9 +43,8 @@ export default function EditDetails(props) {
       .then(() => {
         setEditMode(false);
       })
-      .catch((error) => {
-        //TODO: handle error
-        console.log(error);
+      .catch((e) => {
+        setError(e.message);
       });
   }
 
@@ -52,37 +53,25 @@ export default function EditDetails(props) {
       name: rName,
       description: rAddress,
     })
-      .then((response) => {
-        console.log('Restaurant ID=' + response + ' was added!');
-        setId(response);
+      .then((restaurantId) => {
+        setId(restaurantId);
         setEditMode(false);
       })
-      .catch((error) => {
-        //TODO: handle error
-        console.log(error);
+      .catch((e) => {
+        setError(e.message);
       });
   }
 
   function submit() {
     if (id == 0) {
-      console.log('Adding restaurant');
       addRestaurant();
     } else {
-      console.log('Updating restaurant id=' + id);
       updateRestaurant();
     }
   }
 
   function addMeal({ id, price, name, img, desc }) {
-    setMeals([
-      {
-        id: id,
-        img: img,
-        name: name,
-        price: price,
-      },
-      ...rMeals,
-    ]);
+    setMeals([new MealObject(id, name, img, price), ...rMeals]);
   }
 
   function deleteMeal(id) {
@@ -93,8 +82,12 @@ export default function EditDetails(props) {
     ]);
   }
 
+  // TODO: when New Reataurant is added and ID is retrived Component should be reloaded
+
   return (
     <div className="d-flex flex-column">
+      {error ? <Alert variant="danger">{error}</Alert> : ''}
+
       <div className="row bg-light p-3 mx-1 mb-3">
         <div className="col-3 p-2">
           {/* TODO: add real image src */}
@@ -145,12 +138,16 @@ export default function EditDetails(props) {
 
       <div className="bg-light px-4">
         <div className="pb-2 pt-2 d-flex flex-row-reverse">
-          <AddMealForm
-            updateMeals={(id, price, name, img, desc) =>
-              addMeal({ id, price, name, img, desc })
-            }
-            restaurant={id}
-          />
+          {id ? (
+            <AddMealForm
+              updateMeals={(id, price, name, img, desc) =>
+                addMeal({ id, price, name, img, desc })
+              }
+              restaurant={id}
+            />
+          ) : (
+            ''
+          )}
         </div>
         {hasMeal ? (
           rMeals.map((m) => (

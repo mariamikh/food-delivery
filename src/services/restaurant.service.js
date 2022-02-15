@@ -2,6 +2,8 @@ import http from '../http-common';
 import {
   validateGetAllResponse,
   validateGetResponse,
+  validateCreateResponse,
+  validateUpdateRequest,
 } from './Validation/restaurant.service.validator';
 
 class RestaurantDataService {
@@ -30,14 +32,22 @@ class RestaurantDataService {
   }
 
   async create(data) {
-    return await http.post(`/restaurant`, data).then((response) => {
-      if (response !== undefined && response.data !== undefined)
+    return await http
+      .post('/restaurant', data)
+      .then((response) => {
+        validateCreateResponse(response);
         return response.data;
-    });
+      })
+      .catch((e) => {
+        throw Error('Adding Restaurant Failed');
+      });
   }
 
-  update(id, data) {
-    return http.put(`/restaurant/${id}`, data);
+  async update(id, data) {
+    validateUpdateRequest(id, data);
+    return await http.put(`/restaurant/${id}`, data).catch((e) => {
+      throw Error('Updating Restaurant Failed');
+    });
   }
 
   delete(id) {

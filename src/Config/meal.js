@@ -1,9 +1,8 @@
 export default class Meal {
-  constructor(id, name, address, foodType, meals) {
+  constructor(id, name, img, price) {
     this.id = id;
+    this.img = img;
     this.name = name;
-    this.address = address;
-    this.foodType = foodType;
-    this.meals = meals;
+    this.price = price;
   }
 }
