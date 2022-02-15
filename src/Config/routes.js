@@ -38,6 +38,11 @@ const routes = [
     isPrivate: false,
   },
   {
+    path: '/',
+    component: RestaurantList,
+    isPrivate: true,
+  },
+  {
     path: '/*',
     component: NotFound,
     isPrivate: true,
