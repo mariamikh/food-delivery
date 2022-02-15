@@ -6,6 +6,7 @@ import Meal from '../Meal/editMeals';
 import AddMealForm from '../Meal/addMealForm';
 import RestaurantDataService from '../../services/restaurant.service';
 import UserRole from '../../Config/role';
+import Order from '../../Config/order';
 
 export default function EditDetails(props) {
   const { id, meals, name, address } = props.restaurant;

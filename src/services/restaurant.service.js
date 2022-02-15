@@ -2,7 +2,7 @@ import http from '../http-common';
 import {
   validateGetAllResponse,
   validateGetResponse,
-} from '../services/restaurant.service.validator';
+} from './Validation/restaurant.service.validator';
 
 class RestaurantDataService {
   async getAll() {

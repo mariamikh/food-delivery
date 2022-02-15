@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OrderDataService from '../../services/order.service';
 import { useHistory } from 'react-router-dom';
 import { useAuthState } from '../../Context';
 import UserRole from '../../Config/role';
 import Meal from '../Meal/showMeals';
+import Order from '../../Config/order';
+import Alert from 'react-bootstrap/Alert';
 
 export default function ShowDetails(props) {
   const { id, name, address, meals } = props.restaurant;
 
   const [total, setTotal] = useState(0);
   const [orderedMeals, setOrderedMeals] = useState([]);
-  const canOrder =
-    useAuthState().userDetails.role === UserRole.Owner.name ? false : true;
-
+  const [error, setError] = useState('Some Error');
   const history = useHistory();
-  // validate restaurant for meals
-  const hasMeal = meals !== undefined ? true : false;
+
+  const userDetails = useAuthState().userDetails;
+  const canOrder = userDetails.role === UserRole.Owner.name ? false : true;
+  const hasMeal = meals !== undefined && meals.length > 0 ? true : false;
 
   function modifyTotal({ id, price, quantity }) {
     if (setOrderedMeals[id] === undefined) {
       setOrderedMeals[id] = 0;
     }
-
     setTotal(total + (quantity - setOrderedMeals[id]) * price);
     setOrderedMeals[id] = quantity;
   }
@@ -41,26 +42,25 @@ export default function ShowDetails(props) {
 
   function makeOrder() {
     const orderedMealList = getOrderedMeals();
-    const orderData = {
-      user: '',
-      restaurent: '',
-      meals: orderedMealList,
-    };
+    const orderData = new Order(userDetails.user, id, orderedMealList);
 
     OrderDataService.create(orderData)
       .then((id) => {
-        // TODO: 'Add Alert Message: Ordered Successfully'
-        console.log('Add Alert Message: Ordered Successfully');
         history.push('/order/' + id);
       })
       .catch((e) => {
-        // TODO: handle exception
-        console.log(e);
+        setError(e.message);
       });
   }
 
+  useEffect(() => {
+    setError('');
+  }, []);
+
   return (
     <div className="d-flex flex-column">
+      {error ? <Alert variant="danger">{error}</Alert> : ''}
+
       <div className="row bg-light p-3 mx-1 mb-4">
         <div className="col-3 p-2">
           {/* TODO: add real image src */}

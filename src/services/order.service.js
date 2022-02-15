@@ -1,14 +1,17 @@
 import http from '../http-common';
+import { validateCreateResponse } from './Validation/order.service.validator';
 
 class OrderDataService {
   async create(data) {
-    // TODO: add dynamic id - /restaurant/${id}/meal
-    return await http.post('/order', data).then((response) => {
-      console.log(response.data);
-      // TODO: handle a case when response or response.data is undefined
-      if (response !== undefined && response.data !== undefined)
+    return await http
+      .post('/order', data)
+      .then((response) => {
+        validateCreateResponse(response);
         return response.data.id;
-    });
+      })
+      .catch((e) => {
+        throw Error('Order Failed');
+      });
   }
 
   get(id) {
