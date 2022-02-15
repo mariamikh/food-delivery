@@ -1,8 +1,21 @@
 import http from '../http-common';
+import { validateGetAllResponse } from '../services/restaurant.service.validator';
 
 class RestaurantDataService {
-  getAll() {
-    return http.get('/restaurant');
+  // getAll() {
+  //   return http.get('/restaurant');
+  // }
+
+  async getAll() {
+    return await http
+      .get(`/restaurant`)
+      .then((response) => {
+        validateGetAllResponse(response);
+        return response.data;
+      })
+      .catch((e) => {
+        throw Error('Getting Restaurant Failed');
+      });
   }
 
   get(id) {

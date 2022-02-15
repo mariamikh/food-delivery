@@ -1,6 +1,6 @@
 // import Login from '../Components/Login';
 import NotFound from '../Components/helper/notFound';
-import RestaurantList from '../Components/Restaurant/list';
+import RestaurantList from '../Components/Restaurant/showList';
 import Restaurant from '../Components/Restaurant/parentDetails';
 import Order from '../Components/Order/details.js';
 import OrderList from '../Components/Order/list';
