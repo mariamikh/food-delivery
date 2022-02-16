@@ -6,23 +6,30 @@ export function validateGetAllResponse(response) {
     response.data === undefined ||
     response.data.length === 0
   ) {
-    throw Error('Getting Restaurants Failed');
+    throw Error('Getting restaurants failed');
   }
 }
 
 export function validateGetResponse(response) {
   if (response === undefined || response.data === undefined) {
-    throw Error('Getting Restaurant Failed');
+    throw Error('Getting restaurant failed');
   }
+}
+
+export function validateCreateRequest(request) {
+  if (request === undefined) throw Error('Adding restaurant failed');
+
+  if (request.name === undefined || request.name.length <= 0)
+    throw Error('Adding restaurant failed, restaurant name is empty');
 }
 
 export function validateCreateResponse(response) {
   if (response === undefined || response.data === undefined) {
-    throw Error('Adding Restaurant Failed');
+    throw Error('Adding restaurant failed');
   }
 }
 export function validateUpdateRequest(id, data) {
   if (isNaN(id) || data === undefined) {
-    throw Error('Adding Restaurant Failed');
+    throw Error('Adding restaurant failed');
   }
 }

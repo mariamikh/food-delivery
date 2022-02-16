@@ -26,8 +26,7 @@ export default function EditDetails(props) {
   let canOrder = role === UserRole.Owner.name ? false : true;
 
   useEffect(() => {
-    console.log('Reloaded rId: ' + rId);
-    if (rId === undefined) setId(id);
+    if (rId === undefined || rId == 0) setId(id);
     setName(name);
     setAddress(address);
     setMeals(meals);
@@ -38,6 +37,7 @@ export default function EditDetails(props) {
     props.restaurant.meals,
     props.restaurant.name,
     props.restaurant.address,
+    props.restaurant.id,
     rId,
   ]);
 
@@ -61,6 +61,7 @@ export default function EditDetails(props) {
     })
       .then((restaurantId) => {
         setId(restaurantId);
+        props.setRegisteredId(restaurantId);
         setEditMode(false);
       })
       .catch((e) => {

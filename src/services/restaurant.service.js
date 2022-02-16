@@ -4,6 +4,7 @@ import {
   validateGetResponse,
   validateCreateResponse,
   validateUpdateRequest,
+  validateCreateRequest,
 } from './Validation/restaurant.service.validator';
 
 class RestaurantDataService {
@@ -32,6 +33,7 @@ class RestaurantDataService {
   }
 
   async create(data) {
+    validateCreateRequest(data);
     return await http
       .post('/restaurant', data)
       .then((response) => {

@@ -10,19 +10,20 @@ import Error from '../helper/error';
 
 export default function Restaurant() {
   const { id } = useParams();
+  const [rId, setId] = useState(id);
   const [error, setError] = useState();
   const initialValue = new RestaurantObject(0, '', '', '', []);
   const [restaurant, setRestaurant] = useState(initialValue);
   const userDetails = useAuthState().userDetails;
 
   function isMyRestaurant() {
-    return userDetails.myRestaurant === id &&
+    return userDetails.myRestaurant == rId &&
       userDetails.role === UserRole.Owner.name
       ? true
       : false;
   }
   function isNewRestaurant() {
-    return id == 0 ? true : false;
+    return rId == 0 ? true : false;
   }
 
   function retriveRestaurantDetails(id) {
@@ -35,17 +36,19 @@ export default function Restaurant() {
       });
   }
   useEffect(() => {
-    if (id != 0) {
-      retriveRestaurantDetails(id);
+    console.log('ParentDetails useEffect');
+    setId(id);
+    if (rId != 0) {
+      retriveRestaurantDetails(rId);
     } else {
       setRestaurant(initialValue);
     }
-  }, [id]);
+  }, [rId]);
 
   return error ? (
     <Error message={error} />
   ) : isNewRestaurant() || isMyRestaurant() ? (
-    <EditDetails restaurant={restaurant} />
+    <EditDetails setRegisteredId={(id) => setId(id)} restaurant={restaurant} />
   ) : (
     <ShowDetails restaurant={restaurant} />
   );
