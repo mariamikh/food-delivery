@@ -6,7 +6,6 @@ import Meal from '../Meal/editMeals';
 import AddMealForm from '../Meal/addMealForm';
 import RestaurantDataService from '../../services/restaurant.service';
 import UserRole from '../../Config/role';
-import Error from '../helper/error';
 import Alert from 'react-bootstrap/Alert';
 import MealObject from '../../Config/meal';
 
@@ -88,8 +87,6 @@ export default function EditDetails(props) {
       }),
     ]);
   }
-
-  // TODO: when New Reataurant is added and ID is retrived Component should be reloaded
 
   return (
     <div className="d-flex flex-column">
