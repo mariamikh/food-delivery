@@ -4,11 +4,13 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MealDataService from '../../services/meal.service';
 import UploadPreview from '../helper/UploadPreview';
+import Alert from 'react-bootstrap/Alert';
 
 export default function EditMealForm(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [error, setError] = useState();
 
   const [id, setId] = useState(props.mealDetails.id);
   const [restaurantId, setRestaurantId] = useState(props.restaurant);
@@ -52,6 +54,8 @@ export default function EditMealForm(props) {
 
   return (
     <div>
+      {error ? <Alert variant="danger">{error}</Alert> : ''}
+
       <a href="#" className="pe-auto" onClick={handleShow}>
         <FontAwesomeIcon icon={faEdit} />
       </a>

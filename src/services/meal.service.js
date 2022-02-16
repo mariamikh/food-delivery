@@ -1,14 +1,20 @@
 import http from '../http-common';
+import {
+  validateCreateResponse,
+  validateCreateRequest,
+} from './Validation/meal.service.validator';
 
 class MealDataService {
   async create(restaurantId, data) {
-    console.log('in meal data service: ' + restaurantId);
+    validateCreateRequest(restaurantId, data);
     return await http
       .post(`/restaurant/${restaurantId}/meal`, data)
       .then((response) => {
-        // TODO: handle a case when response or response.data is undefined
-        if (response !== undefined && response.data !== undefined)
-          return response.data;
+        validateCreateResponse(response);
+        return response.data;
+      })
+      .catch((e) => {
+        throw Error('Adding meal failed');
       });
   }
 

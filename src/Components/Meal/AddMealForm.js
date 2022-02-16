@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import MealDataService from '../../services/meal.service';
 import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
 import UploadPreview from '../helper/UploadPreview';
+import Alert from 'react-bootstrap/Alert';
 
 export default function AddMealForm(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [error, setError] = useState();
 
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -31,8 +33,7 @@ export default function AddMealForm(props) {
         addMeal(response);
       })
       .catch((error) => {
-        //TODO: handle error
-        console.log(error);
+        setError('Adding meal failed');
       });
   };
 
@@ -46,6 +47,8 @@ export default function AddMealForm(props) {
           <Modal.Title>Add Meal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {error ? <Alert variant="danger">{error}</Alert> : ''}
+
           <form>
             <div class="form-group mb-3">
               <label for="name">name</label>

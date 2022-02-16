@@ -16,7 +16,7 @@ class RestaurantDataService {
         return response.data;
       })
       .catch((e) => {
-        throw Error('Getting Restaurants Failed');
+        throw Error('Getting restaurants failed');
       });
   }
 
@@ -28,7 +28,7 @@ class RestaurantDataService {
         return response.data;
       })
       .catch((e) => {
-        throw Error('Getting Restaurant Failed');
+        throw Error('Getting restaurant failed');
       });
   }
 
@@ -41,14 +41,14 @@ class RestaurantDataService {
         return response.data;
       })
       .catch((e) => {
-        throw Error('Adding Restaurant Failed');
+        throw Error('Adding restaurant railed');
       });
   }
 
   async update(id, data) {
     validateUpdateRequest(id, data);
     return await http.put(`/restaurant/${id}`, data).catch((e) => {
-      throw Error('Updating Restaurant Failed');
+      throw Error('Updating restaurant failed');
     });
   }
 
