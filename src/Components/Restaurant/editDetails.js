@@ -26,14 +26,20 @@ export default function EditDetails(props) {
   let canOrder = role === UserRole.Owner.name ? false : true;
 
   useEffect(() => {
-    setId(id);
+    console.log('Reloaded rId: ' + rId);
+    if (rId === undefined) setId(id);
     setName(name);
     setAddress(address);
     setMeals(meals);
     setHasMeal(meals !== undefined ? true : false);
     setEditMode(id == 0 ? true : false);
     setError('');
-  }, [props.restaurant.meals, props.restaurant.name, props.restaurant.address]);
+  }, [
+    props.restaurant.meals,
+    props.restaurant.name,
+    props.restaurant.address,
+    rId,
+  ]);
 
   function updateRestaurant() {
     RestaurantDataService.update(rId, {
@@ -138,7 +144,7 @@ export default function EditDetails(props) {
 
       <div className="bg-light px-4">
         <div className="pb-2 pt-2 d-flex flex-row-reverse">
-          {id ? (
+          {rId ? (
             <AddMealForm
               updateMeals={(id, price, name, img, desc) =>
                 addMeal({ id, price, name, img, desc })
