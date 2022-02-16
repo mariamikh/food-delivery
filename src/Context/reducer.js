@@ -42,7 +42,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         loading: false,
-        errorMessage: action.error,
+        errorMessage: action.error.message,
       };
 
     default:

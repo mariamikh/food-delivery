@@ -1,5 +1,20 @@
 import AuthDataService from '../services/auth.service';
 import jwt_decode from 'jwt-decode';
+import UserRole from '../Config/role';
+
+function validateUserData(data) {
+  if (
+    data === undefined ||
+    data.user === undefined ||
+    data.user.length <= 0 ||
+    data.email === undefined ||
+    data.user.email <= 0 ||
+    data.role === undefined ||
+    isNaN(data.myRestaurant) ||
+    (data.role !== UserRole.Owner.name && data.role !== UserRole.Regular.name)
+  )
+    throw Error('General Error');
+}
 
 export function loginUser(dispatch, loginPayload) {
   try {
@@ -11,6 +26,7 @@ export function loginUser(dispatch, loginPayload) {
           var token = response.data.auth_token;
           var data = jwt_decode(token);
           data.token = token;
+          validateUserData(data);
 
           dispatch({ type: 'LOGIN_SUCCESS', payload: data });
 
@@ -34,12 +50,9 @@ export function loginUser(dispatch, loginPayload) {
       })
       .catch((error) => {
         dispatch({ type: 'LOGIN_ERROR', error: error });
-        console.log(error);
       });
-
-    // let response = await fetch(`${ROOT_URL}/login`, requestOptions);
-    // let data = await response.json();
   } catch (error) {
+    console.log('Catching');
     dispatch({ type: 'LOGIN_ERROR', error: error });
   }
 }
