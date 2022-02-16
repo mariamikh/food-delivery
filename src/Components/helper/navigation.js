@@ -12,21 +12,8 @@ export default function Navigation() {
     },
   ];
 
-  const role =
-    user !== 'undefined' &&
-    user !== '' &&
-    user.userDetails !== 'undefined' &&
-    user.userDetails !== ''
-      ? user.userDetails.role
-      : '';
-
-  const myRestaurant =
-    user !== 'undefined' &&
-    user !== '' &&
-    user.userDetails !== 'undefined' &&
-    user.userDetails !== ''
-      ? user.userDetails.myRestaurant
-      : '';
+  const role = user.userDetails.role;
+  const myRestaurant = user.userDetails.myRestaurant;
 
   if (role === UserRole.Owner.name) {
     navigationItems = [

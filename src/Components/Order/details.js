@@ -8,14 +8,10 @@ import Alert from 'react-bootstrap/Alert';
 
 export default function Order() {
   const user = useAuthState();
-  const role =
-    user !== 'undefined' &&
-    user !== '' &&
-    user.userDetails !== 'undefined' &&
-    user.userDetails !== ''
-      ? user.userDetails.role
-      : '';
+  const role = user.userDetails.role;
+
   const { id } = useParams();
+  // TODO: should be movied to order class
   const initialValue = [
     {
       id: 0,

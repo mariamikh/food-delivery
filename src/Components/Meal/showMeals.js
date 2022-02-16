@@ -5,7 +5,6 @@ import UserRole from '../../Config/role';
 export default function MealList(props) {
   const { id, name, img, price } = props.meal;
 
-  // TODO userRole should not be inside meal
   const canOrder =
     useAuthState().userDetails.role === UserRole.Owner.name ? false : true;
 
