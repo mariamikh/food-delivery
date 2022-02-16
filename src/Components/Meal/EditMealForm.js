@@ -9,8 +9,13 @@ import Alert from 'react-bootstrap/Alert';
 export default function EditMealForm(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  function handleShow() {
+    setShow(true);
+    setError('');
+    setMealError('');
+  }
   const [error, setError] = useState();
+  const [mealError, setMealError] = useState();
 
   const [id, setId] = useState(props.mealDetails.id);
   const [restaurantId, setRestaurantId] = useState(props.restaurant);
@@ -26,6 +31,7 @@ export default function EditMealForm(props) {
     setDesc(props.mealDetails.desc);
     setId(props.mealDetails.id);
     setRestaurantId(props.restaurant);
+    setError('');
   }, [
     props.mealDetails.name,
     props.mealDetails.price,
@@ -47,8 +53,7 @@ export default function EditMealForm(props) {
         handleClose();
       })
       .catch((error) => {
-        //TODO: handle error
-        console.log(error);
+        setMealError('Update meal failed');
       });
   };
 
@@ -64,6 +69,7 @@ export default function EditMealForm(props) {
           <Modal.Title>Edit Meal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {mealError ? <Alert variant="danger">{mealError}</Alert> : ''}
           <form>
             <div class="form-group mb-3">
               <label for="name">name</label>

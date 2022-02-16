@@ -24,7 +24,7 @@ export default function EditMeal(props) {
       })
       .catch((error) => {
         setErrorId(id);
-        setError('Delete meal failed');
+        setError('Deleting meal failed');
       });
   }
 

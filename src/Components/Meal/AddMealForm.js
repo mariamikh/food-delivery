@@ -7,7 +7,10 @@ import Alert from 'react-bootstrap/Alert';
 export default function AddMealForm(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  function handleShow() {
+    setShow(true);
+    setError('');
+  }
   const [error, setError] = useState();
 
   const [name, setName] = useState('');
@@ -47,9 +50,8 @@ export default function AddMealForm(props) {
           <Modal.Title>Add Meal</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {error ? <Alert variant="danger">{error}</Alert> : ''}
-
           <form>
+            {error ? <Alert variant="danger">{error}</Alert> : ''}
             <div class="form-group mb-3">
               <label for="name">name</label>
               <input
