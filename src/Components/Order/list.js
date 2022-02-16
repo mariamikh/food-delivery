@@ -14,6 +14,7 @@ export default function OrderList() {
   const [orderList, setOrderList] = useState(initialValue);
 
   useEffect(() => {
+    setError('');
     // TODO: check on undefined
     retriveOrderList(user.userDetails.user);
   }, []);
@@ -27,7 +28,6 @@ export default function OrderList() {
   function retriveOrderList(userId) {
     OrderDataService.getUserOrders(userId)
       .then((orList) => {
-        console.log('orders: ' + JSON.stringify(orList));
         setOrderList(orList);
       })
       .catch((e) => {
@@ -36,7 +36,6 @@ export default function OrderList() {
   }
 
   return (
-    // TODO: if orderlist is emprty, handle
     <div>
       {error ? (
         <Alert variant="danger">{error}</Alert>

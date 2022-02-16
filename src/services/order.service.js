@@ -2,6 +2,8 @@ import http from '../http-common';
 import {
   validateCreateResponse,
   validateGetUserOrdersResponse,
+  validateGetResponse,
+  validateUpdateRequest,
 } from './Validation/order.service.validator';
 
 class OrderDataService {
@@ -17,8 +19,16 @@ class OrderDataService {
       });
   }
 
-  get(id) {
-    return http.get(`/order/${id}`);
+  async get(id) {
+    return await http
+      .get(`/order/${id}`)
+      .then((response) => {
+        validateGetResponse(response);
+        return response.data;
+      })
+      .catch((e) => {
+        throw Error('Getting order details failed');
+      });
   }
 
   async getUserOrders(userId) {
@@ -33,8 +43,11 @@ class OrderDataService {
       });
   }
 
-  update(id, data) {
-    return http.put(`/order/${id}`, data);
+  async update(id, data) {
+    validateUpdateRequest(id, data);
+    return await http.put(`/order/${id}`, data).catch((e) => {
+      throw Error('Unable to update order');
+    });
   }
 }
 
