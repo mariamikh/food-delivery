@@ -5,8 +5,6 @@ import OrderDataService from '../../services/order.service';
 import Alert from 'react-bootstrap/Alert';
 
 export default function OrderList() {
-  /* TODO: check what happens if data is not retrived and initial values are rendered */
-
   const user = useAuthState();
   const initialValue = [{ id: 0, date: '', total: '', status: '' }];
 
