@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import EditMealForm from './editMealForm';
 import MealDataService from '../../services/meal.service';
+import Alert from 'react-bootstrap/Alert';
 
 export default function EditMeal(props) {
   const { id, name, img, price } = props.meal;
   const { restaurant } = props.restaurant;
+  const [error, setError] = useState();
+  const [errorId, setErrorId] = useState();
 
   /* 
     TODO: paging
@@ -20,13 +23,15 @@ export default function EditMeal(props) {
         props.removeMeal(id);
       })
       .catch((error) => {
-        //TODO: handle error
-        console.log(error);
+        setErrorId(id);
+        setError('Delete meal failed');
       });
   }
 
   return (
     <div className="row p-2 mb-2 bg-white">
+      {errorId == id && error ? <Alert variant="danger">{error}</Alert> : ''}
+
       <div className="col-3">
         <img src={img} alt="" className="rounded float-left" />
       </div>
