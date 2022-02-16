@@ -4,6 +4,7 @@ import { Form, Stack } from 'react-bootstrap';
 import { useAuthState } from '../../Context';
 import { useParams } from 'react-router-dom';
 import UserRole from '../../Config/role';
+import Alert from 'react-bootstrap/Alert';
 
 export default function Order() {
   const user = useAuthState();
@@ -37,6 +38,7 @@ export default function Order() {
     },
   ];
 
+  const [error, setError] = useState();
   const [order, setOrder] = useState(initialValue);
   const [availableStatus, setAvailableStatus] = useState('');
   const [isStatusChanged, setIsStatusChanged] = useState(false);

@@ -1,5 +1,8 @@
 import http from '../http-common';
-import { validateCreateResponse } from './Validation/order.service.validator';
+import {
+  validateCreateResponse,
+  validateGetUserOrdersResponse,
+} from './Validation/order.service.validator';
 
 class OrderDataService {
   async create(data) {
@@ -18,8 +21,16 @@ class OrderDataService {
     return http.get(`/order/${id}`);
   }
 
-  getUserOrders(userId) {
-    return http.get('/user/' + userId + '/order');
+  async getUserOrders(userId) {
+    return await http
+      .get('/user/' + userId + '/order')
+      .then((response) => {
+        validateGetUserOrdersResponse(response);
+        return response.data;
+      })
+      .catch((e) => {
+        throw Error('Getting orders failed');
+      });
   }
 
   update(id, data) {
