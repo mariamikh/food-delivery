@@ -48,7 +48,7 @@ export default function Order() {
         setAvailableStatus(getAvailableStatus(role, orderDetails.status));
       })
       .catch((e) => {
-        setError('Getting order details failed');
+        setError(e.message);
       });
   }
 
@@ -132,6 +132,11 @@ export default function Order() {
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>Placed</td>
+                    <td>{order.orderDate}</td>
+                  </tr>
+
                   {order.orderDetails !== undefined
                     ? order.orderHistories.map((r) => (
                         <tr>

@@ -9,8 +9,6 @@ import { addTokentoHeader } from './common.service';
 
 class OrderDataService {
   async create(data) {
-    console.log('ordered data: ' + JSON.stringify(data));
-
     return await http
       .post('/order', data, addTokentoHeader())
       .then((response) => {
@@ -26,6 +24,7 @@ class OrderDataService {
     return await http
       .get(`/order/${id}`, addTokentoHeader())
       .then((response) => {
+        console.log('response: ' + JSON.stringify(response.data));
         validateGetResponse(response);
         return response.data;
       })

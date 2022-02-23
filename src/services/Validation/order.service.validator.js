@@ -23,7 +23,6 @@ export function validateGetResponse(response) {
 
   if (
     response.data.orderDetails.length === 0 ||
-    response.data.orderHistories.length === 0 ||
     response.data.orderDetails === undefined ||
     response.data.orderHistories === undefined ||
     response.data.status === undefined

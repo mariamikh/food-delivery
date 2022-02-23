@@ -43,7 +43,6 @@ export default function ShowDetails(props) {
   }
 
   function makeOrder() {
-    // TODO remove user
     const orderData = new Order(id, orderedMeals);
     OrderDataService.create(orderData)
       .then((id) => {
