@@ -5,6 +5,8 @@ import UserRole from '../../Config/role';
 
 export default function Navigation() {
   const user = useAuthState();
+  console.log('user: ' + JSON.stringify(user));
+
   let navigationItems = [
     {
       name: '',

@@ -5,6 +5,7 @@ import Restaurant from '../Components/Restaurant/parentDetails';
 import Order from '../Components/Order/details.js';
 import OrderList from '../Components/Order/list';
 import Login from '../Components/Login';
+import Register from '../Components/Login/register';
 
 const routes = [
   {
@@ -18,6 +19,7 @@ const routes = [
     isPrivate: true,
   },
   {
+    // TODO: get orders for restaurant owner.
     path: '/user/:id/order',
     component: OrderList,
     isPrivate: true,
@@ -35,6 +37,11 @@ const routes = [
   {
     path: '/login',
     component: Login,
+    isPrivate: false,
+  },
+  {
+    path: '/register',
+    component: Register,
     isPrivate: false,
   },
   {

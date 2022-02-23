@@ -3,50 +3,50 @@ import jwt_decode from 'jwt-decode';
 import UserRole from '../Config/role';
 
 function validateUserData(data) {
+  console.log('data' + JSON.stringify(data));
+
   if (
     data === undefined ||
-    data.user === undefined ||
-    data.user.length <= 0 ||
-    data.email === undefined ||
-    data.user.email <= 0 ||
+    data.sub === undefined ||
+    data.sub.length <= 0 ||
     data.role === undefined ||
-    isNaN(data.myRestaurant) ||
+    // TODO: myRestaurant variable should be added to token, uncomment the following check
+    //isNaN(data.myRestaurant) ||
     (data.role !== UserRole.Owner.name && data.role !== UserRole.Regular.name)
   )
     throw Error('General Error');
 }
 
-export function loginUser(dispatch, loginPayload) {
+export async function loginUser(dispatch, loginPayload) {
   try {
     dispatch({ type: 'REQUEST_LOGIN' });
 
     return AuthDataService.login(loginPayload)
       .then((response) => {
-        if (response !== 'undefined' && response.data !== 'undefined') {
-          var token = response.data.auth_token;
-          var data = jwt_decode(token);
-          data.token = token;
-          validateUserData(data);
+        var token = response.jwt;
+        var data = jwt_decode(token);
+        data.token = token;
+        data.user = loginPayload.username;
+        validateUserData(data);
 
-          dispatch({ type: 'LOGIN_SUCCESS', payload: data });
+        dispatch({ type: 'LOGIN_SUCCESS', payload: data });
 
-          var restaurantId = parseInt(data.myRestaurant) || 0;
+        var restaurantId = parseInt(data.restaurantId) || 0;
 
-          localStorage.setItem(
-            'currentUser',
-            JSON.stringify({
-              userDetails: {
-                user: data.user,
-                email: data.email,
-                role: data.role,
-                myRestaurant: restaurantId,
-              },
-              token: token,
-            })
-          );
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify({
+            userDetails: {
+              user: loginPayload.username,
+              email: data.email,
+              role: data.role,
+              myRestaurant: restaurantId,
+            },
+            token: token,
+          })
+        );
 
-          return data;
-        }
+        return data;
       })
       .catch((error) => {
         dispatch({ type: 'LOGIN_ERROR', error: error });

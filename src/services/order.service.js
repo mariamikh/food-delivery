@@ -5,11 +5,14 @@ import {
   validateGetResponse,
   validateUpdateRequest,
 } from './Validation/order.service.validator';
+import { addTokentoHeader } from './common.service';
 
 class OrderDataService {
   async create(data) {
+    console.log('ordered data: ' + JSON.stringify(data));
+
     return await http
-      .post('/order', data)
+      .post('/order', data, addTokentoHeader())
       .then((response) => {
         validateCreateResponse(response);
         return response.data.id;
@@ -21,7 +24,7 @@ class OrderDataService {
 
   async get(id) {
     return await http
-      .get(`/order/${id}`)
+      .get(`/order/${id}`, addTokentoHeader())
       .then((response) => {
         validateGetResponse(response);
         return response.data;
@@ -31,23 +34,25 @@ class OrderDataService {
       });
   }
 
-  async getUserOrders(userId) {
+  async getUserOrders(userName) {
     return await http
-      .get('/user/' + userId + '/order')
+      .get(`/order?userName=${userName}`, addTokentoHeader())
       .then((response) => {
         validateGetUserOrdersResponse(response);
         return response.data;
       })
       .catch((e) => {
-        throw Error('Getting orders failed');
+        throw Error(e.message);
       });
   }
 
   async update(id, data) {
     validateUpdateRequest(id, data);
-    return await http.put(`/order/${id}`, data).catch((e) => {
-      throw Error('Unable to update order');
-    });
+    return await http
+      .put(`/order/${id}`, data, addTokentoHeader())
+      .catch((e) => {
+        throw Error('Unable to update order');
+      });
   }
 }
 

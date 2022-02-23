@@ -55,7 +55,7 @@ export default function Order() {
   useEffect(() => {
     setError('');
     setStatusError('');
-    retriveOrderDetails(id).then(() => {});
+    retriveOrderDetails(id);
   }, [isStatusChanged]);
 
   function getAvailableStatus(role, currentStatus) {
@@ -99,12 +99,7 @@ export default function Order() {
             <div className="card-body">
               <h5 className="card-title">Order Details</h5>
               <div>Order No.: #{order.id}</div>
-              <div>
-                Restaurent:
-                {order !== undefined && order.restaurant !== undefined
-                  ? order.restaurant.name
-                  : ''}
-              </div>
+              <div>Restaurent: {order.restaurantName}</div>
 
               <Stack direction="horizontal" gap={3}>
                 <div>Status:</div>
@@ -121,8 +116,8 @@ export default function Order() {
                   <option value={availableStatus}>{availableStatus}</option>
                 </Form.Select>
               </Stack>
-              <div>Order Date: {order.date}</div>
-              <div>Total Sum: {order.total}</div>
+              <div>Order Date: {order.orderDate}</div>
+              <div>Total Sum: {order.totalPrice}$</div>
             </div>
           </div>
 
@@ -137,14 +132,14 @@ export default function Order() {
                   </tr>
                 </thead>
                 <tbody>
-                  {order !== undefined && order.history !== undefined
-                    ? order.history.map((r) => (
+                  {order.orderDetails !== undefined
+                    ? order.orderHistories.map((r) => (
                         <tr>
                           <td>{r.status}</td>
-                          <td>{r.time}</td>
+                          <td>{r.updateDate}</td>
                         </tr>
                       ))
-                    : ''}
+                    : null}
                 </tbody>
               </table>
             </div>
@@ -158,19 +153,17 @@ export default function Order() {
                   <tr>
                     <th scope="col">name</th>
                     <th scope="col">price</th>
-                    <th scope="col">quantity</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {order !== undefined && order.meals !== undefined
-                    ? order.meals.map((r) => (
+                  {order.orderDetails !== undefined
+                    ? order.orderDetails.map((r) => (
                         <tr>
-                          <td>{r.name}</td>
+                          <td>{r.mealName}</td>
                           <td>{r.price}$</td>
-                          <td>{r.quantity}</td>
                         </tr>
                       ))
-                    : ''}
+                    : null}
                 </tbody>
               </table>
             </div>

@@ -13,8 +13,7 @@ export default function OrderList() {
 
   useEffect(() => {
     setError('');
-    // TODO: check on undefined
-    retriveOrderList(user.userDetails.user);
+    retriveOrderList();
   }, []);
 
   const history = useHistory();
@@ -23,14 +22,22 @@ export default function OrderList() {
     history.push('/order/' + id);
   };
 
-  function retriveOrderList(userId) {
-    OrderDataService.getUserOrders(userId)
-      .then((orList) => {
-        setOrderList(orList);
-      })
-      .catch((e) => {
-        setError('Getting orders failed');
-      });
+  function retriveOrderList() {
+    if (
+      user === undefined ||
+      user.userDetails === undefined ||
+      user.userDetails.user === undefined
+    ) {
+      setError('Getting orders failed');
+    } else {
+      OrderDataService.getUserOrders(user.userDetails.user)
+        .then((list) => {
+          setOrderList(list);
+        })
+        .catch((e) => {
+          setError(e.message);
+        });
+    }
   }
 
   return (
@@ -47,7 +54,7 @@ export default function OrderList() {
               style={{ cursor: 'pointer' }}
             >
               <div className="p-2"> #{r.id}</div>
-              <div className="p-2">{r.date}</div>
+              <div className="p-2">{r.orderDate}</div>
               <div className="p-2">{r.status}</div>
             </div>
           ))}

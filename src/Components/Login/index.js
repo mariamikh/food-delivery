@@ -14,9 +14,11 @@ function Login(props) {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    loginUser(dispatch, { email, password }).then((value) => {
-      history.push('/restaurant');
-    });
+    loginUser(dispatch, { username: email, password: password }).then(
+      (value) => {
+        history.push('/restaurant');
+      }
+    );
   };
 
   return (
