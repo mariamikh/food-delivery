@@ -1,7 +1,6 @@
 export default class Order {
-  constructor(user, restaurant, meals) {
-    this.user = user;
-    this.restaurant = restaurant;
+  constructor(restaurant, meals) {
+    this.restaurantId = restaurant;
     this.meals = meals;
   }
 }
