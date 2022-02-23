@@ -19,31 +19,32 @@ export default function ShowDetails(props) {
   const canOrder = userDetails.role === UserRole.Owner.name ? false : true;
   const hasMeal = meals !== undefined && meals.length > 0 ? true : false;
 
-  function modifyTotal({ id, price, quantity }) {
-    if (setOrderedMeals[id] === undefined) {
-      setOrderedMeals[id] = 0;
-    }
-    setTotal(total + (quantity - setOrderedMeals[id]) * price);
-    setOrderedMeals[id] = quantity;
+  function calculateTotal(productList) {
+    var sum = 0;
+    productList.forEach((el) => {
+      sum += el.quantity * el.price;
+    });
+
+    return sum;
   }
 
-  function getOrderedMeals() {
-    let len = orderedMeals.length;
-    let j = 0;
-    const orderedMealList = [];
-    for (var i = 0; i < len; i++) {
-      if (orderedMeals[i] === true) {
-        orderedMealList[j] = i;
-        j++;
-      }
-    }
-    return orderedMealList;
+  function updateOrder({ id, price, quantity }) {
+    let tmpOrder = orderedMeals.filter((item) => {
+      return item.id != id;
+    });
+
+    tmpOrder.push({ id: id, price: price, quantity: quantity });
+
+    setOrderedMeals(tmpOrder);
+
+    // TODO: orderedMEals are not updated yet, <-BUG
+    // => passing tmpOrder as parameter
+    setTotal(calculateTotal(tmpOrder));
   }
 
   function makeOrder() {
-    const orderedMealList = getOrderedMeals();
-    const orderData = new Order(userDetails.user, id, orderedMealList);
-
+    // TODO remove user
+    const orderData = new Order(userDetails.user, id, orderedMeals);
     OrderDataService.create(orderData)
       .then((id) => {
         history.push('/order/' + id);
@@ -98,7 +99,7 @@ export default function ShowDetails(props) {
               restaurant={id}
               meal={m}
               changeTotal={(id, price, quantity) =>
-                modifyTotal({ id, price, quantity })
+                updateOrder({ id, price, quantity })
               }
             />
           ))
