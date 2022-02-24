@@ -6,7 +6,13 @@ import Alert from 'react-bootstrap/Alert';
 
 export default function AddMealForm(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setName('');
+    setPrice('');
+    setImg('');
+    setDesc('');
+  };
   function handleShow() {
     setShow(true);
     setError('');
