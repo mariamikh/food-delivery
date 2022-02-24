@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAuthState } from '../../Context';
+import { useHistory } from 'react-router-dom';
+import { useAuthState, useAuthDispatch } from '../../Context';
 import Meal from '../Meal/editMeals';
 import AddMealForm from '../Meal/addMealForm';
 import RestaurantDataService from '../../services/restaurant.service';
@@ -18,9 +19,10 @@ export default function EditDetails(props) {
   const [error, setError] = useState();
   const [hasMeal, setHasMeal] = useState(false);
   const [editMode, setEditMode] = useState(id == 0 ? true : false);
-
   const userDetails = useAuthState().userDetails;
   const role = userDetails.role;
+  const dispatch = useAuthDispatch();
+  const history = useHistory();
 
   let canOrder = role === UserRole.Owner.name ? false : true;
 
@@ -40,6 +42,19 @@ export default function EditDetails(props) {
     rId,
   ]);
 
+  function deleteRestaurant() {
+    RestaurantDataService.delete(rId)
+      .then(() => {
+        dispatch({ type: 'REMOVE_DETAILS' });
+        history.push('/restaurant');
+
+        // delete restaurant ID from user Details + storage
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
+  }
+
   function updateRestaurant() {
     RestaurantDataService.update(rId, {
       name: rName,
@@ -53,14 +68,24 @@ export default function EditDetails(props) {
       });
   }
 
+  function setMyRestaurant(restaurantId) {
+    console.log('setting dispatch ADD_DETAILS: payload=' + restaurantId);
+    dispatch({ type: 'ADD_DETAILS', payload: restaurantId });
+    // var currUser = JSON.parse(localStorage.getItem('currentUser'));
+    // if (currUser !== undefined && currUser.userDetails !== undefined)
+    //   currUser.userDetails.myRestaurant = restaurantId;
+    // localStorage.setItem('currentUser', JSON.stringify(currUser));
+  }
+
   function addRestaurant() {
     RestaurantDataService.create({
       name: rName,
       description: rAddress,
     })
-      .then((restaurantId) => {
-        setId(restaurantId);
-        props.setRegisteredId(restaurantId);
+      .then((restaurant) => {
+        setId(restaurant);
+        setMyRestaurant(restaurant.id);
+        props.setRegisteredId(restaurant.id);
         setEditMode(false);
       })
       .catch((e) => {
@@ -107,6 +132,9 @@ export default function EditDetails(props) {
               {rName}
               <a href="#" className="p-2" onClick={() => setEditMode(true)}>
                 <FontAwesomeIcon icon={faEdit} />
+              </a>
+              <a href="#" className="p-2" onClick={() => deleteRestaurant()}>
+                <FontAwesomeIcon icon={faTrash} />
               </a>
             </h5>
             <p>{rAddress}</p>

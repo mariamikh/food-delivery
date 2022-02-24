@@ -12,32 +12,32 @@ export default function Order() {
 
   const { id } = useParams();
   // TODO: should be movied to order class
-  const initialValue = [
-    {
-      id: 0,
-      restaurant: {
-        id: 0,
-        name: '',
-      },
-      user: 0,
-      date: '',
-      total: 0,
-      status: '',
-      meals: [
-        {
-          id: 0,
-          img: '',
-          name: '',
-          price: 0,
-        },
-      ],
-    },
-  ];
+  // const initialValue = [
+  //   {
+  //     id: 0,
+  //     restaurant: {
+  //       id: 0,
+  //       name: '',
+  //     },
+  //     user: 0,
+  //     date: '',
+  //     total: 0,
+  //     status: '',
+  //     meals: [
+  //       {
+  //         id: 0,
+  //         img: '',
+  //         name: '',
+  //         price: 0,
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const [error, setError] = useState();
   const [statusError, setStatusError] = useState();
 
-  const [order, setOrder] = useState(initialValue);
+  const [order, setOrder] = useState([]);
   const [availableStatus, setAvailableStatus] = useState('');
   const [isStatusChanged, setIsStatusChanged] = useState(false);
 
@@ -53,6 +53,7 @@ export default function Order() {
   }
 
   useEffect(() => {
+    console.log('useEffect');
     setError('');
     setStatusError('');
     retriveOrderDetails(id);
@@ -71,14 +72,33 @@ export default function Order() {
         case 'Placed':
           return 'Processing';
         case 'Processing':
+          return 'InRoute';
+        case 'InRoute':
           return 'Delivered';
       }
     }
     return '';
   }
 
+  function getStatusId(status) {
+    switch (status) {
+      case 'Placed':
+        return 0;
+      case 'Canceled':
+        return 1;
+      case 'Processing':
+        return 2;
+      case 'InRoute':
+        return 3;
+      case 'Delivered':
+        return 4;
+      case 'Received':
+        return 5;
+    }
+  }
+
   async function changeStatus(newStatus) {
-    return OrderDataService.update(id, { status: newStatus })
+    return OrderDataService.update(id, { status: getStatusId(newStatus) })
       .then(() => {
         setIsStatusChanged(true);
       })
@@ -113,7 +133,9 @@ export default function Order() {
                   onChange={(e) => changeStatus(e.target.value)}
                 >
                   <option>{order.status}</option>
-                  <option value={availableStatus}>{availableStatus}</option>
+                  {isStatusChanged ? null : (
+                    <option value={availableStatus}>{availableStatus}</option>
+                  )}
                 </Form.Select>
               </Stack>
               <div>Order Date: {order.orderDate}</div>

@@ -45,6 +45,24 @@ export const AuthReducer = (initialState, action) => {
         errorMessage: action.error.message,
       };
 
+    case 'ADD_DETAILS':
+      return {
+        ...initialState,
+        userDetails: {
+          ...initialState.userDetails,
+          myRestaurant: action.payload,
+        },
+        loading: false,
+      };
+    case 'REMOVE_DETAILS':
+      return {
+        ...initialState,
+        userDetails: {
+          ...initialState.userDetails,
+          myRestaurant: 0,
+        },
+        loading: false,
+      };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

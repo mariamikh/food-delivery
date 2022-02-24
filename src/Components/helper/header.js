@@ -2,8 +2,6 @@ import React from 'react';
 import { useAuthDispatch, useAuthState, logout } from '../../Context';
 
 export default function Header(props) {
-  console.log('Header Component... ');
-
   const user = useAuthState();
   const isAuthenticated =
     user !== 'undefined' &&

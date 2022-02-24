@@ -8,12 +8,12 @@ export function validateCreateResponse(response) {
   }
 }
 
-export function validateGetUserOrdersResponse(response) {
+export function validateGetOrdersResponse(response) {
   if (response === undefined || response.data === undefined) {
     throw Error('Getting orders failed');
   }
 
-  if (response.data.length === 0) throw Error('User has no order');
+  if (response.data.length === 0) throw Error('No order');
 }
 
 export function validateGetResponse(response) {

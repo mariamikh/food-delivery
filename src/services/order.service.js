@@ -1,11 +1,12 @@
 import http from '../http-common';
 import {
   validateCreateResponse,
-  validateGetUserOrdersResponse,
+  validateGetOrdersResponse,
   validateGetResponse,
   validateUpdateRequest,
 } from './Validation/order.service.validator';
 import { addTokentoHeader } from './common.service';
+import UserRole from '../Config/role';
 
 class OrderDataService {
   async create(data) {
@@ -33,11 +34,16 @@ class OrderDataService {
       });
   }
 
-  async getUserOrders(userName) {
+  async getOrdersbyRole(id, role) {
+    var url =
+      role === UserRole.Owner.name
+        ? `/order/restaurant/${id}`
+        : `/order?userName=${id}`;
+
     return await http
-      .get(`/order?userName=${userName}`, addTokentoHeader())
+      .get(url, addTokentoHeader())
       .then((response) => {
-        validateGetUserOrdersResponse(response);
+        validateGetOrdersResponse(response);
         return response.data;
       })
       .catch((e) => {
@@ -48,7 +54,7 @@ class OrderDataService {
   async update(id, data) {
     validateUpdateRequest(id, data);
     return await http
-      .put(`/order/${id}`, data, addTokentoHeader())
+      .patch(`/order/${id}`, data, addTokentoHeader())
       .catch((e) => {
         throw Error('Unable to update order');
       });

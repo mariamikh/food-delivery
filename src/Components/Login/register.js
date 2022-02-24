@@ -95,7 +95,7 @@ export default function Register() {
           {error ? <Alert variant="danger">{error}</Alert> : ''}
 
           <button
-            type="button"
+            type="submit"
             className="btn btn-secondary "
             onClick={handleRegister}
           >

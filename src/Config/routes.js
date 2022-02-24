@@ -14,19 +14,20 @@ const routes = [
     isPrivate: true,
   },
   {
-    path: '/restaurent/:id/order',
-    component: OrderList,
-    isPrivate: true,
-  },
-  {
-    // TODO: get orders for restaurant owner.
     path: '/user/:id/order',
     component: OrderList,
     isPrivate: true,
   },
+
   {
     path: '/restaurant/:id',
     component: Restaurant,
+    isPrivate: true,
+  },
+  // TODO: r must be changed to restaurant. but it does not work. must fix the bug
+  {
+    path: '/r/:id/order',
+    component: OrderList,
     isPrivate: true,
   },
   {

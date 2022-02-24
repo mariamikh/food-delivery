@@ -11,6 +11,10 @@ function Login(props) {
   const { loading, errorMessage } = useAuthState();
   const history = useHistory();
 
+  function openUserRegistration() {
+    history.push('/register');
+  }
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -50,7 +54,7 @@ function Login(props) {
             </div>
           </div>
           <button
-            type="button"
+            type="submit"
             className="btn btn-secondary "
             onClick={handleLogin}
             disabled={loading}
@@ -58,6 +62,7 @@ function Login(props) {
             login
           </button>
         </form>
+        <p onClick={() => openUserRegistration()}>Register New User</p>
       </div>
     </div>
   );

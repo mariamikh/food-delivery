@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthState } from '../../Context';
+import { useAuthState, useAuthDispatch } from '../../Context';
 import UserRole from '../../Config/role';
 
 export default function Navigation() {
+  // const [role, setRole] = useState('');
+  // const [myRestaurant, setMyRestaurant] = useState('');
+
   const user = useAuthState();
-  console.log('user: ' + JSON.stringify(user));
+  const dispatch = useAuthDispatch();
 
   let navigationItems = [
     {
@@ -14,6 +17,22 @@ export default function Navigation() {
     },
   ];
 
+  // dispatch({ type: 'ADD_DETAILS', payload: data });
+
+  useEffect(() => {
+    console.log('Navigation Component useEffect: ' + JSON.stringify(user));
+    //   // var currUser = JSON.parse(localStorage.getItem('currentUser'));
+    //   // if (currUser !== null && currUser.userDetails !== null) {
+    //   //   setRole(currUser.userDetails.role);
+    //   //   setMyRestaurant(currUser.userDetails.myRestaurant);
+    //   // }
+    //   // console.log('currUser: ' + currUser);
+    //   console.log('role: ' + role);
+    //   console.log('myRestaurant: ' + myRestaurant);
+    //   //role, myRestaurant
+  }, [user]);
+
+  // TODO: remove comments
   const role = user.userDetails.role;
   const myRestaurant = user.userDetails.myRestaurant;
 
@@ -29,8 +48,7 @@ export default function Navigation() {
       },
       {
         name: 'Order List',
-        // TODO: maybe url should be different for orders of owner restaurant
-        link: '/user/' + user.userDetails.user + '/order',
+        link: '/r/' + myRestaurant + '/order',
       },
     ];
   } else if (role == UserRole.Regular.name) {

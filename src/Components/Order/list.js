@@ -3,13 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { useAuthState } from '../../Context';
 import OrderDataService from '../../services/order.service';
 import Alert from 'react-bootstrap/Alert';
+import UserRole from '../../Config/role';
 
 export default function OrderList() {
   const user = useAuthState();
-  const initialValue = [{ id: 0, date: '', total: '', status: '' }];
-
   const [error, setError] = useState();
-  const [orderList, setOrderList] = useState(initialValue);
+  const [orderList, setOrderList] = useState([]);
 
   useEffect(() => {
     setError('');
@@ -30,7 +29,11 @@ export default function OrderList() {
     ) {
       setError('Getting orders failed');
     } else {
-      OrderDataService.getUserOrders(user.userDetails.user)
+      var id =
+        user.userDetails.role === UserRole.Owner.name
+          ? user.userDetails.myRestaurant
+          : user.userDetails.user;
+      OrderDataService.getOrdersbyRole(id, user.userDetails.role)
         .then((list) => {
           setOrderList(list);
         })
